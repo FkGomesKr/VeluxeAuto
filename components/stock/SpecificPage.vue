@@ -171,10 +171,10 @@ const closeFullscreen = () => {
   <div v-if="!getCarro()" class="bg-[#121212] flex justify-center items-center h-screen text-5xl font-black text-white">
     No car was found.
   </div>
-  <div v-else class="bg-[#121212] p-10 pt-20" :style="{ height: 'calc(100vh - 92px)' }">
-    <div class="flex justify-center test2 rounded-xl">
-      <div class="bg-[#201818] w-1/2 rounded-l-xl p-6 text-white">
-        <h1 class="text-white text-3xl text-left pb-3 font-black">
+  <div v-else class="bg-[#121212] p-2 xl:p-10 pt-12 xl:pt-20" :style="{ height: 'calc(100vh - 92px)' }">
+    <div class="flex flex-col lg:flex-row justify-center test2 rounded-xl">
+      <div class="bg-[#201818] w-full lg:w-1/2 rounded-l-xl p-6 text-white">
+        <h1 class="text-white text-2xl xl:text-3xl text-left pb-3 font-black">
           {{ getCarro()?.marca + " - " +  getCarro()?.modelo }}
         </h1>
         <div class="flex flex-wrap justify-between items-center px-4">
@@ -375,7 +375,7 @@ const closeFullscreen = () => {
         </div>
         
         <div class="px-4 w-full flex">
-          <div class="w-1/2 flex justify-center items-center flex-col mt-12">
+          <div class="w-full lg:w-1/2 flex justify-center items-center flex-col mt-4 xl:mt-12">
             <div class="flex justify-center items-center">
               <h1 class="text-gray-500 text-lg">
                 {{ t('price') }}
@@ -386,15 +386,15 @@ const closeFullscreen = () => {
             </h1>
           </div>
 
-          <div class="w-1/2 flex justify-center items-center flex-col mt-14">
-            <button class="border-2 btc italic border-[#b53d3d] hover:bg-[#b53d3d] btc text-[#b53d3d] p-4 ps-8 pe-8 rounded-xl hover:scale-[1.02] transition duration-300 ease-in-out">
+          <div class="w-1/2 flex justify-center items-center flex-col mt-8 xl:mt-14">
+            <button class="border-2 btc italic border-[#b53d3d] hover:bg-[#b53d3d] text-[14px] xl:text-[16px] text-[#b53d3d] p-3 xl:p-4 ps-6 xl:ps-8 pe-6 xl:pe-8 rounded-xl hover:scale-[1.02] transition duration-300 ease-in-out">
               {{ t('interested') }}
-              <i class="fa-regular fa-paper-plane text-[19px] text-[#b53d3d] py-[5px] icn transition duration-300 ease-in-out"></i>
+              <i class="fa-regular fa-paper-plane text-[16p] xl:text-[19px] text-[#b53d3d] py-[5px] icn transition duration-300 ease-in-out"></i>
             </button>
           </div>
         </div>
       </div>
-      <div class="w-1/2">
+      <div class="w-2/5 xl:w-1/2">
         <Swiper
             class="rounded-r-xl object-fit overflow-hidden"
             :modules="[Navigation]"
@@ -457,6 +457,7 @@ const closeFullscreen = () => {
     </div>
 
   </div>
+  <div class="h-8 xl:h-16"> </div>
 </template>
 
 <style scoped>

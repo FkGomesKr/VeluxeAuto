@@ -25,5 +25,6 @@ useHead({
 }
 body {
   font-family: 'Nunito Sans', sans-serif;
+  color: #121212;
 }
 </style>
