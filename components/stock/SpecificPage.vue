@@ -177,7 +177,7 @@ const closeFullscreen = () => {
         <h1 class="text-white text-2xl xl:text-3xl text-left pb-3 font-black">
           {{ getCarro()?.marca + " - " +  getCarro()?.modelo }}
         </h1>
-        <div class="flex flex-wrap justify-between items-center px-4">
+        <div class="flex flex-wrap justify-between items-center">
           <div class="flex justify-start items-center font-light text-[15px] w-1/3">
             <svg class="mr-3 text-[#b53d3d]" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16">
               <g fill="currentColor">
@@ -225,7 +225,7 @@ const closeFullscreen = () => {
           </div>
         </div>
 
-        <div class="flex flex-wrap justify-between items-center mt-8 px-4">
+        <div class="flex flex-wrap justify-between items-center mt-8">
           <div class="flex justify-start items-center font-light text-[15px] w-1/3">
             <svg class="mr-3 text-[#b53d3d]" xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24">
               <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2 21.998V11.996m20 10.002V11.996M12 21.998v-1m0-3.001v-1M5.725 5.655l.83.758m0 0c.16-.268.435-.738.527-1.032c.799-2.57.87-3.278 2.103-3.38h5.627c1.234.102 1.304.81 2.103 3.38c.091.294.318.764.477 1.032m-10.837 0C5.951 7.433 5.15 8.1 5.03 8.98c-.02.145 0 1.752 0 2.918c0 .876.844.85 1.666.918c.523.043 1.046.138 1.57.143c2.906.03 4.828.033 7.702.002c.556-.006 1.116-.11 1.67-.158c.625-.053 1.28-.123 1.33-.905c.077-1.165.02-2.773 0-2.918c-.12-.88-.97-1.547-1.575-2.567m-10.837 0h10.837m0 0l.972-.759M5.204 8.43l1.208.92m4.146 1.162h2.939m4.123-1.185l1.335-.425M7.082 12.855L7.004 14.5m9.978-1.623V14.5" color="currentColor"/>
@@ -270,7 +270,7 @@ const closeFullscreen = () => {
           </div>
         </div>
 
-        <div class="flex flex-wrap justify-between items-center mt-8 px-4">
+        <div class="flex flex-wrap justify-between items-center mt-8">
           <div class="flex justify-start items-center font-light text-[15px] w-1/3">
             <svg class="mr-3 mt-1 text-[#b53d3d]" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" color="currentColor">
               <path d="M5 6v-.5c0-.943 0-1.414.293-1.707S6.057 3.5 7 3.5s1.414 0 1.707.293S9 4.557 9 5.5V6m6-1h3"/>
@@ -329,7 +329,7 @@ const closeFullscreen = () => {
           </div>
         </div>
 
-        <div class="flex flex-wrap justify-between items-center mt-8 px-4">
+        <div class="flex flex-wrap justify-between items-center mt-8">
           <div class="flex justify-start items-center font-light text-[15px] w-1/3">
             <svg class="mr-3 mt-1 text-[#b53d3d]" xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24">
               <path fill="currentColor" d="M17.5 12a1.5 1.5 0 0 1-1.5-1.5A1.5 1.5 0 0 1 17.5 9a1.5 1.5 0 0 1 1.5 1.5a1.5 1.5 0 0 1-1.5 1.5m-3-4A1.5 1.5 0 0 1 13 6.5A1.5 1.5 0 0 1 14.5 5A1.5 1.5 0 0 1 16 6.5A1.5 1.5 0 0 1 14.5 8m-5 0A1.5 1.5 0 0 1 8 6.5A1.5 1.5 0 0 1 9.5 5A1.5 1.5 0 0 1 11 6.5A1.5 1.5 0 0 1 9.5 8m-3 4A1.5 1.5 0 0 1 5 10.5A1.5 1.5 0 0 1 6.5 9A1.5 1.5 0 0 1 8 10.5A1.5 1.5 0 0 1 6.5 12M12 3a9 9 0 0 0-9 9a9 9 0 0 0 9 9a1.5 1.5 0 0 0 1.5-1.5c0-.39-.15-.74-.39-1c-.23-.27-.38-.62-.38-1a1.5 1.5 0 0 1 1.5-1.5H16a5 5 0 0 0 5-5c0-4.42-4.03-8-9-8"/>
@@ -374,7 +374,7 @@ const closeFullscreen = () => {
           </div>
         </div>
         
-        <div class="px-4 w-full flex">
+        <div class="w-full flex">
           <div class="w-full lg:w-1/2 flex justify-center items-center flex-col mt-4 xl:mt-12">
             <div class="flex justify-center items-center">
               <h1 class="text-gray-500 text-lg">
@@ -406,7 +406,7 @@ const closeFullscreen = () => {
             :effect="'fade'"
         >
           <SwiperSlide v-for="(carIMG, index) in getCarro()?.imagens" :key="index" class="w-full relative p-3 bg-[#201818]">
-              <img class="max-h-[500px] rounded-xl w-full h-auto object-cover" :src="carIMG" alt="Car Image">
+              <img class="max-h-[450px] rounded-xl w-full h-auto object-cover" :src="carIMG" alt="Car Image">
               <!-- Fullscreen Button -->
               <button @click="openFullscreen()" class="fullscreen-btn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
