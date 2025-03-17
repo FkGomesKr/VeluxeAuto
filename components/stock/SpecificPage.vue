@@ -171,13 +171,13 @@ const closeFullscreen = () => {
   <div v-if="!getCarro()" class="bg-[#121212] flex justify-center items-center h-screen text-5xl font-black text-white">
     No car was found.
   </div>
-  <div v-else class="bg-[#121212] p-2 xl:p-10 pt-12 xl:pt-20" :style="{ height: 'calc(100vh - 92px)' }">
+  <div v-else class="bg-[#121212] p-10 lg:p-2 xl:p-10 pt-12 xl:pt-20">
     <div class="flex flex-col lg:flex-row justify-center test2 rounded-xl">
-      <div class="bg-[#201818] w-full lg:w-1/2 rounded-l-xl p-6 text-white">
-        <h1 class="text-white text-2xl xl:text-3xl text-left pb-3 font-black">
+      <div class="bg-[#201818] w-full lg:w-1/2 lg:rounded-t-[0px] rounded-t-xl rounded-l-[0px] lg:rounded-l-xl p-6 text-white">
+        <h1 class="text-white text-2xl md:text-3xl lg:text-2xl xl:text-3xl text-left pb-3 font-black">
           {{ getCarro()?.marca + " - " +  getCarro()?.modelo }}
         </h1>
-        <div class="flex flex-wrap justify-between items-center">
+        <div class="mx-auto flex flex-wrap justify-between items-center">
           <div class="flex justify-start items-center font-light text-[15px] w-1/3">
             <svg class="mr-3 text-[#b53d3d]" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16">
               <g fill="currentColor">
@@ -374,7 +374,7 @@ const closeFullscreen = () => {
           </div>
         </div>
         
-        <div class="w-full flex">
+        <div class="hidden lg:flex w-full ">
           <div class="w-full lg:w-1/2 flex justify-center items-center flex-col mt-4 xl:mt-12">
             <div class="flex justify-center items-center">
               <h1 class="text-gray-500 text-lg">
@@ -394,9 +394,9 @@ const closeFullscreen = () => {
           </div>
         </div>
       </div>
-      <div class="w-2/5 xl:w-1/2">
+      <div class="w-full lg:w-2/5 xl:w-1/2 bg-[#201818] rounded-r-xl flex justify-center items-center">
         <Swiper
-            class="rounded-r-xl object-fit overflow-hidden"
+            class="rounded-xl rounded-r-xl w-[95%] lg:w-full object-fit overflow-hidden"
             :modules="[Navigation]"
             :slides-per-view="1"
             space-between="4"
