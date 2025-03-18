@@ -693,11 +693,6 @@ const resetFilters = () => {
     v-for="(carro, index) in filteredCarros" :key="carro.modelo" 
     class="pt-4 pb-1 px-4 test rounded-2xl bg-[#201818] h-fit"
     >
-      <div class="w-full flex justify-center items-center text-white test2">
-          <p class="py-3 text-3xl font-black italic flex gap-2">
-            {{ carro.preco + " €" }}
-          </p>
-      </div>
       <Swiper
           class="rounded-xl object-fit overflow-hidden test3"
           :modules="[Navigation]"
@@ -722,8 +717,15 @@ const resetFilters = () => {
           <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 16 16"><path fill="currentColor" d="M7.571 11.84C6.908 12.298 6 11.827 6 11.024V4.975c0-.803.908-1.274 1.571-.816l3.784 2.617a1.486 1.486 0 0 1 0 2.447z"/></svg>
         </div>
       </Swiper>
-      <div class="flex flex-col justify-center items-center w-full pl-3 pt-3 pb-2">
-        <h1 class="w-full text-white font-bold text-lg md:text-xl xl:text-2xl">{{ carro.marca }}</h1>
+      <div class="flex flex-col justify-center items-center w-full p-3 pb-2">
+        <div class="w-full flex justify-between">
+          <h1 class="w-full text-start text-white font-bold text-lg md:text-xl xl:text-2xl">
+            {{ carro.marca }}
+          </h1>
+          <h1 class="w-full text-end text-white font-bold text-lg xl:text-[20px] font-black">
+            {{ carro.preco + " €" }}
+          </h1>
+        </div>
         <h2 class="w-full text-white text-[15px] md:text-[17px] xl:text-[20px]">{{ carro.modelo }}</h2>
         <div class="w-full flex items-center justify-start text-white mt-6">
           <div class="w-full flex items-center gap-1 justify-start">
