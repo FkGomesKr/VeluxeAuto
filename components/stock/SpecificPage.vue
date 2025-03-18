@@ -175,7 +175,7 @@ const closeFullscreen = () => {
     <div class="h-8 xl:h-16"> </div>
     <div class="flex flex-col lg:flex-row justify-center test2 rounded-xl">
       <div class="bg-[#201818] w-full lg:w-1/2 rounded-t-xl rounded-b-xl rounded-l-xl lg:rounded-tr-none lg:rounded-br-none p-6 sm:p-6 pb-2 lg:p-6 text-white">
-        <h1 class="text-white text-xl xs:text-2xl md:text-3xl lg:text-2xl xl:text-3xl text-left pb-3 font-black pr-3 sm:pr-0">
+        <h1 class="pl-2.5 lg:pl-0 text-white text-xl xs:text-2xl md:text-3xl lg:text-2xl xl:text-3xl text-left pb-3 font-black pr-3 sm:pr-0">
           {{ getCarro()?.marca + " - " +  getCarro()?.modelo }}
         </h1>
         <div class="w-full pb-2 lg:w-2/5 xl:w-1/2 bg-[#201818] rounded-r-xl flex lg:hidden flex-col sm:flex-row justify-center items-center">
