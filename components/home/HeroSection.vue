@@ -347,7 +347,7 @@ function toggleOpenFilters() {
 </script>
 
 <template>
-  <div class="w-full relative mt-[-120px] bg-[#121212] min-h-[480px]">
+  <div class="w-full relative mt-[-120px] bg-[#121212] min-h-[510px]">
       <div v-if="openFilters" class="block h-[925px] md:hidden "></div>
       <img class="hidden md:block w-full h-[550px] object-cover" src="https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/homePage/bgHero.jpg" alt="Background Image Hero Section">
       <div class="absolute inset-0 top-[130px] md:top-[22%] flex flex-col items-center w-full">
