@@ -1,10 +1,17 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { onClickOutside } from '@vueuse/core'
 
+const dropdownRef = ref(null);
 const route = useRoute();
 const navbarClass = ref('navbar');
 const localCode = useCookie("i18n_redirected");
 const { t, locale } = useI18n(); 
+const openFilters = ref(false);
+
+function toggleOpenFilters() {
+  openFilters.value = !openFilters.value;
+}
 
 const handleScroll = () => {
   if (!(route.path.includes('/stock') || route.path.includes("/stockSingle"))) {
@@ -44,9 +51,14 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
+  toggleFiltersOff();
   if (!(route.path.includes('/stock') || route.path.includes("/stockSingle"))) {
     window.removeEventListener('scroll', handleScroll)
   }
+})
+
+onClickOutside(dropdownRef, () => {
+  openFilters.value = false;
 })
 </script>
 
@@ -58,7 +70,7 @@ onBeforeUnmount(() => {
                 <img class="w-40" src="public/images/VeluxeAutoLogo.png" alt="Logo Image">
               </NuxtLink>
             </div>
-            <div class="flex justify-center items-center gap-3 sm:gap-10 font-medium text-[13px]">
+            <div class="hidden sm:flex justify-center items-center gap-3 sm:gap-10 font-medium text-[13px]">
                 <NuxtLink
                 :to="localCode=='pt' ? '/stock' : '/'+localCode+'/stock'" 
                 active-class="border-[#b53d3d] text-[#b53d3d] border-t-2"
@@ -73,6 +85,25 @@ onBeforeUnmount(() => {
                 </button>
                 <LanguageSelector/>
             </div>
+            <div class="relative block sm:hidden" ref="dropdownRef">
+              <button @click="toggleOpenFilters()" class="p-2">
+                <svg :class="{'rotate-90deg': openFilters}" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-dasharray="16" stroke-dashoffset="16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M5 5h14"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.2s" values="16;0"/></path><path d="M5 12h14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.2s" dur="0.2s" values="16;0"/></path><path d="M5 19h14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.4s" dur="0.2s" values="16;0"/></path></g></svg>
+              </button>
+              <div v-if="openFilters" class="absolute top-15 right-[0px] xs:right-[-20px] bg-[#121212] rounded-lg w-[100px] greyishadow">
+                <div class="flex flex-col justify-center items-start gap-3 sm:gap-10 font-medium text-[13px] w-full">
+                  <NuxtLink
+                    :to="localCode=='pt' ? '/stock' : '/'+localCode+'/stock'" 
+                    active-class="text-[#b53d3d]"
+                    class=" w-full pl-4 flex justify-start gap-1 items-center hover:text-[#b53d3d] transition duration-300 ease-in-out pt-2 mt-3">
+                    <span class="text-[14px]">{{ t('stock') }}</span>
+                  </NuxtLink>
+                  <button @click="scrollToBottom()" class="w-full pl-4 flex justify-start gap-1 items-center hover:text-[#b53d3d] transition duration-300 ease-in-out mt-2">
+                      <span class="text-[14px]">{{ t('contacts') }}</span>
+                  </button>
+                  <LanguageSelector class="pl-4"/>
+                </div>
+              </div>
+            </div>     
         </div>
     </div>
 </template>
@@ -109,5 +140,9 @@ onBeforeUnmount(() => {
   100% {
     transform: translateY(0); 
   }
+}
+
+.greyishadow {
+  box-shadow: 0px 0px 10px rgba(108, 108, 108, 0.2); 
 }
 </style>

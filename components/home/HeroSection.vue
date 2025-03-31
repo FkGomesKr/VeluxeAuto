@@ -350,7 +350,7 @@ function toggleOpenFilters() {
   <div class="w-full relative mt-[-120px] bg-[#121212] min-h-[510px]">
       <div v-if="openFilters" class="block h-[925px] md:hidden "></div>
       <img class="hidden md:block w-full h-[550px] object-cover" src="https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/homePage/bgHero.jpg" alt="Background Image Hero Section">
-      <div class="absolute inset-0 top-[130px] md:top-[22%] flex flex-col items-center w-full">
+      <div class="absolute inset-0 top-[140px] md:top-[22%] flex flex-col items-center w-full">
         <div class="bg-[#201818] px-0 lg:px-8 pt-10 pb-6 rounded-xl md:rounded-[100px] items-center justify-center w-full max-w-[300px] md:max-w-[700px] lg:max-w-[900px] test">
           <div class="text-[#D32F2F] flex justify-between items-center px-6 md:px-10 mb-4">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2m0 2a8 8 0 0 1 8 8c0 2.4-1 4.5-2.7 6c-1.4-1.3-3.3-2-5.3-2s-3.8.7-5.3 2C5 16.5 4 14.4 4 12a8 8 0 0 1 8-8m2 1.89c-.38.01-.74.26-.9.65l-1.29 3.23l-.1.23c-.71.13-1.3.6-1.57 1.26c-.41 1.03.09 2.19 1.12 2.6s2.19-.09 2.6-1.12c.26-.66.14-1.42-.29-1.98l.1-.26l1.29-3.21l.01-.03c.2-.51-.05-1.09-.56-1.3c-.13-.05-.26-.07-.41-.07M10 6a1 1 0 0 0-1 1a1 1 0 0 0 1 1a1 1 0 0 0 1-1a1 1 0 0 0-1-1M7 9a1 1 0 0 0-1 1a1 1 0 0 0 1 1a1 1 0 0 0 1-1a1 1 0 0 0-1-1m10 0a1 1 0 0 0-1 1a1 1 0 0 0 1 1a1 1 0 0 0 1-1a1 1 0 0 0-1-1"/></svg>
