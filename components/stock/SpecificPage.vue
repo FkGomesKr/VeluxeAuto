@@ -28,18 +28,18 @@ const carros = [
     consumo: 6.3,
     kms: 330000,
     imagens: [
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6blue/audi1.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6blue/audi2.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6blue/audi3.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6blue/audi4.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6blue/audi5.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6blue/audi6.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6blue/audi7.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6blue/audi8.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6blue/audi9.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6blue/audi10.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6blue/audi11.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6blue/audi12.jpg"
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6Azul/audi1.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6Azul/audi2.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6Azul/audi3.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6Azul/audi4.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6Azul/audi5.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6Azul/audi6.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6Azul/audi7.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6Azul/audi8.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6Azul/audi9.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6Azul/audi10.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6Azul/audi11.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6Azul/audi12.jpg"
     ]
   },
   {
@@ -60,19 +60,21 @@ const carros = [
     consumo: 6.3,
     kms: 195000,
     imagens: [
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1white/serie1white7.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1white/serie1white8.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1white/serie1white2.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1white/serie1white5.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1white/serie1white4.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1white/serie1white3.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1white/serie1white6.jpg"
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Branco/serie1white2.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Branco/serie1white3.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Branco/serie1white4.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Branco/serie1white5.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Branco/serie1white6.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Branco/serie1white7.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Branco/serie1white8.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Branco/serie1white9.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Branco/serie1white10.jpg"
     ]
   },
   {
     id: 3,
-    marca: "Fiat",
-    modelo: "A3 Sportback 1.6 TDI Sport",
+    marca: "Mini",
+    modelo: "Clubman D",
     combustivel: "Gasóleo",
     anoReg: 2013, 
     preco: "12, 990",
@@ -87,16 +89,27 @@ const carros = [
     consumo: 6.3,
     kms: 190000,
     imagens: [
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages//mini2.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages//mini12.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages//mini8.jpg"
-
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD1.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD2 (1).jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD3 (1).jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD4.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD6.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD7.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD8.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD9.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD10.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD11.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD12.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD13.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD14.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD15.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD16.jpg"
     ]
   },
   {
     id: 4,
-    marca: "Toyota",
-    modelo: "A3 Sportback 1.6 TDI Sport",
+    marca: "Mini",
+    modelo: "Cooper",
     combustivel: "Elétrico",
     anoReg: 2013, 
     preco: "8, 640",
@@ -111,16 +124,24 @@ const carros = [
     consumo: 6.3,
     kms: 50000,
     imagens: [
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages//mini2.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages//mini12.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages//mini8.jpg"
-
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniCooperBlack/miniCooper8 (1).jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniCooperBlack/miniCooper9.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniCooperBlack/miniCooper1.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniCooperBlack/miniCooper2.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniCooperBlack/miniCooper3.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniCooperBlack/miniCooper5.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniCooperBlack/miniCooper6.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniCooperBlack/miniCooper7.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniCooperBlack/miniCooper10.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniCooperBlack/miniCooper11.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniCooperBlack/miniCooper12.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniCooperBlack/miniCooper13 (1).jpg"
     ]
   },
   {
     id: 5,
-    marca: "Peugeot",
-    modelo: "A3 Sportback 1.6 TDI Sport",
+    marca: "BMW",
+    modelo: "Serie 1",
     combustivel: "Gasóleo",
     anoReg: 2013, 
     preco: "12, 990",
@@ -135,33 +156,19 @@ const carros = [
     consumo: 6.3,
     kms: 190000,
     imagens: [
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages//mini2.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages//mini12.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages//mini8.jpg"
-
-    ]
-  },
-  {
-    id: 6,
-    marca: "Mini",
-    modelo: "A3 Sportback 1.6 TDI Sport",
-    combustivel: "Gasóleo",
-    anoReg: 2013, 
-    preco: "12, 990",
-    potencia: 110,
-    cilindrada: 1598,
-    transmissao: "Manual de 6 velocidades",
-    estado: "Com pouco uso",
-    lugares: 4,
-    portas: 5,
-    cor: "Azul escuro",
-    tipologia: "Utilitário",
-    consumo: 6.3,
-    kms: 190000,
-    imagens: [
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages//mini2.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages//mini12.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages//mini8.jpg"
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza2.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza4.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza5.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza6.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza1.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza7.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza8.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza9.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza10.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza11.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza12.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza13.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza14.jpg"
     ]
   }
 ];
