@@ -44,36 +44,48 @@ const carros = [
   {
     id: 1,
     marca: "Audi",
-    modelo: "A3 Sportback 1.6 TDI Sport",
+    modelo: "A6 3.0 TDi quattro",
     combustivel: "diesel",
-    anoReg: 2013, 
+    anoReg: 2005, 
     preco: "12, 990",
-    transmissao: "manual",
-    tipologia: "utility",
+    transmissao: "automatic",
+    tipologia: "Hatchback",
     lugares: 2,
-    kms: 190000,
+    kms: 330000,
     imagens: [
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages//mini2.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages//mini12.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages//mini8.jpg"
-
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6blue/audi1.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6blue/audi2.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6blue/audi3.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6blue/audi4.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6blue/audi5.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6blue/audi6.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6blue/audi7.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6blue/audi8.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6blue/audi9.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6blue/audi10.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6blue/audi11.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6blue/audi12.jpg"
     ]
   },
   {
     id: 2,
     marca: "BMW",
-    modelo: "A3 Sportback 1.6 TDI Sport",
+    modelo: "Série 1",
     combustivel: "diesel",
-    anoReg: 2011, 
+    anoReg: 2014, 
     preco: "12, 990",
     transmissao: "manual",
-    tipologia: "utility",
+    tipologia: "Coupe",
     lugares: 4,
     kms: 190000,
     imagens: [
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages//mini2.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages//mini12.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages//mini8.jpg"
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1white/serie1white7.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1white/serie1white8.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1white/serie1white2.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1white/serie1white5.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1white/serie1white4.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1white/serie1white3.jpg",
+      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1white/serie1white6.jpg"
 
     ]
   },
