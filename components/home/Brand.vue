@@ -59,9 +59,9 @@
                         <img class="w-[75px] sm:w-[90px]" src="https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/homePage/toyotaLogo.png" alt="LogoChannel">
                     </div>
                 </NuxtLink>
-                <NuxtLink to="/stock?marca=Nissan">
+                <NuxtLink to="/stock?marca=Mini">
                     <div class="moving-element9 item item9 center-item bg-[#201818] shadow-md rounded-full flex justify-center items-center">
-                        <img class="w-[75px] sm:w-[110px]" src="https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/homePage/nissanLogo.png" alt="LogoChannel">
+                        <img class="w-[75px] sm:w-[110px]" src="https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/homePage/miniLogo.png" alt="LogoChannel">
                     </div>
                 </NuxtLink>
                 <NuxtLink to="/stock?marca=Seat">

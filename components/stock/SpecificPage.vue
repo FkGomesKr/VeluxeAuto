@@ -557,8 +557,8 @@ const closeFullscreen = () => {
           :speed="500"
           :effect="'fade'"
         >
-          <SwiperSlide v-for="carIMG in getCarro()?.imagens" class="w-full relative flex justify-center items-center">
-            <img class="max-h-[90vh] w-full object-contain" :src="carIMG" alt="Car Image">
+          <SwiperSlide v-for="carIMG in getCarro()?.imagens" class="w-full relative h-full flex justify-center items-center">
+            <img class="max-h-full w-full object-contain" :src="carIMG" alt="Car Image">
           </SwiperSlide>
           <div class="swiper-button-prev-custom transition duration-300 ease-in-out">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16"><path fill="currentColor" d="M9.428 11.84c.663.458 1.571-.013 1.571-.816V4.975c0-.803-.908-1.274-1.571-.816L5.644 6.776a1.486 1.486 0 0 0 0 2.447z"/></svg>
