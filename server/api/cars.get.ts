@@ -5,7 +5,7 @@ import { CarsService } from '~/server/services/cars.service'
  * GET /api/cars
  * Returns cars with Portuguese field names for frontend compatibility
  * 
- * Cached for 10 minutes to reduce database load
+ * Cached for 6 hours to reduce database load (data changes are very rare)
  * Cache key includes expiresIn query param to ensure different presigned URL expiry times are cached separately
  */
 export default defineCachedEventHandler(async (event) => {
@@ -27,7 +27,7 @@ export default defineCachedEventHandler(async (event) => {
     })
   }
 }, {
-  maxAge: 10 * 60, // Cache for 10 minutes (600 seconds)
+  maxAge: 6 * 60 * 60, // Cache for 6 hours (21600 seconds) - data changes are very rare
   name: 'cars-list',
   getKey: (event) => {
     const query = getQuery(event)
