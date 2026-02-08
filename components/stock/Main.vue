@@ -40,139 +40,27 @@ selectedRange3.value[1] = props.maxPreco ? props.maxPreco : 50000;
 selectedRange2.value[0] = props.minKM ? props.minKM : 10000;
 selectedRange2.value[1] = props.maxKM ? props.maxKM : 400000;
 
-const carros = [
-  {
-    id: 1,
-    marca: "Audi",
-    modelo: "A6 3.0 TDi quattro",
-    combustivel: "diesel",
-    anoReg: 2005, 
-    preco: "12, 990",
-    transmissao: "automatic",
-    tipologia: "Hatchback",
-    lugares: 2,
-    kms: 330000,
-    imagens: [
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6Azul/audi1.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6Azul/audi2.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6Azul/audi3.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6Azul/audi4.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6Azul/audi5.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6Azul/audi6.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6Azul/audi7.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6Azul/audi8.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6Azul/audi9.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6Azul/audi10.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6Azul/audi11.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6Azul/audi12.jpg"
-    ]
-  },
-  {
-    id: 2,
-    marca: "BMW",
-    modelo: "Serie 1",
-    combustivel: "diesel",
-    anoReg: 2014, 
-    preco: "12, 990",
-    transmissao: "manual",
-    tipologia: "Coupe",
-    lugares: 4,
-    kms: 190000,
-    imagens: [
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Branco/serie1white2.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Branco/serie1white3.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Branco/serie1white4.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Branco/serie1white5.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Branco/serie1white6.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Branco/serie1white7.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Branco/serie1white8.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Branco/serie1white9.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Branco/serie1white10.jpg"
-    ]
-  },
-  {
-    id: 3,
-    marca: "Mini",
-    modelo: "Clubman D",
-    combustivel: "diesel",
-    anoReg: 2013, 
-    preco: "12, 990",
-    transmissao: "manual",
-    tipologia: "utility",
-    lugares: 5,
-    kms: 190000,
-    imagens: [
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD1.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD2 (1).jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD3 (1).jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD4.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD6.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD7.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD8.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD9.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD10.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD11.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD12.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD13.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD14.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD15.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD16.jpg"
-    ]
-  },
-  {
-    id: 4,
-    marca: "Mini",
-    modelo: "Cooper",
-    combustivel: "eletric",
-    anoReg: 2013, 
-    preco: "8, 640",
-    transmissao: "automatic",
-    tipologia: "utility",
-    lugares: 5,
-    kms: 50000,
-    imagens: [
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniCooperBlack/miniCooper8 (1).jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniCooperBlack/miniCooper9.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniCooperBlack/miniCooper1.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniCooperBlack/miniCooper2.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniCooperBlack/miniCooper3.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniCooperBlack/miniCooper5.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniCooperBlack/miniCooper6.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniCooperBlack/miniCooper7.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniCooperBlack/miniCooper10.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniCooperBlack/miniCooper11.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniCooperBlack/miniCooper12.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniCooperBlack/miniCooper13 (1).jpg"
-    ]
-  },
-  {
-    id: 5,
-    marca: "BMW",
-    modelo: "Serie 1",
-    combustivel: "diesel",
-    anoReg: 2013, 
-    preco: "12, 990",
-    transmissao: "automatic",
-    tipologia: "utility",
-    lugares: 5,
-    kms: 190000,
-    imagens: [
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza2.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza4.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza5.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza6.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza1.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza7.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza8.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza9.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza10.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza11.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza12.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza13.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza14.jpg"
-    ]
+// Fetch cars from API
+const { getCars } = useApi()
+const carros = ref<any[]>([])
+const isLoading = ref(true)
+const error = ref<string | null>(null)
+
+// Load cars on component mount
+onMounted(async () => {
+  try {
+    isLoading.value = true
+    error.value = null
+    const cars = await getCars()
+    carros.value = cars
+  } catch (err: any) {
+    error.value = err.message || 'Failed to load cars'
+    console.error('Error loading cars:', err)
+  } finally {
+    isLoading.value = false
   }
-];
+})
+
 
 const orderByOptions = [
   {
@@ -294,7 +182,7 @@ function parseFormattedNumber(input: string): number {
 const orderFilter = ref("");
 
 const filteredCarros = computed(() => {
-  let filtered = carros.filter(carro => {
+  let filtered = carros.value.filter(carro => {
     const isMarcaValid = marca.value ? carro.marca.toLowerCase().includes(marca.value.toLowerCase()) : true;
     const isCombustivelValid = combustivel.value ? t(carro.combustivel).toLowerCase().includes(combustivel.value.toLowerCase()) : true;
     const isTransmissionValid = transmissao.value ? t(carro.transmissao).toLowerCase().includes(transmissao.value.toLowerCase()) : true;
@@ -317,9 +205,9 @@ const filteredCarros = computed(() => {
       case t('higherPrice'):
         return parseFloat(b.preco.replace(",", ".")) - parseFloat(a.preco.replace(",", "."));
       case t('latest'):
-        return a.anoReg - b.anoReg;
-      case t('oldest'):
         return b.anoReg - a.anoReg;
+      case t('oldest'):
+        return a.anoReg - b.anoReg;
       case t('brandAZ'):
         return a.marca.localeCompare(b.marca);
       case t('brandZA'):
@@ -708,9 +596,19 @@ const resetFilters = () => {
     </div>
   </div>
 
-  <div v-if="filteredCarros.length==0" class="bg-[#121212] text-center w-full pb-20 flex justify-center items-center text-3xl lg:text-5xl font-black text-white" :style="{ height: 'calc(100vh - 198px)' }">
+  <!-- Loading State -->
+  <div v-if="isLoading" class="bg-[#121212] text-center w-full pb-20 flex justify-center items-center" :style="{ height: 'calc(100vh - 198px)' }">
+    <div class="loading-spinner"></div>
+  </div>
+  <!-- Error State -->
+  <div v-else-if="error" class="bg-[#121212] text-center w-full pb-20 flex justify-center items-center text-3xl lg:text-5xl font-black text-red-500" :style="{ height: 'calc(100vh - 198px)' }">
+    {{ error }}
+  </div>
+  <!-- No Results -->
+  <div v-else-if="filteredCarros.length==0" class="bg-[#121212] text-center w-full pb-20 flex justify-center items-center text-3xl lg:text-5xl font-black text-white" :style="{ height: 'calc(100vh - 198px)' }">
     No cars correspond the preferences.
   </div>
+  <!-- Cars Grid -->
   <div v-else class="bg-[#121212] w-full pb-20 px-5 xs:px-10 lg:px-20 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-10" :class="{'pt-6': openFilters}" :style="{ minHeight: 'calc(100vh - 198px)' }">
     <div
     v-for="(carro, index) in filteredCarros" :key="carro.modelo" 
@@ -726,11 +624,15 @@ const resetFilters = () => {
           :speed="500"
           :effect="'fade'"
       >
-        <SwiperSlide v-for="carIMG in carro.imagens" class="w-full relative">
+        <SwiperSlide v-for="(carIMG, imgIndex) in carro.imagens" :key="imgIndex" class="w-full relative">
             <NuxtLink  
             :to="localCode=='pt' ? `/stockSingle/${carro.id}` : '/'+localCode+`/stockSingle/${carro.id}`"
             >
-              <img class="hover:scale-[1.04] transition duration-300 ease-in-out max-h-[240px] xs:max-h-[280px] w-full object-cover" :src="carIMG" alt="Car Image">
+              <img 
+                class="hover:scale-[1.04] transition duration-300 ease-in-out max-h-[240px] xs:max-h-[280px] w-full object-cover" 
+                :src="carIMG" 
+                alt="Car Image"
+              >
             </NuxtLink>
         </SwiperSlide>
         <div class="swiper-button-prev-custom transition duration-300 ease-in-out">
@@ -904,5 +806,20 @@ const resetFilters = () => {
   outline: none;
   box-shadow: none;
   height: 6px;
+}
+
+.loading-spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 </style>

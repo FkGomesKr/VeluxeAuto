@@ -24,7 +24,7 @@ export default {
     brandZA: "Marke (Z-A)",
     higherKMs: "Mehr Kilometer",
     lowerKMs: "Weniger Kilometer",
-    potency: "Leistung",
+    power: "Leistung",
     cylinderCapacity: "Hubraum",
     color: "Farbe",
     state: "Zustand",

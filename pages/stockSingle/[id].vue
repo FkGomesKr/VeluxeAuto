@@ -5,13 +5,17 @@ useHead({
 });
 const route = useRoute();
 
-const id = parseInt(route.params.id as string) || undefined;
+const routeId = route.params.id as string
+const id = computed(() => {
+  const parsedId = parseInt(routeId)
+  return isNaN(parsedId) ? undefined : parsedId
+})
 </script>
 
 <template>
   <div class="bg-[#121212]">
-      <StockSpecificPage
-        :id="id"
-      />
-    </div>
+    <StockSpecificPage
+      :id="id"
+    />
+  </div>
 </template>

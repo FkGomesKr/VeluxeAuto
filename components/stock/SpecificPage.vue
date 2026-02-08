@@ -8,172 +8,50 @@ const props = defineProps({
   id: Number,
 });
 
+// Fetch car from API
+const { getCarById } = useApi()
+const carro = ref<any>(null)
+const isLoading = ref(true)
+const error = ref<string | null>(null)
 
-const carros = [
-  {
-    id: 1,
-    marca: "Audi",
-    modelo: "A6 3.0 TDi quattro",
-    combustivel: "Gasóleo",
-    anoReg: 2005, 
-    preco: "12, 990",
-    potencia: 224,
-    cilindrada: 2967,
-    transmissao: "Automático",
-    estado: "Com pouco uso",
-    lugares: 4,
-    portas: 5,
-    cor: "Azul",
-    tipologia: "Hatchback",
-    consumo: 6.3,
-    kms: 330000,
-    imagens: [
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6Azul/audi1.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6Azul/audi2.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6Azul/audi3.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6Azul/audi4.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6Azul/audi5.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6Azul/audi6.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6Azul/audi7.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6Azul/audi8.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6Azul/audi9.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6Azul/audi10.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6Azul/audi11.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/audiA6Azul/audi12.jpg"
-    ]
-  },
-  {
-    id: 2,
-    marca: "BMW",
-    modelo: "Série 1",
-    combustivel: "Gasóleo",
-    anoReg: 2014, 
-    preco: "12, 990",
-    potencia: 177,
-    cilindrada: 1995,
-    transmissao: "Manual de 6 velocidades",
-    estado: "Com pouco uso",
-    lugares: 4,
-    portas: 3,
-    cor: "Branco",
-    tipologia: "Coupe",
-    consumo: 6.3,
-    kms: 195000,
-    imagens: [
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Branco/serie1white2.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Branco/serie1white3.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Branco/serie1white4.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Branco/serie1white5.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Branco/serie1white6.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Branco/serie1white7.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Branco/serie1white8.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Branco/serie1white9.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Branco/serie1white10.jpg"
-    ]
-  },
-  {
-    id: 3,
-    marca: "Mini",
-    modelo: "Clubman D",
-    combustivel: "Gasóleo",
-    anoReg: 2013, 
-    preco: "12, 990",
-    potencia: 110,
-    cilindrada: 1598,
-    transmissao: "Manual de 6 velocidades",
-    estado: "Com pouco uso",
-    lugares: 4,
-    portas: 5,
-    cor: "Azul escuro",
-    tipologia: "Utilitário",
-    consumo: 6.3,
-    kms: 190000,
-    imagens: [
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD1.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD2 (1).jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD3 (1).jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD4.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD6.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD7.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD8.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD9.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD10.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD11.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD12.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD13.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD14.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD15.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniClubmanD/miniD16.jpg"
-    ]
-  },
-  {
-    id: 4,
-    marca: "Mini",
-    modelo: "Cooper",
-    combustivel: "Elétrico",
-    anoReg: 2013, 
-    preco: "8, 640",
-    potencia: 110,
-    cilindrada: 1598,
-    transmissao: "Manual de 6 velocidades",
-    estado: "Com pouco uso",
-    lugares: 4,
-    portas: 5,
-    cor: "Azul escuro",
-    tipologia: "Utilitário",
-    consumo: 6.3,
-    kms: 50000,
-    imagens: [
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniCooperBlack/miniCooper8 (1).jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniCooperBlack/miniCooper9.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniCooperBlack/miniCooper1.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniCooperBlack/miniCooper2.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniCooperBlack/miniCooper3.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniCooperBlack/miniCooper5.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniCooperBlack/miniCooper6.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniCooperBlack/miniCooper7.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniCooperBlack/miniCooper10.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniCooperBlack/miniCooper11.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniCooperBlack/miniCooper12.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/miniCooperBlack/miniCooper13 (1).jpg"
-    ]
-  },
-  {
-    id: 5,
-    marca: "BMW",
-    modelo: "Serie 1",
-    combustivel: "Gasóleo",
-    anoReg: 2013, 
-    preco: "12, 990",
-    potencia: 110,
-    cilindrada: 1598,
-    transmissao: "Manual de 6 velocidades",
-    estado: "Com pouco uso",
-    lugares: 4,
-    portas: 5,
-    cor: "Azul escuro",
-    tipologia: "Utilitário",
-    consumo: 6.3,
-    kms: 190000,
-    imagens: [
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza2.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza4.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza5.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza6.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza1.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza7.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza8.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza9.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza10.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza11.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza12.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza13.jpg",
-      "https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/serie1Cinza/serie1Cinza14.jpg"
-    ]
+// Function to load car data
+const loadCar = async (carId: number | undefined) => {
+  if (!carId) {
+    error.value = 'Car ID is required'
+    isLoading.value = false
+    return
   }
-];
 
-const getCarro = () => carros.find(carro => carro.id === props.id);
+  try {
+    isLoading.value = true
+    error.value = null
+    const car = await getCarById(carId)
+    carro.value = car
+  } catch (err: any) {
+    error.value = err.message || 'Failed to load car'
+    console.error('Error loading car:', err)
+    carro.value = null
+  } finally {
+    isLoading.value = false
+  }
+}
+
+// Load car on component mount
+onMounted(() => {
+  if (props.id) {
+    loadCar(props.id)
+  } else {
+    error.value = 'Car ID is missing'
+    isLoading.value = false
+  }
+})
+
+// Watch for prop changes (in case id changes)
+watch(() => props.id, (newId) => {
+  if (newId) {
+    loadCar(newId)
+  }
+})
 
 const isFullscreen = ref(false);
 
@@ -187,15 +65,21 @@ const closeFullscreen = () => {
 
 </script>
 <template>
-  <div v-if="!getCarro()" class="bg-[#121212] flex justify-center items-center h-screen text-5xl font-black text-white">
-    No car was found.
+  <!-- Loading State -->
+  <div v-if="isLoading" class="bg-[#121212] flex justify-center items-center h-screen">
+    <div class="loading-spinner"></div>
   </div>
+  <!-- Error State -->
+  <div v-else-if="error || !carro" class="bg-[#121212] flex justify-center items-center h-screen text-5xl font-black text-white">
+    {{ error || 'No car was found.' }}
+  </div>
+  <!-- Car Details -->
   <div v-else class="bg-[#121212] p-4 sm:p-10 lg:p-2 xl:p-10 pt-2 sm:pt-12 xl:pt-20">
     <div class="h-8 xl:h-16"> </div>
     <div class="flex flex-col lg:flex-row justify-center test2 rounded-xl">
       <div class="bg-[#201818] w-full lg:w-1/2 rounded-t-xl rounded-b-xl rounded-l-xl lg:rounded-tr-none lg:rounded-br-none p-6 sm:p-6 pb-2 lg:p-6 text-white">
         <h1 class="pl-2.5 lg:pl-0 text-white text-xl xs:text-2xl md:text-3xl lg:text-2xl xl:text-3xl text-left pb-3 font-black pr-3 sm:pr-0">
-          {{ getCarro()?.marca + " - " +  getCarro()?.modelo }}
+          {{ carro.marca + " - " + carro.modelo }}
         </h1>
         <div class="w-full pb-2 lg:w-2/5 xl:w-1/2 bg-[#201818] rounded-r-xl flex lg:hidden flex-col sm:flex-row justify-center items-center">
           <Swiper
@@ -208,7 +92,7 @@ const closeFullscreen = () => {
               :speed="500"
               :effect="'fade'"
           >
-            <SwiperSlide v-for="(carIMG, index) in getCarro()?.imagens" :key="index" class="w-full relative pb-4 bg-[#201818]">
+            <SwiperSlide v-for="(carIMG, index) in carro.imagens" :key="index" class="w-full relative pb-4 bg-[#201818]">
                 <img class="max-h-[240px] xs:max-h-[300px] sm:max-h-[450px] rounded-xl w-full h-auto object-cover" :src="carIMG" alt="Car Image">
                 <!-- Fullscreen Button -->
                 <button @click="openFullscreen()" class="fullscreen-btn">
@@ -238,7 +122,7 @@ const closeFullscreen = () => {
                 {{ t('fuel') }}
               </p>
               <p class="font-medium">
-                {{ getCarro()?.combustivel }}
+                {{ carro.combustivel }}
               </p>
               
             </div>
@@ -252,7 +136,7 @@ const closeFullscreen = () => {
                 {{ t('year') }}
               </p>
               <p class="font-medium">
-                {{ getCarro()?.anoReg }}
+                {{ carro.anoReg }}
               </p>
               
             </div>
@@ -266,7 +150,7 @@ const closeFullscreen = () => {
                 {{ t('transmission') }}
               </p>
               <p class="font-medium leading-[14px]">
-                {{ getCarro()?.transmissao }}
+                {{ carro.transmissao }}
               </p>
               
             </div>
@@ -283,7 +167,7 @@ const closeFullscreen = () => {
                 {{ t('kilometers') }}
               </p>
               <p class="font-medium">
-                {{ getCarro()?.kms + " km" }}
+                {{ carro.kms + " km" }}
               </p>
               
             </div>
@@ -297,7 +181,7 @@ const closeFullscreen = () => {
                 {{ t('capacity') }}
               </p>
               <p class="font-medium">
-                {{ getCarro()?.lugares }}
+                {{ carro.lugares }}
               </p>
               
             </div>
@@ -311,7 +195,7 @@ const closeFullscreen = () => {
                 {{ t('doors') }}
               </p>
               <p class="font-medium">
-                {{ getCarro()?.portas }}
+                {{ carro.portas }}
               </p>
               
             </div>
@@ -329,11 +213,11 @@ const closeFullscreen = () => {
               <p class="leading-[13px] text-gray-500">
                 {{ t('consumption') }}
               </p>
-              <p v-if="getCarro()?.combustivel=='Elétrico'" class="font-medium">
-                {{ getCarro()?.consumo + " kWh/100km" }}
+              <p v-if="carro.combustivel=='Elétrico'" class="font-medium">
+                {{ carro.consumo + " kWh/100km" }}
               </p>
               <p v-else class="font-medium">
-                {{ getCarro()?.consumo + " L/100km" }}
+                {{ carro.consumo + " L/100km" }}
               </p>
               
               
@@ -348,10 +232,10 @@ const closeFullscreen = () => {
             </svg>
             <div class="flex flex-col justify-center items-start mt-2 text-[14px] sm:text-[15px]">
               <p class="leading-[13px] text-gray-500">
-                {{ t('potency') }}
+                {{ t('power') }}
               </p>
               <p class="font-medium">
-                {{ getCarro()?.potencia + " Cv" }}
+                {{ carro.potencia + " Cv" }}
               </p>
               
             </div>
@@ -370,7 +254,7 @@ const closeFullscreen = () => {
                 {{ t('cylinderCapacity') }}
               </p>
               <p class="font-medium">
-                {{ getCarro()?.cilindrada + " Cc" }}
+                {{ carro.cilindrada + " Cc" }}
               </p>
               
             </div>
@@ -387,7 +271,7 @@ const closeFullscreen = () => {
                 {{ t('color') }}
               </p>
               <p class="font-medium">
-                {{ getCarro()?.cor }}
+                {{ carro.cor }}
               </p>
               
             </div>
@@ -401,7 +285,7 @@ const closeFullscreen = () => {
                 {{ t('state') }}
               </p>
               <p class="font-medium">
-                {{ getCarro()?.estado }}
+                {{ carro.estado }}
               </p>
               
             </div>
@@ -415,7 +299,7 @@ const closeFullscreen = () => {
                 {{ t('typology') }}
               </p>
               <p class="font-medium">
-                {{ getCarro()?.tipologia }}
+                {{ carro.tipologia }}
               </p>
               
             </div>
@@ -432,7 +316,7 @@ const closeFullscreen = () => {
                 {{ t('transmission') }}
               </p>
               <p class="font-medium leading-[14px]">
-                {{ getCarro()?.transmissao }}
+                {{ carro.transmissao }}
               </p>
               
             </div>
@@ -446,7 +330,7 @@ const closeFullscreen = () => {
                 {{ t('doors') }}
               </p>
               <p class="font-medium">
-                {{ getCarro()?.portas }}
+                {{ carro.portas }}
               </p>
               
             </div>
@@ -468,7 +352,7 @@ const closeFullscreen = () => {
                 {{ t('cylinderCapacity') }}
               </p>
               <p class="font-medium">
-                {{ getCarro()?.cilindrada + " Cc" }}
+                {{ carro.cilindrada + " Cc" }}
               </p>
               
             </div>
@@ -482,7 +366,7 @@ const closeFullscreen = () => {
                 {{ t('typology') }}
               </p>
               <p class="font-medium">
-                {{ getCarro()?.tipologia }}
+                {{ carro.tipologia }}
               </p>
               
             </div>
@@ -497,7 +381,7 @@ const closeFullscreen = () => {
               </h1>
             </div>
             <h1 class="text-white text-3xl font-bold italic">
-              {{ getCarro()?.preco + " €" }}
+              {{ carro.preco + " €" }}
             </h1>
           </div>
 
@@ -526,7 +410,7 @@ const closeFullscreen = () => {
             :speed="500"
             :effect="'fade'"
         >
-          <SwiperSlide v-for="(carIMG, index) in getCarro()?.imagens" :key="index" class="w-full relative p-3 bg-[#201818]">
+          <SwiperSlide v-for="(carIMG, index) in carro.imagens" :key="index" class="w-full relative p-3 bg-[#201818]">
               <img class="max-h-[240px] xs:max-h-[300px] sm:max-h-[450px] rounded-xl w-full h-auto object-cover" :src="carIMG" alt="Car Image">
               <!-- Fullscreen Button -->
               <button @click="openFullscreen()" class="fullscreen-btn">
@@ -557,7 +441,7 @@ const closeFullscreen = () => {
           :speed="500"
           :effect="'fade'"
         >
-          <SwiperSlide v-for="carIMG in getCarro()?.imagens" class="w-full relative h-full flex justify-center items-center">
+          <SwiperSlide v-for="carIMG in carro.imagens" class="w-full relative h-full flex justify-center items-center">
             <img class="max-h-full w-full object-contain" :src="carIMG" alt="Car Image">
           </SwiperSlide>
           <div class="swiper-button-prev-custom transition duration-300 ease-in-out">
@@ -666,6 +550,21 @@ const closeFullscreen = () => {
 .btc:hover,
 .btc:hover .icn {
   color: white;
+}
+
+.loading-spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 </style>
