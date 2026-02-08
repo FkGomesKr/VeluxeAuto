@@ -24,7 +24,7 @@ export default {
     brandZA: "品牌 (Z-A)",
     higherKMs: "更多公里",
     lowerKMs: "更少公里",
-    potency: "功率",
+    power: "功率",
     cylinderCapacity: "排量",
     color: "颜色",
     state: "状态",
