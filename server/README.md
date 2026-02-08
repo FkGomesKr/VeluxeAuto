@@ -34,7 +34,7 @@ server/
 ### GET /api/cars
 Returns all cars with their image URLs.
 
-**Caching:** Responses are cached for **10 minutes** to reduce database load. Uses stale-while-revalidate strategy for optimal performance.
+**Caching:** Responses are cached for **6 hours** to reduce database load (data changes are very rare). Uses stale-while-revalidate strategy for optimal performance.
 
 **Query Parameters:**
 - `expiresIn` (optional): URL expiration time in seconds (default: 604800 = 7 days)
@@ -60,7 +60,7 @@ Returns all cars with their image URLs.
 ### GET /api/cars/:id
 Returns a single car by ID with its image URLs.
 
-**Caching:** Responses are cached for **15 minutes** to reduce database load. Uses stale-while-revalidate strategy for optimal performance.
+**Caching:** Responses are cached for **24 hours** to reduce database load (data changes are very rare). Uses stale-while-revalidate strategy for optimal performance.
 
 **Query Parameters:**
 - `expiresIn` (optional): URL expiration time in seconds (default: 604800 = 7 days)
@@ -183,8 +183,8 @@ const car = await getCarById(1)
 
 API responses are cached using Nuxt 3's built-in `defineCachedEventHandler`:
 
-- **GET /api/cars**: Cached for 10 minutes
-- **GET /api/cars/:id**: Cached for 15 minutes
+- **GET /api/cars**: Cached for **6 hours** (data changes are very rare)
+- **GET /api/cars/:id**: Cached for **24 hours** (individual car data changes very rarely)
 - **Stale-While-Revalidate**: Serves stale cache while refreshing in the background for better performance
 
 **Benefits:**
@@ -193,11 +193,11 @@ API responses are cached using Nuxt 3's built-in `defineCachedEventHandler`:
 - Lower Supabase usage/costs
 
 **Cache Invalidation:**
-- Cache automatically expires after the TTL (10-15 minutes)
+- Cache automatically expires after the TTL (6-24 hours)
 - Restart the dev server to clear all caches immediately
 - In production, cache will refresh automatically
 
-**Note:** Since you update the database manually, the cache TTL ensures changes appear within 10-15 minutes. If you need immediate updates, restart the server.
+**Note:** Since you update the database manually and data changes are very rare, the longer cache TTL ensures minimal database load. If you need immediate updates after making changes, restart the server.
 
 ## Future: CloudFront Integration
 

@@ -5,7 +5,7 @@ import { CarsService } from '~/server/services/cars.service'
  * GET /api/cars/:id
  * Returns car with Portuguese field names for frontend compatibility
  * 
- * Cached for 15 minutes to reduce database load
+ * Cached for 24 hours to reduce database load (data changes are very rare)
  * Cache key includes car ID and expiresIn query param
  */
 export default defineCachedEventHandler(async (event) => {
@@ -54,7 +54,7 @@ export default defineCachedEventHandler(async (event) => {
     })
   }
 }, {
-  maxAge: 15 * 60, // Cache for 15 minutes (900 seconds) - individual cars change less frequently
+  maxAge: 24 * 60 * 60, // Cache for 24 hours (86400 seconds) - individual car data changes very rarely
   name: 'car-detail',
   getKey: (event) => {
     const id = getRouterParam(event, 'id')
