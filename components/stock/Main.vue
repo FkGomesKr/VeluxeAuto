@@ -611,7 +611,7 @@ const resetFilters = () => {
   <!-- Cars Grid -->
   <div v-else class="bg-[#121212] w-full pb-20 px-5 xs:px-10 lg:px-20 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-10" :class="{'pt-6': openFilters}" :style="{ minHeight: 'calc(100vh - 198px)' }">
     <div
-    v-for="(carro, index) in filteredCarros" :key="carro.modelo" 
+    v-for="(carro, index) in filteredCarros" :key="carro.id" 
     class="pt-4 pb-1 px-4 test rounded-2xl bg-[#201818] h-fit"
     >
       <Swiper
@@ -632,6 +632,8 @@ const resetFilters = () => {
                 class="hover:scale-[1.04] transition duration-300 ease-in-out max-h-[240px] xs:max-h-[280px] w-full object-cover" 
                 :src="carIMG" 
                 alt="Car Image"
+                loading="lazy"
+                decoding="async"
               >
             </NuxtLink>
         </SwiperSlide>

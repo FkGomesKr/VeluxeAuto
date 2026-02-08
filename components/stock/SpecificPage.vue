@@ -93,7 +93,13 @@ const closeFullscreen = () => {
               :effect="'fade'"
           >
             <SwiperSlide v-for="(carIMG, index) in carro.imagens" :key="index" class="w-full relative pb-4 bg-[#201818]">
-                <img class="max-h-[240px] xs:max-h-[300px] sm:max-h-[450px] rounded-xl w-full h-auto object-cover" :src="carIMG" alt="Car Image">
+                <img 
+                  class="max-h-[240px] xs:max-h-[300px] sm:max-h-[450px] rounded-xl w-full h-auto object-cover" 
+                  :src="carIMG" 
+                  alt="Car Image"
+                  :loading="index === 0 ? 'eager' : 'lazy'"
+                  decoding="async"
+                >
                 <!-- Fullscreen Button -->
                 <button @click="openFullscreen()" class="fullscreen-btn">
                   <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
@@ -411,7 +417,13 @@ const closeFullscreen = () => {
             :effect="'fade'"
         >
           <SwiperSlide v-for="(carIMG, index) in carro.imagens" :key="index" class="w-full relative p-3 bg-[#201818]">
-              <img class="max-h-[240px] xs:max-h-[300px] sm:max-h-[450px] rounded-xl w-full h-auto object-cover" :src="carIMG" alt="Car Image">
+              <img 
+                class="max-h-[240px] xs:max-h-[300px] sm:max-h-[450px] rounded-xl w-full h-auto object-cover" 
+                :src="carIMG" 
+                alt="Car Image"
+                :loading="index === 0 ? 'eager' : 'lazy'"
+                decoding="async"
+              >
               <!-- Fullscreen Button -->
               <button @click="openFullscreen()" class="fullscreen-btn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
@@ -442,7 +454,13 @@ const closeFullscreen = () => {
           :effect="'fade'"
         >
           <SwiperSlide v-for="carIMG in carro.imagens" class="w-full relative h-full flex justify-center items-center">
-            <img class="max-h-full w-full object-contain" :src="carIMG" alt="Car Image">
+            <img 
+              class="max-h-full w-full object-contain" 
+              :src="carIMG" 
+              alt="Car Image"
+              loading="eager"
+              decoding="async"
+            >
           </SwiperSlide>
           <div class="swiper-button-prev-custom transition duration-300 ease-in-out">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16"><path fill="currentColor" d="M9.428 11.84c.663.458 1.571-.013 1.571-.816V4.975c0-.803-.908-1.274-1.571-.816L5.644 6.776a1.486 1.486 0 0 0 0 2.447z"/></svg>
