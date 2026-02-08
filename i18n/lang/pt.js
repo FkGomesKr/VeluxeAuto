@@ -1,6 +1,8 @@
 export default {
   filtersTitle: "Encontra o teu carro",
   brand: "Marca",
+  brands: "Marcas",
+  whatyoulookingfor: "O que procuras?",
   year: "Ano",
   fuel: "Combustível",
   model: "Modelo",

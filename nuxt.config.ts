@@ -11,9 +11,16 @@ export default defineNuxtConfig({
       { code: 'zh-CN', name: '中国人', file: 'zh-CN.js' }
     ],
     lazy: true, 
-    langDir: 'lang/', 
-    defaultLocale: 'pt', 
-    fallbackLocale: 'pt',
+    langDir: 'lang',
+    defaultLocale: 'pt',
+    strategy: 'prefix_except_default',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root',
+      alwaysRedirect: false,
+    },
+    vueI18n: './i18n.config.ts',
   },
   css: [
     '@/assets/css/tailwind.css',
