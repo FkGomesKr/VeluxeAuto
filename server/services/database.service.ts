@@ -13,6 +13,7 @@ export class DatabaseService {
     const { data, error } = await this.supabase
       .from(tableName)
       .select('*')
+      .order('id', { ascending: true }) // Consistent ordering
     
     if (error) throw error
     return data || []

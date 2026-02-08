@@ -14,9 +14,11 @@ This is a **read-only** backend for a car showroom website:
 ```
 server/
 ├── api/                    # API route handlers
-│   ├── cars.get.ts        # GET /api/cars - Get all cars
-│   └── cars/
-│       └── [id].get.ts     # GET /api/cars/:id - Get car by ID
+│   ├── cars.get.ts        # GET /api/cars - Get all cars (cached 10min)
+│   ├── cars/
+│   │   └── [id].get.ts     # GET /api/cars/:id - Get car by ID (cached 15min)
+│   └── cache/
+│       └── clear.post.ts   # POST /api/cache/clear - Clear cache (dev utility)
 ├── schemas/               # Database schema definitions
 │   └── cars.ts           # Cars table schema and TypeScript types
 ├── services/              # Business logic services
@@ -31,6 +33,8 @@ server/
 
 ### GET /api/cars
 Returns all cars with their image URLs.
+
+**Caching:** Responses are cached for **10 minutes** to reduce database load. Uses stale-while-revalidate strategy for optimal performance.
 
 **Query Parameters:**
 - `expiresIn` (optional): URL expiration time in seconds (default: 604800 = 7 days)
@@ -55,6 +59,8 @@ Returns all cars with their image URLs.
 
 ### GET /api/cars/:id
 Returns a single car by ID with its image URLs.
+
+**Caching:** Responses are cached for **15 minutes** to reduce database load. Uses stale-while-revalidate strategy for optimal performance.
 
 **Query Parameters:**
 - `expiresIn` (optional): URL expiration time in seconds (default: 604800 = 7 days)
@@ -172,6 +178,26 @@ const cars = await getCars()
 const car = await getCarById(1)
 </script>
 ```
+
+## Response Caching
+
+API responses are cached using Nuxt 3's built-in `defineCachedEventHandler`:
+
+- **GET /api/cars**: Cached for 10 minutes
+- **GET /api/cars/:id**: Cached for 15 minutes
+- **Stale-While-Revalidate**: Serves stale cache while refreshing in the background for better performance
+
+**Benefits:**
+- Reduces database queries significantly
+- Faster response times for repeated requests
+- Lower Supabase usage/costs
+
+**Cache Invalidation:**
+- Cache automatically expires after the TTL (10-15 minutes)
+- Restart the dev server to clear all caches immediately
+- In production, cache will refresh automatically
+
+**Note:** Since you update the database manually, the cache TTL ensures changes appear within 10-15 minutes. If you need immediate updates, restart the server.
 
 ## Future: CloudFront Integration
 

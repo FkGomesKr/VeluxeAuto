@@ -4,8 +4,11 @@ import { CarsService } from '~/server/services/cars.service'
  * Get car by ID endpoint
  * GET /api/cars/:id
  * Returns car with Portuguese field names for frontend compatibility
+ * 
+ * Cached for 15 minutes to reduce database load
+ * Cache key includes car ID and expiresIn query param
  */
-export default defineEventHandler(async (event) => {
+export default defineCachedEventHandler(async (event) => {
   try {
     const id = getRouterParam(event, 'id')
     
@@ -50,4 +53,14 @@ export default defineEventHandler(async (event) => {
       statusMessage: error.message || 'Failed to fetch car'
     })
   }
+}, {
+  maxAge: 15 * 60, // Cache for 15 minutes (900 seconds) - individual cars change less frequently
+  name: 'car-detail',
+  getKey: (event) => {
+    const id = getRouterParam(event, 'id')
+    const query = getQuery(event)
+    const expiresIn = query.expiresIn ? query.expiresIn : 'default'
+    return `car-${id}-${expiresIn}`
+  },
+  swr: true, // Enable stale-while-revalidate: serve stale cache while revalidating in background
 })
