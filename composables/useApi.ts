@@ -26,20 +26,18 @@ export interface CarFrontend {
  */
 export const useApi = () => {
   /**
-   * Get all cars with their images
+   * Get all cars with their images (served via Supabase Storage proxy with Vercel cache)
    */
-  const getCars = async (expiresIn?: number): Promise<CarFrontend[]> => {
-    const params = expiresIn ? `?expiresIn=${expiresIn}` : ''
-    const response = await $fetch<{ success: boolean; cars: CarFrontend[] }>(`/api/cars${params}`)
+  const getCars = async (): Promise<CarFrontend[]> => {
+    const response = await $fetch<{ success: boolean; cars: CarFrontend[] }>('/api/cars')
     return response.cars
   }
 
   /**
-   * Get a single car by ID with its images
+   * Get a single car by ID with its images (served via Supabase Storage proxy with Vercel cache)
    */
-  const getCarById = async (id: number, expiresIn?: number): Promise<CarFrontend> => {
-    const params = expiresIn ? `?expiresIn=${expiresIn}` : ''
-    const response = await $fetch<{ success: boolean; car: CarFrontend }>(`/api/cars/${id}${params}`)
+  const getCarById = async (id: number): Promise<CarFrontend> => {
+    const response = await $fetch<{ success: boolean; car: CarFrontend }>(`/api/cars/${id}`)
     
     if (!response.success || !response.car) {
       throw new Error('Invalid response from API')

@@ -8,31 +8,24 @@ import { CarsService } from '~/server/services/cars.service'
  * Cached for 6 hours to reduce database load (data changes are very rare)
  * Cache key includes expiresIn query param to ensure different presigned URL expiry times are cached separately
  */
-export default defineCachedEventHandler(async (event) => {
+export default defineCachedEventHandler(async () => {
   try {
-    const query = getQuery(event)
-    const expiresIn = query.expiresIn ? parseInt(query.expiresIn as string) : 3600 * 24 * 7 // 7 days default
-    
     const carsService = new CarsService()
-    const cars = await carsService.getAllCars(expiresIn)
-    
+    const cars = await carsService.getAllCars()
+
     return {
       success: true,
-      cars
+      cars,
     }
   } catch (error: any) {
     throw createError({
       statusCode: 500,
-      statusMessage: error.message || 'Failed to fetch cars'
+      statusMessage: error.message || 'Failed to fetch cars',
     })
   }
 }, {
-  maxAge: 6 * 60 * 60, // Cache for 6 hours (21600 seconds) - data changes are very rare
+  maxAge: 6 * 60 * 60, // Cache for 6 hours - data changes are very rare
   name: 'cars-list',
-  getKey: (event) => {
-    const query = getQuery(event)
-    const expiresIn = query.expiresIn ? query.expiresIn : 'default'
-    return `cars-list-${expiresIn}`
-  },
-  swr: true, // Enable stale-while-revalidate: serve stale cache while revalidating in background
+  getKey: () => 'cars-list',
+  swr: true,
 })

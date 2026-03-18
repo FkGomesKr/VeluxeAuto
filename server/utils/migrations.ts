@@ -49,8 +49,8 @@ export async function runMigrations() {
     if (checkError && checkError.code === '42P01') {
       console.log('📦 Creating cars table...')
       
-      // Execute the migration SQL
-      const { error: migrationError } = await supabase.rpc('exec_sql', {
+      // Execute the migration SQL (exec_sql is a custom RPC; not in generated types)
+      const { error: migrationError } = await (supabase as any).rpc('exec_sql', {
         sql: CARS_TABLE_SQL
       })
       
@@ -85,8 +85,8 @@ export async function ensureCarsTable() {
   try {
     const config = useRuntimeConfig()
     
-    // Skip check if Supabase isn't configured
-    if (!config.SUPABASE_URL || !config.SUPABASE_ANON_KEY) {
+    // Skip check if Supabase isn't configured (we use service role key only)
+    if (!config.SUPABASE_URL || !config.SUPABASE_SERVICE_ROLE_KEY) {
       console.warn('⚠️  Supabase credentials not configured - skipping table check')
       return false
     }

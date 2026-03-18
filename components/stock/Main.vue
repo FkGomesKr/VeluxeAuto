@@ -4,7 +4,8 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Navigation } from 'swiper/modules';
 import noUiSlider from 'nouislider';
 import 'nouislider/dist/nouislider.css';
-import 'swiper/swiper-bundle.css'; 
+import 'swiper/css';
+import 'swiper/css/navigation'; 
 
 const {t, locale} = useI18n();
 const selectedRange = ref([1990, 2024]);

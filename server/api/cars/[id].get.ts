@@ -27,11 +27,8 @@ export default defineCachedEventHandler(async (event) => {
       })
     }
     
-    const query = getQuery(event)
-    const expiresIn = query.expiresIn ? parseInt(query.expiresIn as string) : 3600 * 24 * 7 // 7 days default
-    
     const carsService = new CarsService()
-    const car = await carsService.getCarById(carId, expiresIn)
+    const car = await carsService.getCarById(carId)
     
     if (!car) {
       throw createError({
@@ -56,11 +53,6 @@ export default defineCachedEventHandler(async (event) => {
 }, {
   maxAge: 24 * 60 * 60, // Cache for 24 hours (86400 seconds) - individual car data changes very rarely
   name: 'car-detail',
-  getKey: (event) => {
-    const id = getRouterParam(event, 'id')
-    const query = getQuery(event)
-    const expiresIn = query.expiresIn ? query.expiresIn : 'default'
-    return `car-${id}-${expiresIn}`
-  },
+  getKey: (event) => `car-${getRouterParam(event, 'id')}`,
   swr: true, // Enable stale-while-revalidate: serve stale cache while revalidating in background
 })

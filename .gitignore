@@ -9,6 +9,7 @@ yarn-error.log
 npm-debug.log
 package-lock.json
 yarn.lock
+.output/
 
 # Nuxt.js build files
 .nuxt/
