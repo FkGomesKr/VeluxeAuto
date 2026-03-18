@@ -40,7 +40,41 @@ export default defineNuxtConfig({
     SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY,
     SUPABASE_STORAGE_BUCKET: process.env.SUPABASE_STORAGE_BUCKET || 'car-images',
   },
-  
+
+  // Vercel/server edge caching: Cache-Control so responses are cached and we spare DB + Supabase
+  nitro: {
+    routeRules: {
+      // Cars API: edge cache JSON (data changes rarely, same as images)
+      '/api/cars': {
+        headers: {
+          'Cache-Control': 'public, s-maxage=21600, stale-while-revalidate=21600',
+        },
+      },
+      '/api/cars/**': {
+        headers: {
+          'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=86400',
+        },
+      },
+      // Build outputs: immutable, long cache (content-hashed filenames)
+      '/_nuxt/**': {
+        headers: {
+          'Cache-Control': 'public, max-age=31536000, immutable',
+        },
+      },
+      // Static images/SVGs in public/ (e.g. /images/VeluxeAutoLogo.png or /public/images/...)
+      '/images/**': {
+        headers: {
+          'Cache-Control': 'public, max-age=31536000, s-maxage=31536000',
+        },
+      },
+      '/public/images/**': {
+        headers: {
+          'Cache-Control': 'public, max-age=31536000, s-maxage=31536000',
+        },
+      },
+    },
+  },
+
   components: true,
   compatibilityDate: '2026-02-08',
 })
