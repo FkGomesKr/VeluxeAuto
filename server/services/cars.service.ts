@@ -1,6 +1,11 @@
 import { DatabaseService } from './database.service'
-import { generateCarImageUrls } from '~/server/utils/s3'
 import type { Car, CarWithImages } from '~/server/schemas/cars'
+
+/** Builds image URLs for the car image proxy (Supabase Storage behind Vercel cache). */
+function generateCarImageUrls(carId: number, picsNumber: number): string[] {
+  if (!picsNumber || picsNumber === 0) return []
+  return Array.from({ length: picsNumber }, (_, i) => `/api/image/car/${carId}/${i}`)
+}
 
 /**
  * Frontend car interface (Portuguese field names)
@@ -62,65 +67,37 @@ function mapCarToFrontend(car: CarWithImages): CarFrontend {
  */
 export class CarsService {
   private dbService = new DatabaseService()
-  private bucket: string
-
-  constructor() {
-    const config = useRuntimeConfig()
-    this.bucket = config.AWS_S3_BUCKET || ''
-    
-    if (!this.bucket) {
-      throw new Error('AWS_S3_BUCKET environment variable is required')
-    }
-  }
 
   /**
-   * Get all cars with their image URLs (mapped to frontend format)
+   * Get all cars with their image URLs (mapped to frontend format).
+   * Image URLs point to the server image proxy (Supabase Storage, Vercel-cached).
    */
-  async getAllCars(expiresIn: number = 3600 * 24 * 7): Promise<CarFrontend[]> {
+  async getAllCars(): Promise<CarFrontend[]> {
     const cars = await this.dbService.getAllItems<Car>('cars')
-    
-    const carsWithImages = await Promise.all(
-      cars.map(async (car) => {
-        try {
-          // Handle both camelCase and snake_case for picsNumber
-          const picsNumber = (car as any).picsNumber || (car as any).pics_number || 0
-          const images = await generateCarImageUrls(
-            car.id,
-            picsNumber,
-            this.bucket,
-            expiresIn
-          )
-          return { ...car, images }
-        } catch (error: any) {
-          console.error(`Error generating images for car ${car.id}:`, error.message)
-          // Return car with empty images array if URL generation fails
-          return { ...car, images: [] }
-        }
-      })
-    )
-    
+
+    const carsWithImages = cars.map((car) => {
+      const picsNumber = (car as any).picsNumber || (car as any).pics_number || 0
+      const images = generateCarImageUrls(car.id, picsNumber)
+      return { ...car, images }
+    })
+
     return carsWithImages.map(mapCarToFrontend)
   }
 
   /**
-   * Get a single car by ID with its image URLs (mapped to frontend format)
+   * Get a single car by ID with its image URLs (mapped to frontend format).
+   * Image URLs point to the server image proxy (Supabase Storage, Vercel-cached).
    */
-  async getCarById(id: number, expiresIn: number = 3600 * 24 * 7): Promise<CarFrontend | null> {
+  async getCarById(id: number): Promise<CarFrontend | null> {
     const car = await this.dbService.getItemById<Car>('cars', id)
-    
+
     if (!car) {
       return null
     }
-    
-    // Handle both camelCase and snake_case for picsNumber
+
     const picsNumber = (car as any).picsNumber || (car as any).pics_number || 0
-    const images = await generateCarImageUrls(
-      car.id,
-      picsNumber,
-      this.bucket,
-      expiresIn
-    )
-    
+    const images = generateCarImageUrls(car.id, picsNumber)
+
     return mapCarToFrontend({ ...car, images })
   }
 }
