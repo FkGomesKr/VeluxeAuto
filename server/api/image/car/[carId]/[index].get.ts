@@ -1,12 +1,13 @@
-import { downloadCarImage } from '~/server/utils/supabase-storage'
+import {
+  downloadCarImageFull,
+  downloadCarImageThumbOrFull,
+} from '~/server/utils/supabase-storage'
 
 /**
  * Image proxy for car images stored in Supabase Storage.
  * GET /api/image/car/:carId/:index
- *
- * - Fetches the image from Supabase Storage using the service role (private, no public keys).
- * - Sets long-lived Cache-Control so Vercel caches the response and reduces Supabase requests.
- * - Images are updated rarely (~once a month), so 30 days cache is appropriate.
+ * Query thumb=1 — stock list only (thumb file, else full). No query — detail gallery (full only).
+ * Long Cache-Control for Vercel edge + browser.
  */
 const CACHE_MAX_AGE = 60 * 60 * 24 * 30 // 30 days in seconds
 
@@ -18,10 +19,16 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 400, statusMessage: 'Invalid carId or index' })
   }
 
+  const query = getQuery(event)
+  const forStockThumb =
+    query.thumb === '1' || query.thumb === 'true' || query.thumb === true
+
   const config = useRuntimeConfig()
   const bucket = config.SUPABASE_STORAGE_BUCKET || 'car-images'
 
-  const result = await downloadCarImage(bucket, carId, index)
+  const result = forStockThumb
+    ? await downloadCarImageThumbOrFull(bucket, carId, index)
+    : await downloadCarImageFull(bucket, carId, index)
 
   if (!result) {
     throw createError({ statusCode: 404, statusMessage: 'Image not found' })

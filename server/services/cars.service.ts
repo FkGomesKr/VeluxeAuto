@@ -4,14 +4,17 @@ import type { Car, CarWithImages } from '~/server/schemas/cars'
 /** Max images returned for the stock list (thumbnails). Detail page returns all. */
 export const STOCK_LIST_MAX_IMAGES = 3
 
-/**
- * Builds image URLs for the car image proxy (Supabase Storage behind Vercel cache).
- * @param maxImages - If set, only the first N URLs are generated (capped by picsNumber).
- */
-function generateCarImageUrls(carId: number, picsNumber: number, maxImages?: number): string[] {
+/** Detail page: full-size only (no thumb query). */
+function generateFullImageUrls(carId: number, picsNumber: number): string[] {
   if (!picsNumber || picsNumber === 0) return []
-  const count = maxImages !== undefined ? Math.min(maxImages, picsNumber) : picsNumber
-  return Array.from({ length: count }, (_, i) => `/api/image/car/${carId}/${i}`)
+  return Array.from({ length: picsNumber }, (_, i) => `/api/image/car/${carId}/${i}`)
+}
+
+/** Stock list: first N images with ?thumb=1 (thumb file, failover to full in the API). */
+function generateStockListImageUrls(carId: number, picsNumber: number, maxImages: number): string[] {
+  if (!picsNumber || picsNumber === 0) return []
+  const count = Math.min(maxImages, picsNumber)
+  return Array.from({ length: count }, (_, i) => `/api/image/car/${carId}/${i}?thumb=1`)
 }
 
 /**
@@ -84,7 +87,7 @@ export class CarsService {
 
     const carsWithImages = cars.map((car) => {
       const picsNumber = (car as any).picsNumber || (car as any).pics_number || 0
-      const images = generateCarImageUrls(car.id, picsNumber, STOCK_LIST_MAX_IMAGES)
+      const images = generateStockListImageUrls(car.id, picsNumber, STOCK_LIST_MAX_IMAGES)
       return { ...car, images }
     })
 
@@ -103,7 +106,7 @@ export class CarsService {
     }
 
     const picsNumber = (car as any).picsNumber || (car as any).pics_number || 0
-    const images = generateCarImageUrls(car.id, picsNumber)
+    const images = generateFullImageUrls(car.id, picsNumber)
 
     return mapCarToFrontend({ ...car, images })
   }
