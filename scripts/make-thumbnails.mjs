@@ -10,6 +10,8 @@
  * For each input file writes: <name>-thumb.jpg next to the original
  * (e.g. car-1-0.jpg → car-1-0-thumb.jpg)
  *
+ * For full-size originals (overwrite in place), see optimize-full-images.mjs
+ *
  * Requires: npm install (adds sharp as devDependency)
  */
 

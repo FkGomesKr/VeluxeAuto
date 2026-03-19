@@ -8,7 +8,8 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "thumbs": "node scripts/make-thumbnails.mjs"
+    "thumbs": "node scripts/make-thumbnails.mjs",
+    "optimize-images": "node scripts/optimize-full-images.mjs"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",
