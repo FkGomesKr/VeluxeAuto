@@ -1,10 +1,20 @@
 import { DatabaseService } from './database.service'
 import type { Car, CarWithImages } from '~/server/schemas/cars'
 
-/** Builds image URLs for the car image proxy (Supabase Storage behind Vercel cache). */
-function generateCarImageUrls(carId: number, picsNumber: number): string[] {
+/** Max images returned for the stock list (thumbnails). Detail page returns all. */
+export const STOCK_LIST_MAX_IMAGES = 3
+
+/** Detail page: full-size only (no thumb query). */
+function generateFullImageUrls(carId: number, picsNumber: number): string[] {
   if (!picsNumber || picsNumber === 0) return []
   return Array.from({ length: picsNumber }, (_, i) => `/api/image/car/${carId}/${i}`)
+}
+
+/** Stock list: first N images with ?thumb=1 (thumb file, failover to full in the API). */
+function generateStockListImageUrls(carId: number, picsNumber: number, maxImages: number): string[] {
+  if (!picsNumber || picsNumber === 0) return []
+  const count = Math.min(maxImages, picsNumber)
+  return Array.from({ length: count }, (_, i) => `/api/image/car/${carId}/${i}?thumb=1`)
 }
 
 /**
@@ -69,15 +79,15 @@ export class CarsService {
   private dbService = new DatabaseService()
 
   /**
-   * Get all cars with their image URLs (mapped to frontend format).
-   * Image URLs point to the server image proxy (Supabase Storage, Vercel-cached).
+   * Get all cars with image URLs for the stock list only (first STOCK_LIST_MAX_IMAGES).
+   * Reduces browser work and storage traffic; full gallery is on the car detail API.
    */
   async getAllCars(): Promise<CarFrontend[]> {
     const cars = await this.dbService.getAllItems<Car>('cars')
 
     const carsWithImages = cars.map((car) => {
       const picsNumber = (car as any).picsNumber || (car as any).pics_number || 0
-      const images = generateCarImageUrls(car.id, picsNumber)
+      const images = generateStockListImageUrls(car.id, picsNumber, STOCK_LIST_MAX_IMAGES)
       return { ...car, images }
     })
 
@@ -96,7 +106,7 @@ export class CarsService {
     }
 
     const picsNumber = (car as any).picsNumber || (car as any).pics_number || 0
-    const images = generateCarImageUrls(car.id, picsNumber)
+    const images = generateFullImageUrls(car.id, picsNumber)
 
     return mapCarToFrontend({ ...car, images })
   }

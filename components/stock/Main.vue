@@ -182,6 +182,31 @@ function parseFormattedNumber(input: string): number {
 
 const orderFilter = ref("");
 
+const YEAR_MIN = 1990;
+const YEAR_MAX = 2024;
+const PRICE_MIN = 3000;
+const PRICE_MAX = 50000;
+const KM_MIN = 10000;
+const KM_MAX = 400000;
+
+function rangeToPct(value: number, min: number, max: number): number {
+  if (max <= min) return 0;
+  return ((value - min) / (max - min)) * 100;
+}
+
+const yearHandlePct = computed(() => [
+  rangeToPct(selectedRange.value[0], YEAR_MIN, YEAR_MAX),
+  rangeToPct(selectedRange.value[1], YEAR_MIN, YEAR_MAX),
+]);
+const priceHandlePct = computed(() => [
+  rangeToPct(selectedRange3.value[0], PRICE_MIN, PRICE_MAX),
+  rangeToPct(selectedRange3.value[1], PRICE_MIN, PRICE_MAX),
+]);
+const kmHandlePct = computed(() => [
+  rangeToPct(selectedRange2.value[0], KM_MIN, KM_MAX),
+  rangeToPct(selectedRange2.value[1], KM_MIN, KM_MAX),
+]);
+
 const filteredCarros = computed(() => {
   let filtered = carros.value.filter(carro => {
     const isMarcaValid = marca.value ? carro.marca.toLowerCase().includes(marca.value.toLowerCase()) : true;
@@ -230,18 +255,17 @@ function initializeSliders() {
     start: selectedRange.value,
     connect: true,
     range: {
-      min: 1990,
-      max: 2024
+      min: YEAR_MIN,
+      max: YEAR_MAX
     },
-    step: 1, 
-    tooltips: true, 
+    step: 1,
+    tooltips: false,
     format: {
       to: (value: number) => Math.round(value),
       from: (value: string) => parseInt(value)
     }
   });
 
-  // After initializing the slider, style the connect bars
   const connectBars = slider.getElementsByClassName("noUi-connect");
   for (let i = 0; i < connectBars.length; i++) {
     const bar = connectBars[i] as HTMLElement;
@@ -249,49 +273,25 @@ function initializeSliders() {
     bar.style.border = "none"; 
     bar.style.outline = "none"; 
     bar.style.boxShadow = "none";
-    bar.style.height = "6px";
+    bar.style.height = "7px";
   }
 
-  // Style the handles
-  const handles = slider.querySelectorAll(".noUi-handle");
+  const handles = slider.querySelectorAll<HTMLElement>(".noUi-handle");
   handles.forEach(handle => {
     handle.style.background = "#b53d3d";
-    handle.style.border = "2px solid #b53d3d";
-    handle.style.borderRadius = "10px";
-    handle.style.width = "36px";
-    handle.style.height = "24px";
-    handle.style.cursor = "grab"; 
-    handle.style.boxShadow = "none"; 
+    handle.style.border = "none";
+    handle.style.borderRadius = "4px";
+    handle.style.boxShadow = "none";
     handle.style.outline = "none";
-
-    // Add grabbing effect when mouse is down
-    handle.addEventListener("mousedown", () => {
-      handle.style.cursor = "grabbing";
-    });
-    handle.addEventListener("mouseup", () => {
-      handle.style.cursor = "grab";
-    });
+    handle.style.width = "10px";
+    handle.style.height = "20px";
+    handle.style.marginRight = "8px";
   });
 
   // Apply the custom tooltip styling after the slider is initialized
   slider.noUiSlider?.on('update', (values: any) => {
     selectedRange.value = values.map((value: string) => parseInt(value));
     //console.log("Intervalo selecionado: " + selectedRange.value[0] + " - " + selectedRange.value[1]);
-  });
-
-  // Apply custom styles to the tooltips
-  const tooltips = slider.querySelectorAll('.noUi-tooltip');
-  tooltips.forEach(tooltip => {
-    tooltip.style.backgroundColor = "#b53d3d";
-    tooltip.style.color = "white";               
-    tooltip.style.borderRadius = "12px";         
-    tooltip.style.padding = "3px 10px";          
-    tooltip.style.fontSize = "14px";
-    tooltip.style.fontWeight = "bold";
-    tooltip.style.transform = "translateY(27px) translateX(-19px)"; 
-    tooltip.style.textAlign = "center";          
-    tooltip.style.zIndex = "10";                
-    tooltip.style.border = "none";
   });
 
   const slider2 = document.getElementById('price-slider');
@@ -308,14 +308,14 @@ function initializeSliders() {
       start: selectedRange3.value,
       connect: true,
       range: {
-        min: 3000,
-        max: 50000
+        min: PRICE_MIN,
+        max: PRICE_MAX
       },
-      step: 1, 
-      tooltips: true, 
+      step: 1,
+      tooltips: false,
       format: {
-        to: (value: number) => Math.round(value)+'€',
-        from: (value: string) => parseInt(value)
+        to: (value: number) => Math.round(value) + '€',
+        from: (value: string) => parseInt(value, 10)
       }
     });
 
@@ -323,14 +323,14 @@ function initializeSliders() {
       start: selectedRange2.value,
       connect: true,
       range: {
-        min: 10000,
-        max: 400000
+        min: KM_MIN,
+        max: KM_MAX
       },
-      step: 1, 
-      tooltips: true, 
+      step: 1,
+      tooltips: false,
       format: {
-        to: (value: number) => Math.round(value)+'km',
-        from: (value: string) => parseInt(value)
+        to: (value: number) => Math.round(value) + 'km',
+        from: (value: string) => parseInt(value, 10)
       }
     });
   }
@@ -342,7 +342,7 @@ function initializeSliders() {
     bar.style.border = "none"; 
     bar.style.outline = "none"; 
     bar.style.boxShadow = "none";
-    bar.style.height = "6px";
+    bar.style.height = "7px";
   }
   const connectBars3 = slider3.getElementsByClassName("noUi-connect");
   for (let i = 0; i < connectBars3.length; i++) {
@@ -351,46 +351,30 @@ function initializeSliders() {
     bar.style.border = "none"; 
     bar.style.outline = "none"; 
     bar.style.boxShadow = "none"; 
-    bar.style.height = "6px";
+    bar.style.height = "7px";
   }
   
-  const handles2 = slider2.querySelectorAll(".noUi-handle");
+  const handles2 = slider2.querySelectorAll<HTMLElement>(".noUi-handle");
   handles2.forEach(handle => {
     handle.style.background = "#b53d3d";
-    handle.style.border = "2px solid #b53d3d";
-    handle.style.borderRadius = "10px";
-    handle.style.width = "36px";
-    handle.style.height = "24px";
-    handle.style.cursor = "grab"; 
-    handle.style.boxShadow = "none"; 
+    handle.style.border = "none";
+    handle.style.borderRadius = "4px";
+    handle.style.boxShadow = "none";
     handle.style.outline = "none";
-
-    // Add grabbing effect when mouse is down
-    handle.addEventListener("mousedown", () => {
-      handle.style.cursor = "grabbing";
-    });
-    handle.addEventListener("mouseup", () => {
-      handle.style.cursor = "grab";
-    });
+    handle.style.width = "10px";
+    handle.style.height = "20px";
+    handle.style.marginRight = "8px";
   });
-  const handles3 = slider3.querySelectorAll(".noUi-handle");
+  const handles3 = slider3.querySelectorAll<HTMLElement>(".noUi-handle");
   handles3.forEach(handle => {
     handle.style.background = "#b53d3d";
-    handle.style.border = "2px solid #b53d3d";
-    handle.style.borderRadius = "10px";
-    handle.style.width = "36px";
-    handle.style.height = "24px";
-    handle.style.cursor = "grab"; 
-    handle.style.boxShadow = "none"; 
+    handle.style.border = "none";
+    handle.style.borderRadius = "4px";
+    handle.style.boxShadow = "none";
     handle.style.outline = "none";
-
-    // Add grabbing effect when mouse is down
-    handle.addEventListener("mousedown", () => {
-      handle.style.cursor = "grabbing";
-    });
-    handle.addEventListener("mouseup", () => {
-      handle.style.cursor = "grab";
-    });
+    handle.style.width = "10px";
+    handle.style.height = "20px";
+    handle.style.marginRight = "8px";
   });
 
   slider2.noUiSlider?.on('update', (values: any) => {
@@ -400,33 +384,6 @@ function initializeSliders() {
   slider3.noUiSlider?.on('update', (values: any) => {
     selectedRange2.value = values.map((value: string) => parseInt(value));
     //console.log("Intervalo selecionado: " + selectedRange.value[0] + " - " + selectedRange.value[1]);
-  });
-
-  const tooltips2 = slider2.querySelectorAll('.noUi-tooltip');
-  tooltips2.forEach(tooltip => {
-    tooltip.style.backgroundColor = "#b53d3d";
-    tooltip.style.color = "white";               
-    tooltip.style.borderRadius = "12px";         
-    tooltip.style.padding = "3px 8px";          
-    tooltip.style.fontSize = "14px";
-    tooltip.style.fontWeight = "bold";
-    tooltip.style.transform = "translateY(27px) translateX(-19px)"; 
-    tooltip.style.textAlign = "center";          
-    tooltip.style.zIndex = "10";                
-    tooltip.style.border = "none";
-  });
-  const tooltips3 = slider3.querySelectorAll('.noUi-tooltip');
-  tooltips3.forEach(tooltip => {
-    tooltip.style.backgroundColor = "#b53d3d";
-    tooltip.style.color = "white";               
-    tooltip.style.borderRadius = "12px";         
-    tooltip.style.padding = "3px 8px";          
-    tooltip.style.fontSize = "14px";
-    tooltip.style.fontWeight = "bold";
-    tooltip.style.transform = "translateY(27px) translateX(-19px)"; 
-    tooltip.style.textAlign = "center";          
-    tooltip.style.zIndex = "10";                
-    tooltip.style.border = "none";
   });
 }
 
@@ -516,8 +473,8 @@ const resetFilters = () => {
     }"
     class="w-full bg-[#121212] transition-all duration-[1.5s] ease-in-out"
     > 
-    <div class="flex flex-col md:flex-row justify-center items-center pt-2">
-        <div class="w-full md:w-[25%] rounded-xl relative">
+    <div class="flex w-full flex-col md:gap-12 gap-2 md:flex-row md:justify-center items-end pt-2 pl-6 md:pl-0">
+        <div class="w-[70%] md:w-[27%] md:min-w-0 rounded-xl relative">
           <label class="text-xs text-[#b53d3d] ml-2 font-semibold">{{ t('brand') }}</label>
           <select v-model="marca" class="bg-transparent hover:bg-transparent w-full px-3 py-2 bg-gray-800 text-white rounded-2xl border appearance-none focus:outline-none border-[#b53d3d]">
             <option class="bg-[#121212]" value="">{{ t('select') }}</option>
@@ -526,12 +483,22 @@ const resetFilters = () => {
           <svg class="absolute top-[50%] right-2 pointer-events-none" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 12 12"><path fill="white" d="M3.076 4.617A1 1 0 0 1 4 4h4a1 1 0 0 1 .707 1.707l-2 2a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1-.217-1.09"/></svg>
         </div>
 
-        <div class="w-[96%] md:w-[50%] ml-0 md:ml-[9px] pl-0 md:pl-[3px] pr-0 md:pr-[12px] py-2 flex justify-center flex-col gap-3 mb-2">
-          <label class="text-xs text-[#b53d3d] font-semibold mr-6">{{ t('year') }}</label>
-          <div id="year-slider" class="slider relative px-4" :class="{'pr-8': selectedRange.length<50}"></div>
+        <div class="stock-year-slider stock-slider-col relative w-full md:w-[42%] flex flex-col gap-3 px-4 md:px-3 pb-0 translate-y-3">
+          <label class="text-xs text-[#b53d3d] font-semibold absolute top-[-30px]">{{ t('year') }}</label>
+          <div class="slider-with-labels w-full">
+            <div id="year-slider" class="slider relative"></div>
+            <div class="slider-value-row stock-year-value-row relative min-h-[1.375rem] pointer-events-none">
+              <span
+                v-for="(pct, i) in yearHandlePct"
+                :key="'year-val-' + i"
+                class="slider-value-chip slider-value-chip--year"
+                :style="{ left: pct + '%' }"
+              >{{ Math.round(selectedRange[i]) }}</span>
+            </div>
+          </div>
         </div>
 
-        <div class="w-full md:w-[25%] relative">
+        <div class="w-[90%] md:w-[27%] md:min-w-0 relative">
           <label class="text-xs text-[#b53d3d] ml-2 font-semibold">{{ t('fuel') }}</label>
           <select v-model="combustivel" class="bg-transparent w-full px-3 py-2 bg-gray-800 text-white rounded-2xl border appearance-none focus:outline-none border-[#b53d3d]">
             <option class="bg-[#121212]" value="">{{ t('select') }}</option>
@@ -543,8 +510,8 @@ const resetFilters = () => {
       <div class="w-full flex justify-center items-center bg-[#121212]">
         <div class="mt-6 bg-[#b53d3d] opacity-[0.3] h-[1px] w-full py-[1px]"></div>
       </div>
-      <div class="flex flex-col md:flex-row justify-center items-center pt-2">
-        <div class="w-full md:w-[25%] rounded-xl relative">
+      <div class="flex w-full flex-col md:gap-12 gap-2 md:flex-row md:justify-center items-start md:items-end mt-2 pl-6 md:pl-0">
+        <div class="w-[70%] md:w-[27%] md:min-w-0 rounded-xl relative">
           <label class="text-xs text-[#b53d3d] ml-2 font-semibold">{{ t('model') }}</label>
           <select v-model="modelo" class="bg-transparent hover:bg-transparent w-full px-3 py-2 bg-gray-800 text-white rounded-2xl border appearance-none focus:outline-none border-[#b53d3d]">
             <option class="bg-[#121212]" value="">{{ t('select') }}</option>
@@ -553,12 +520,22 @@ const resetFilters = () => {
           <svg class="absolute top-[50%] right-2 pointer-events-none" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 12 12"><path fill="white" d="M3.076 4.617A1 1 0 0 1 4 4h4a1 1 0 0 1 .707 1.707l-2 2a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1-.217-1.09"/></svg>
         </div>
 
-        <div class="w-[96%] md:w-[50%] ml-[9px] pl-[3px] pr-[21px] py-2 flex justify-center flex-col gap-3 mb-2 mr-5">
-          <label class="text-xs text-[#b53d3d] font-semibold mr-6">{{ t('budget') }}</label>
-          <div id="price-slider" class="slider relative px-4"></div>
+        <div class="stock-price-slider stock-slider-col relative w-full md:w-[42%] flex flex-col gap-3 px-4 md:px-3 pb-0 translate-y-3">
+          <label class="text-xs text-[#b53d3d] font-semibold absolute top-[-30px] mr-6">{{ t('budget') }}</label>
+          <div class="slider-with-labels w-full">
+            <div id="price-slider" class="slider relative"></div>
+            <div class="slider-value-row stock-price-value-row relative min-h-[1.375rem] pointer-events-none">
+              <span
+                v-for="(pct, i) in priceHandlePct"
+                :key="'price-val-' + i"
+                class="slider-value-chip slider-value-chip--price"
+                :style="{ left: pct + '%' }"
+              >{{ Math.round(selectedRange3[i]) }}€</span>
+            </div>
+          </div>
         </div>
 
-        <div class="w-full md:w-[25%] relative">
+        <div class="w-[90%] md:w-[27%] md:min-w-0 relative">
           <label class="text-xs text-[#b53d3d] ml-2 font-semibold">{{ t('typology') }}</label>
           <select v-model="tipologia" class="bg-transparent w-full px-3 py-2 bg-gray-800 text-white rounded-2xl border appearance-none focus:outline-none border-[#b53d3d]">
             <option class="bg-[#121212]" value="">{{ t('select') }}</option>
@@ -567,8 +544,8 @@ const resetFilters = () => {
           <svg class="absolute top-[50%] right-2 pointer-events-none" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 12 12"><path fill="white" d="M3.076 4.617A1 1 0 0 1 4 4h4a1 1 0 0 1 .707 1.707l-2 2a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1-.217-1.09"/></svg>
         </div>
       </div>
-      <div class="flex-col md:flex-row flex justify-center items-center pt-2">
-        <div class="w-full md:w-[25%] rounded-xl relative">
+      <div class="flex w-full flex-col md:gap-12 gap-2 md:flex-row md:justify-center items-start md:items-end mt-3 pl-6 md:pl-0">
+        <div class="w-[70%] md:w-[27%] md:min-w-0 rounded-xl relative">
           <label class="text-xs text-[#b53d3d] ml-2 font-semibold">{{ t('transmission') }}</label>
           <select v-model="transmissao" class="bg-transparent hover:bg-transparent w-full px-3 py-2 bg-gray-800 text-white rounded-2xl border appearance-none focus:outline-none border-[#b53d3d]">
             <option class="bg-[#121212]" value="">{{ t('select') }}</option>
@@ -577,12 +554,22 @@ const resetFilters = () => {
           <svg class="absolute top-[50%] right-2 pointer-events-none" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 12 12"><path fill="white" d="M3.076 4.617A1 1 0 0 1 4 4h4a1 1 0 0 1 .707 1.707l-2 2a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1-.217-1.09"/></svg>
         </div>
 
-        <div class="w-[96.5%] md:w-[50%] pl-[12px] pr-[34px] py-2 flex justify-center flex-col gap-3 mb-2 mr-7">
-          <label class="text-xs text-[#b53d3d] font-semibold mr-6">{{ t('kilometers') }}</label>
-          <div id="kilometer-slider" class="slider relative px-4"></div>
+        <div class="stock-km-slider stock-slider-col relative w-full md:w-[42%] flex flex-col gap-3 px-4 md:px-3 pb-0 translate-y-3">
+          <label class="text-xs text-[#b53d3d] font-semibold absolute top-[-30px] ml-1 md:ml-0 mr-6">{{ t('kilometers') }}</label>
+          <div class="slider-with-labels w-full">
+            <div id="kilometer-slider" class="slider relative"></div>
+            <div class="slider-value-row stock-km-value-row relative min-h-[1.375rem] pointer-events-none">
+              <span
+                v-for="(pct, i) in kmHandlePct"
+                :key="'km-val-' + i"
+                class="slider-value-chip slider-value-chip--km"
+                :style="{ left: pct + '%' }"
+              >{{ Math.round(selectedRange2[i]) }}km</span>
+            </div>
+          </div>
         </div>
 
-        <div class="w-full md:w-[25%] relative">
+        <div class="w-[90%] md:w-[27%] md:min-w-0 relative">
           <label class="text-xs text-[#b53d3d] ml-2 font-semibold">{{ t('capacity') }}</label>
           <select v-model="lugares" class="bg-transparent w-full px-3 py-2 bg-gray-800 text-white rounded-2xl border appearance-none focus:outline-none border-[#b53d3d]">
             <option class="bg-[#121212]" value="">{{ t('select') }}</option>
@@ -735,8 +722,67 @@ const resetFilters = () => {
   }
 }
 
-.noUi-tooltip {
+.slider :deep(.noUi-horizontal .noUi-handle) {
+  width: 20px !important;
+  height: 12px !important;
+  min-width: 16px;
+  max-width: 16px;
+  cursor: grab;
+  overflow: hidden;
+  background: #b53d3d !important;
+  border: none !important;
+}
+
+.slider :deep(.noUi-horizontal .noUi-handle:active) {
+  cursor: grabbing;
+}
+
+.slider :deep(.noUi-handle::before),
+.slider :deep(.noUi-handle::after) {
   display: none;
+}
+
+.slider :deep(.noUi-tooltip) {
+  display: none !important;
+}
+
+.slider-value-row {
+  width: 100%;
+  margin-top: 14px;
+}
+
+.slider-value-chip {
+  position: absolute;
+  top: 2px;
+  font-size: 13px;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.9);
+  white-space: nowrap;
+  line-height: 1.25;
+  margin-left: 4px;
+}
+
+.slider-value-chip--year {
+  transform: translateX(-50%);
+}
+
+.slider-value-chip--price {
+  transform: translateX(-50%);
+}
+
+.slider-value-chip--km {
+  transform: translateX(-55%);
+}
+
+.stock-slider-col {
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.stock-year-slider .stock-year-value-row,
+.stock-price-slider .stock-price-value-row,
+.stock-km-slider .stock-km-value-row {
+  margin-top: 10px;
 }
 
 @keyframes slide-down {
@@ -793,22 +839,31 @@ const resetFilters = () => {
     }
   }
 }
-#price-slider .noUi-tooltip,
-#kilometer-slider .noUi-tooltip {
-  display: none;
-}
-
 .slider {
   width: 100%;
   height: 10px;
 }
 
-.noUi-target {
-  background-color: #29333c;
-  border: none;
+/* Same as hero: track visible before noUi mounts */
+#year-slider.slider:not(.noUi-target) {
+  height: 7px;
+  border-radius: 3px;
+  background-color: #605b5b;
+}
+
+/* Track = outside the selected interval; selected span = .noUi-connect (red) */
+.slider.noUi-target {
+  background-color: #605b5b;
+  border: none !important;
+  border-radius: 3px;
   outline: none;
-  box-shadow: none;
-  height: 6px;
+  box-shadow: none !important;
+  height: 7px;
+}
+
+.slider :deep(.noUi-connect) {
+  background: #b53d3d !important;
+  border: none !important;
 }
 
 .loading-spinner {
