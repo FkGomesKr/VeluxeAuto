@@ -20,6 +20,9 @@ export default defineNuxtConfig({
       redirectOn: 'root',
       alwaysRedirect: false,
     },
+    compilation: {
+      strictMessage: false,
+    },
     vueI18n: './i18n.config.ts',
   },
   css: [

@@ -1,148 +1,209 @@
 <script lang="ts" setup>
+import { ref } from 'vue'
+
+const { t } = useI18n()
+const showPrivacyModal = ref(false)
+
+function openPrivacyModal() {
+  showPrivacyModal.value = true
+  document.body.style.overflow = 'hidden'
+}
+
+function closePrivacyModal() {
+  showPrivacyModal.value = false
+  document.body.style.overflow = ''
+}
 </script>
 
 <template>
-    <hr class="bar">
-    <hr class="bar2">
-    <div class="w-full bg-[#201818] overflow-hidden relative z-[2]">
-        <div class="pt-6 pb-4">
-            <div class="mx-auto w-full rounded-2xl flex flex-col items-center gap-6">
-              <div class="w-full flex justify-between items-end pr-14 pl-4 gap-6">
-                <div class="flex flex-col justify-start items-center">
-                  <div class="flex justify-start items-start gap-1">
-                    <p class="text-white text-[11px] font-light">
-                      Localização:
-                    </p>
-                  </div>
-                  <p class="text-white text-[13px] font-thin ml-8">
-                    Portugal, Braga
-                  </p>
-                </div>
-                <div class="icon-container WPP mr-2">
-                  <a class="icon-link" href="https://wa.me/351912247691?text=Olá, estou interessado em comprar um carro. Podemos conversar?">
-                    <svg class="pr-1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="#fff" d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2c-5.46 0-9.91 4.45-9.91 9.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91c0-2.65-1.03-5.14-2.9-7.01m-7.01 15.24c-1.48 0-2.93-.4-4.2-1.15l-.3-.18l-3.12.82l.83-3.04l-.2-.31a8.26 8.26 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24c2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.83c.02 4.54-3.68 8.23-8.22 8.23m4.52-6.16c-.25-.12-1.47-.72-1.69-.81c-.23-.08-.39-.12-.56.12c-.17.25-.64.81-.78.97c-.14.17-.29.19-.54.06c-.25-.12-1.05-.39-1.99-1.23c-.74-.66-1.23-1.47-1.38-1.72c-.14-.25-.02-.38.11-.51c.11-.11.25-.29.37-.43s.17-.25.25-.41c.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31c-.22.25-.86.85-.86 2.07s.89 2.4 1.01 2.56c.12.17 1.75 2.67 4.23 3.74c.59.26 1.05.41 1.41.52c.59.19 1.13.16 1.56.1c.48-.07 1.47-.6 1.67-1.18c.21-.58.21-1.07.14-1.18s-.22-.16-.47-.28"/></svg>
-                  </a>
-                </div>
-                <div class="flex flex-col justify-start items-center">
-                  <p class="text-white text-[11px] font-light">
-                    Contact us: 
-                  </p>
-                  <div class="ml-3 h-[20px]">
-                      <a href="https://wa.me/351912247691?text=Olá, estou interessado em comprar um carro. Podemos conversar?">
-                        <span class="text-white text-[13px] font-thin underline">Whatsapp</span>
-                      </a>
-                  </div>
-                </div>
-              </div>
-              <p class="text-xs text-white pt-2 pb-2 z-[2]">
-                  Veluxe Auto®
+  <hr class="bar">
+  <hr class="bar2">
+  <footer class="w-full bg-[#201818] relative z-[2]">
+    <div class="max-w-5xl mx-auto px-8 sm:px-12 pt-10 pb-6">
+      <!-- Three columns -->
+      <div class="grid grid-cols-1 md:grid-cols-[1.4fr_0.8fr_0.8fr] gap-10 md:gap-24">
+
+        <!-- Sobre nós -->
+        <div class="flex flex-col gap-3">
+          <div class="flex items-center gap-2.5">
+            <img src="/images/VeluxeAutoLogo.png" alt="VeluxeAuto" class="h-6 w-auto">
+            <h3 class="text-white text-md font-semibold tracking-wide uppercase">{{ t('footerAboutUs') }}</h3>
+          </div>
+          <p class="text-gray-400 text-[14px] leading-relaxed pt-2">
+            {{ t('footerAboutUsText') }}
+          </p>
+        </div>
+
+        <!-- Contactos -->
+        <div class="flex flex-col gap-3">
+          <h3 class="text-white text-md font-semibold tracking-wide uppercase">{{ t('contacts') }}</h3>
+          <div class="flex flex-col gap-3 pt-2">
+            <a
+              href="https://www.instagram.com/veluxeauto"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-2.5 text-gray-400 text-[14px] hover:text-[#ff026a] transition-colors duration-200"
+            >
+              <i class="fa-brands fa-instagram text-lg"></i>
+              <span>Instagram</span>
+            </a>
+            <a
+              href="https://www.facebook.com/veluxeauto"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-2.5 text-gray-400 text-[14px] hover:text-[#0866ff] transition-colors duration-200"
+            >
+              <i class="fa-brands fa-facebook-f text-lg"></i>
+              <span>Facebook</span>
+            </a>
+            <a
+              href="https://wa.me/351912247691?text=Olá, estou interessado em comprar um carro. Podemos conversar?"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-2.5 text-gray-400 text-[14px] hover:text-[#25d366] transition-colors duration-200"
+            >
+              <i class="fa-brands fa-whatsapp text-lg"></i>
+              <span>WhatsApp</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Localização -->
+        <div class="flex flex-col gap-3">
+          <h3 class="text-white text-md font-semibold tracking-wide uppercase">{{ t('footerLocation') }}</h3>
+          <div class="flex items-start gap-2 text-gray-400 text-[14px] leading-relaxed pt-2">
+            <i class="fa-solid fa-location-dot mt-0.5"></i>
+            <div>
+              <p>Portugal, Braga</p>
+              <p>4700-000 Braga</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Separator -->
+      <div class="border-t border-gray-700 mt-10 pt-8 mb-1">
+        <div class="flex flex-col sm:flex-row justify-center items-center gap-1 sm:gap-0">
+          <p class="text-gray-500 text-sm">
+            {{ t('footerAllRights') }}
+          </p>
+          <span class="hidden sm:inline text-gray-600 text-xs mx-2">|</span>
+          <button
+            @click="openPrivacyModal()"
+            class="text-gray-500 text-sm hover:text-[#b53d3d] transition-colors duration-200 underline underline-offset-2"
+          >
+            {{ t('privacyPolicy') }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Privacy Policy Modal -->
+    <Teleport to="body">
+      <Transition name="modal">
+        <div
+          v-if="showPrivacyModal"
+          class="fixed inset-0 z-[9999] flex items-center justify-center p-4"
+          @click.self="closePrivacyModal()"
+        >
+          <div class="fixed inset-0 bg-black/70 backdrop-blur-sm" @click="closePrivacyModal()"></div>
+          <div class="relative bg-[#201818] rounded-xl max-w-2xl w-full max-h-[80vh] overflow-hidden shadow-2xl z-10">
+            <div class="h-full max-h-[80vh] overflow-y-auto modal-scroll">
+            <div class="sticky top-0 bg-[#201818] pl-6 pr-1  py-4 flex justify-between items-center">
+              <h2 class="text-white text-lg font-semibold">{{ t('privacyPolicy') }}</h2>
+              <button
+                @click="closePrivacyModal()"
+                class="text-gray-400 hover:text-white transition-colors duration-200 p-1"
+              >
+                <i class="fa-solid fa-xmark text-xl"></i>
+              </button>
+            </div>
+            <div class="px-6 py-5 text-gray-300 text-sm leading-relaxed space-y-4">
+              <p v-for="i in 10" :key="i">
+                <strong class="text-white">{{ t(`privacyS${i}Title`) }}</strong><br>
+                <span v-html="t(`privacyS${i}Text`)"></span>
+              </p>
+              <p class="text-gray-500 text-xs pt-2">
+                {{ t('privacyLastUpdated') }}
               </p>
             </div>
+          </div>
+          </div>
         </div>
-    </div>
+      </Transition>
+    </Teleport>
+  </footer>
 </template>
 
 <style scoped>
 .bar {
-  border: none; 
-  height: 1px; 
-  background: #b53d3d; /* Bright yellow */
-  box-shadow: 0 -5px 10px #b53d3d, /* Glow above */
-              0 5px 10px #b53d3d,  /* Glow below */
-              0 0 15px #b53d3d,   /* Larger glow around */
-              0 0 30px #b53d3d;   /* Intense glowing effect */
+  border: none;
+  height: 1px;
+  background: #b53d3d;
+  box-shadow: 0 -5px 10px #b53d3d,
+              0 5px 10px #b53d3d,
+              0 0 15px #b53d3d,
+              0 0 30px #b53d3d;
 }
 
 .bar2 {
-  border: none; 
-  height: 1px; 
-  background: #b53d3d; /* Bright yellow */
-  box-shadow: 0 -5px 10px #b53d3d, /* Glow above */
-              0 5px 10px #D32F2F,  /* Glow below */
-              0 0 15px #b53d3d,   /* Larger glow around */
-              0 0 30px #D32F2F;   /* Intense glowing effect */
+  border: none;
+  height: 1px;
+  background: #b53d3d;
+  box-shadow: 0 -5px 10px #b53d3d,
+              0 5px 10px #D32F2F,
+              0 0 15px #b53d3d,
+              0 0 30px #D32F2F;
   transform: rotate(180deg);
 }
 
-/* Container styles */
-.icon-container {
-  position: relative;
-  display: inline-block;
-  width: 50px; /* Adjust size */
-  height: 50px; /* Adjust size */
+/* Modal transitions */
+.modal-enter-active,
+.modal-leave-active {
+  transition: opacity 0.25s ease;
 }
 
-/* Icon link styles */
-.icon-link {
-  position: relative;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  z-index: 2; /* Ensure it is above the circle */
-  text-decoration: none;
+.modal-enter-active .relative,
+.modal-leave-active .relative {
+  transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
-/* Pseudo-element for the circle */
-.icon-container::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 48%;
-  width: 30px; /* Initial size of the circle */
-  height: 30px; /* Initial size of the circle */
-  border-radius: 50%;
-  transform: translate(-50%, -50%) scale(0); /* Start small */
-  transition: transform 0.3s ease; /* Animation duration and easing */
-  z-index: 1; /* Below the icon */
+.modal-enter-from,
+.modal-leave-to {
+  opacity: 0;
 }
 
-/* Pseudo-element for the circle */
-.INSTA::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 30px; /* Initial size of the circle */
-  height: 30px; /* Initial size of the circle */
-  border-radius: 50%;
-  transform: translate(-50%, -50%) scale(0); /* Start small */
-  transition: transform 0.3s ease; /* Animation duration and easing */
-  z-index: 1; /* Below the icon */
+.modal-enter-from .relative {
+  transform: scale(0.95) translateY(10px);
+  opacity: 0;
 }
 
-/* Hover effect: Grow the circle */
-.icon-container:hover::before {
-  transform: translate(-50%, -50%) scale(1.5); /* Grow to full size */
+.modal-leave-to .relative {
+  transform: scale(0.95) translateY(10px);
+  opacity: 0;
 }
 
-.FB::before {
-  background-color: #0866ff; 
-  color: #aaacad;
+.modal-scroll::-webkit-scrollbar {
+  width: 8px;
 }
 
-.TT::before {
-  background-color: black;
+.modal-scroll::-webkit-scrollbar-track {
+  background: #201818;
+  border-radius: 0 12px 12px 0;
 }
 
-.LI::before {
-  background-color: #007bb6;
+.modal-scroll::-webkit-scrollbar-thumb {
+  background: #3a2a2a;
+  border-radius: 4px;
 }
 
-.INSTA::before {
-  background-color: #ff026a; 
+.modal-scroll::-webkit-scrollbar-thumb:hover {
+  background: #4a3535;
 }
 
-.WPP::before {
-  background-color: #c72121; 
-}
-
-.horizontal-line {
-    width: 100%; 
-    height: 1px;
-    background-color: #ccd6db;
-    margin: 14px 0;
-    border-radius: 1px; 
+.modal-scroll {
+  scrollbar-color: #3a2a2a #201818;
+  scrollbar-width: thin;
 }
 </style>
