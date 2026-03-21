@@ -39,7 +39,7 @@ export default defineEventHandler(async (event) => {
     }
 
     setResponseHeaders(event, {
-      'Cache-Control': `public, s-maxage=${CACHE_MAX_AGE}, stale-while-revalidate=${CACHE_MAX_AGE}`,
+      'Cache-Control': `public, max-age=300, s-maxage=${CACHE_MAX_AGE}, stale-while-revalidate=${CACHE_MAX_AGE}`,
     })
     
     return {
