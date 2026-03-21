@@ -1,14 +1,15 @@
 import { CarsService } from '~/server/services/cars.service'
 
+const CACHE_MAX_AGE = 24 * 60 * 60 // 24 hours
+
 /**
  * Get car by ID endpoint
  * GET /api/cars/:id
  * Returns car with Portuguese field names for frontend compatibility
  * 
- * Cached for 24 hours to reduce database load (data changes are very rare)
- * Cache key includes car ID and expiresIn query param
+ * Caching is handled via Cache-Control headers (s-maxage for Vercel edge).
  */
-export default defineCachedEventHandler(async (event) => {
+export default defineEventHandler(async (event) => {
   try {
     const id = getRouterParam(event, 'id')
     
@@ -36,6 +37,10 @@ export default defineCachedEventHandler(async (event) => {
         statusMessage: 'Car not found'
       })
     }
+
+    setResponseHeaders(event, {
+      'Cache-Control': `public, s-maxage=${CACHE_MAX_AGE}, stale-while-revalidate=${CACHE_MAX_AGE}`,
+    })
     
     return {
       success: true,
@@ -50,9 +55,4 @@ export default defineCachedEventHandler(async (event) => {
       statusMessage: error.message || 'Failed to fetch car'
     })
   }
-}, {
-  maxAge: 24 * 60 * 60, // Cache for 24 hours (86400 seconds) - individual car data changes very rarely
-  name: 'car-detail',
-  getKey: (event) => `car-${getRouterParam(event, 'id')}`,
-  swr: true, // Enable stale-while-revalidate: serve stale cache while revalidating in background
 })

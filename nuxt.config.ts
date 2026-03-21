@@ -77,4 +77,11 @@ export default defineNuxtConfig({
 
   components: true,
   compatibilityDate: '2026-02-08',
+
+  // Pre-bundle noUiSlider in dev so the first import resolves quickly (Hero + stock sliders)
+  vite: {
+    optimizeDeps: {
+      include: ['nouislider'],
+    },
+  },
 })
