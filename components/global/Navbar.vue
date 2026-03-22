@@ -129,14 +129,17 @@ onClickOutside(dropdownRef, () => {
   width: 100%;
   top: 0;
   left: 0;
-  position: relative;
-  transition: transform 0.4s ease-in-out;
+  position: sticky;
+  transition: transform 0.4s ease-in-out, background-color 0.3s ease;
   z-index: 1000;
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .navbar-scrolled {
-  position: sticky;
-  background-color: #121212 ;
+  background-color: #121212;
   box-shadow: 0px 10px 30px rgba(255, 255, 255, 0.05);
   color: white;
 }
