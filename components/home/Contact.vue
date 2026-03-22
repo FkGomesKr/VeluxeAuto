@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const { t } = useI18n();
+const { t, locale } = useI18n();
 
 const activeBar = ref(0);
 const flipped = ref(false);
@@ -50,7 +50,9 @@ const canSubmitForm = computed(() =>
   userName.value.trim() && userMessage.value.trim() && hasValidContact.value
 );
 
-function submitForm() {
+const submitting = ref(false);
+
+async function submitForm() {
   formError.value = '';
 
   if (!userName.value.trim() || !userMessage.value.trim()) return;
@@ -63,9 +65,24 @@ function submitForm() {
   if (userEmail.value.trim() && !isEmailValid.value) return;
   if (userPhone.value.trim() && !isPhoneValid.value) return;
 
-  // TODO: send to database
-  console.log({ name: userName.value, email: userEmail.value, phone: userPhone.value, message: userMessage.value });
-  formSubmitted.value = true;
+  submitting.value = true;
+  try {
+    await $fetch('/api/contact', {
+      method: 'POST',
+      body: {
+        name: userName.value.trim(),
+        email: userEmail.value.trim() || null,
+        phone: userPhone.value.trim() || null,
+        message: userMessage.value.trim(),
+        locale: locale.value,
+      },
+    });
+    formSubmitted.value = true;
+  } catch {
+    formError.value = 'Something went wrong. Please try again.';
+  } finally {
+    submitting.value = false;
+  }
 }
 
 function resetForm() {
@@ -168,9 +185,9 @@ const bars = computed(() => [
               <p class="text-[#a0a0a0] text-sm">{{ t('contactBarScheduleText').split('.')[0] }}.</p>
               <button
                 @click="resetForm()"
-                class="mt-2 text-[#b53d3d] hover:text-[#c94a4a] text-sm font-medium transition-colors duration-200 cursor-pointer"
+                class="mt-2 text-[#b53d3d] hover:text-[#c94a4a] text-md font-medium transition-colors duration-200 cursor-pointer"
               >
-                ← {{ t('stock') }}
+                ← {{ t('backToContact') }}
               </button>
             </div>
 
@@ -246,11 +263,12 @@ const bars = computed(() => [
                 <!-- Submit form button -->
                 <button
                   @click="submitForm()"
-                  :disabled="!canSubmitForm"
+                  :disabled="!canSubmitForm || submitting"
                   class="w-full flex items-center justify-center gap-2.5 py-3.5 rounded-xl font-semibold text-sm text-white transition-all duration-300"
-                  :class="canSubmitForm ? 'bg-white/10 hover:bg-white/15 hover:-translate-y-0.5 border border-white/20 hover:border-white/30 cursor-pointer' : 'bg-white/5 border border-white/5 cursor-not-allowed text-white/30'"
+                  :class="canSubmitForm && !submitting ? 'bg-white/10 hover:bg-white/15 hover:-translate-y-0.5 border border-white/20 hover:border-white/30 cursor-pointer' : 'bg-white/5 border border-white/5 cursor-not-allowed text-white/30'"
                 >
-                  <i class="fa-solid fa-paper-plane text-lg"></i>
+                  <i v-if="submitting" class="fa-solid fa-spinner fa-spin text-lg"></i>
+                  <i v-else class="fa-solid fa-paper-plane text-lg"></i>
                   <span>{{ t('contactFormSubmit') }}</span>
                 </button>
 

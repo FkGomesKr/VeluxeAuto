@@ -85,6 +85,9 @@ export default {
     contactFormPhone: "Telefono",
     contactFormSubmit: "Invia informazioni",
     contactFormContactRequired: "Compila almeno l'email o il telefono se desideri inviarci i tuoi dati",
+    confirmationEmailSubject: "VeluxeAuto — Abbiamo ricevuto il tuo messaggio",
+    confirmationEmailBody: "Ciao {name}, grazie per averci contattato! Abbiamo ricevuto le tue informazioni e ti contatteremo il prima possibile. A presto!",
+    backToContact: "Indietro",
     whatsappPreMessage: "Ciao, sono interessato ad acquistare un'auto. Possiamo parlare?",
     emailSubject: "Interesse per un veicolo",
     emailPreMessage: "Ciao, sono interessato ad acquistare un'auto. Possiamo parlare?"
