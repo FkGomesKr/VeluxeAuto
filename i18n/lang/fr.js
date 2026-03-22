@@ -70,5 +70,12 @@ export default {
   privacyS9Text: 'Conformément au RGPD et à la législation portugaise applicable, l\'utilisateur a le droit d\'accès, de rectification, d\'effacement, de limitation du traitement, de portabilité et d\'opposition concernant ses données personnelles. Il peut également déposer une réclamation auprès de la <a href="https://www.cnpd.pt" target="_blank" rel="noopener noreferrer" class="text-[#b53d3d] hover:underline">Commission Nationale de Protection des Données (CNPD)</a>.',
   privacyS10Title: "10. Contact",
   privacyS10Text: "Pour exercer vos droits ou pour toute question liée à la confidentialité, vous pouvez nous contacter via WhatsApp, Instagram ou Facebook, accessibles depuis ce site web.",
-  privacyLastUpdated: "Dernière mise à jour : mars 2026"
+  privacyLastUpdated: "Dernière mise à jour : mars 2026",
+  contactSectionTitle: "Contactez-nous",
+  contactBarScheduleTitle: "Horaires",
+  contactBarScheduleText: "Nous sommes disponibles tous les jours, y compris les week-ends et jours fériés. Nous vous recontactons dès que possible — que ce soit pour répondre à vos questions sur un véhicule ou pour vous contacter si vous nous avez laissé vos coordonnées.",
+  contactBarLocationTitle: "Localisation",
+  contactBarLocationText: "Nous sommes situés dans la région de Braga, au Portugal. Rendez-nous visite pour découvrir nos véhicules en personne et bénéficier d'un service personnalisé.",
+  contactBarContactTitle: "Contacts",
+  contactBarContactText: "Contactez-nous via WhatsApp, Instagram ou Facebook. Nous répondons à tous les messages le plus rapidement possible."
 };

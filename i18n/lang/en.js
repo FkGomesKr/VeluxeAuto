@@ -70,6 +70,13 @@ export default {
     privacyS9Text: 'Under the GDPR and applicable Portuguese legislation, the user has the right of access, rectification, erasure, restriction of processing, portability, and objection regarding their personal data. They may also file a complaint with the <a href="https://www.cnpd.pt" target="_blank" rel="noopener noreferrer" class="text-[#b53d3d] hover:underline">Portuguese Data Protection Authority (CNPD)</a>.',
     privacyS10Title: "10. Contact",
     privacyS10Text: "To exercise your rights or for any privacy-related questions, you can contact us through WhatsApp, Instagram, or Facebook, accessible from this website.",
-    privacyLastUpdated: "Last updated: March 2026"
+    privacyLastUpdated: "Last updated: March 2026",
+    contactSectionTitle: "Get in Touch",
+    contactBarScheduleTitle: "Opening Hours",
+    contactBarScheduleText: "We are available every day, including weekends and holidays. We get back to you as soon as possible — whether to answer questions about a vehicle or to contact you if you've left us your details.",
+    contactBarLocationTitle: "Location",
+    contactBarLocationText: "We are located in the Braga region, Portugal. Visit us to see our vehicles in person and receive personalized service.",
+    contactBarContactTitle: "Contacts",
+    contactBarContactText: "Get in touch with us via WhatsApp, Instagram, or Facebook. We reply to all messages as quickly as possible."
   }
   

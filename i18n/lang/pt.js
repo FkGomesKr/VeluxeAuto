@@ -70,5 +70,12 @@ export default {
   privacyS9Text: 'Nos termos do RGPD e da legislação portuguesa aplicável, o utilizador tem o direito de acesso, retificação, apagamento, limitação do tratamento, portabilidade e oposição relativamente aos seus dados pessoais. Pode também apresentar reclamação junto da <a href="https://www.cnpd.pt" target="_blank" rel="noopener noreferrer" class="text-[#b53d3d] hover:underline">Comissão Nacional de Proteção de Dados (CNPD)</a>.',
   privacyS10Title: "10. Contacto",
   privacyS10Text: "Para exercer os seus direitos ou para qualquer questão relacionada com privacidade, pode contactar-nos através do WhatsApp, Instagram ou Facebook, acessíveis a partir deste website.",
-  privacyLastUpdated: "Última atualização: março de 2026"
+  privacyLastUpdated: "Última atualização: março de 2026",
+  contactSectionTitle: "Fale Connosco",
+  contactBarScheduleTitle: "Horário",
+  contactBarScheduleText: "Estamos disponíveis todos os dias, incluindo fins de semana e feriados. Comunicamos assim que possível — seja para responder a questões sobre uma viatura ou para o contactar caso nos tenha deixado os seus dados.",
+  contactBarLocationTitle: "Localização",
+  contactBarLocationText: "Estamos situados na região de Braga, Portugal. Vamos marcar um encontro mediante interesse na aquisição de uma das nossas viaturas.",
+  contactBarContactTitle: "Contactos",
+  contactBarContactText: "Entre em contacto connosco através do WhatsApp, Instagram ou Facebook. Respondemos a todas as mensagens o mais rapidamente possível."
 }

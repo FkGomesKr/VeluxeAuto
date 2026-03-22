@@ -7,7 +7,7 @@ const { t, locale } = useI18n();
     <hr class="bar">
     <hr class="bar2">
     <div class="w-full flex flex-col items-center justify-start gap-24 h-[700px] sm:h-[840px] bg-[#121212] overflow-hidden xl:overflow-visible">
-        <div class="mt-8 flex flex-col justify-center items-center">
+        <div class="mt-8 flex flex-col justify-center items-center py-4">
             <h1 class="text-[42px] text-center text-white font-extrabold w-fit leading-[55px]">
                 {{ t('whatyoulookingfor')}}
             </h1>
@@ -262,7 +262,10 @@ const { t, locale } = useI18n();
                 </NuxtLink>
             </div>
         </div>
-    </div>    
+    </div>
+
+    <hr class="bar mt-4">
+    <hr class="bar2">
 </template>
 
 <style scoped>

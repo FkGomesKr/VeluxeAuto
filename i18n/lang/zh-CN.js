@@ -70,5 +70,12 @@ export default {
     privacyS9Text: '根据GDPR和适用的葡萄牙法律，用户有权就其个人数据行使访问、更正、删除、限制处理、数据可携性和反对的权利。也可以向<a href="https://www.cnpd.pt" target="_blank" rel="noopener noreferrer" class="text-[#b53d3d] hover:underline">葡萄牙数据保护委员会（CNPD）</a>提出投诉。',
     privacyS10Title: "10. 联系方式",
     privacyS10Text: "如需行使您的权利或有任何与隐私相关的问题，可以通过本网站上的WhatsApp、Instagram或Facebook联系我们。",
-    privacyLastUpdated: "最后更新：2026年3月"
+    privacyLastUpdated: "最后更新：2026年3月",
+    contactSectionTitle: "联系我们",
+    contactBarScheduleTitle: "营业时间",
+    contactBarScheduleText: "我们每天都可以联系，包括周末和节假日。我们会尽快与您沟通——无论是解答关于车辆的问题，还是在您留下联系方式后主动与您联系。",
+    contactBarLocationTitle: "位置",
+    contactBarLocationText: "我们位于葡萄牙布拉加地区。欢迎您亲自来访，查看我们的车辆并获得个性化服务。",
+    contactBarContactTitle: "联系方式",
+    contactBarContactText: "通过WhatsApp、Instagram或Facebook联系我们。我们会尽快回复所有消息。"
   }
