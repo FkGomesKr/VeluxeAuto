@@ -23,9 +23,13 @@ useHead({
   background-color: #d47474;
   color: white; 
 }
-html, body {
+html {
   background-color: #121212;
+}
+body {
+  background-color: #201818;
   font-family: 'Nunito Sans', sans-serif;
   color: #121212;
+  overflow-x: hidden;
 }
 </style>
