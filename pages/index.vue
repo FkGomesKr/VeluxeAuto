@@ -11,7 +11,6 @@ useHead({
   <div class="bg-[#121212]">
     <HomeHeroSection />
     <HomeBrand />
+    <HomeContact />
   </div>
 </template>
-
-

@@ -29,7 +29,7 @@ function closePrivacyModal() {
             <img src="/images/VeluxeAutoLogo.png" alt="VeluxeAuto" class="h-6 w-auto">
             <h3 class="text-white text-md font-semibold tracking-wide uppercase">{{ t('footerAboutUs') }}</h3>
           </div>
-          <p class="text-gray-400 text-[14px] leading-relaxed pt-2">
+          <p class="text-[#a0a0a0] text-[14px] leading-relaxed pt-2">
             {{ t('footerAboutUsText') }}
           </p>
         </div>
@@ -42,7 +42,7 @@ function closePrivacyModal() {
               href="https://www.instagram.com/veluxeauto"
               target="_blank"
               rel="noopener noreferrer"
-              class="flex items-center gap-2.5 text-gray-400 text-[14px] hover:text-[#ff026a] transition-colors duration-200"
+              class="flex items-center gap-2.5 text-[#a0a0a0] text-[14px] hover:text-[#ff026a] transition-colors duration-200"
             >
               <i class="fa-brands fa-instagram text-lg"></i>
               <span>Instagram</span>
@@ -51,7 +51,7 @@ function closePrivacyModal() {
               href="https://www.facebook.com/veluxeauto"
               target="_blank"
               rel="noopener noreferrer"
-              class="flex items-center gap-2.5 text-gray-400 text-[14px] hover:text-[#0866ff] transition-colors duration-200"
+              class="flex items-center gap-2.5 text-[#a0a0a0] text-[14px] hover:text-[#0866ff] transition-colors duration-200"
             >
               <i class="fa-brands fa-facebook-f text-lg"></i>
               <span>Facebook</span>
@@ -60,7 +60,7 @@ function closePrivacyModal() {
               href="https://wa.me/351912247691?text=Olá, estou interessado em comprar um carro. Podemos conversar?"
               target="_blank"
               rel="noopener noreferrer"
-              class="flex items-center gap-2.5 text-gray-400 text-[14px] hover:text-[#25d366] transition-colors duration-200"
+              class="flex items-center gap-2.5 text-[#a0a0a0] text-[14px] hover:text-[#25d366] transition-colors duration-200"
             >
               <i class="fa-brands fa-whatsapp text-lg"></i>
               <span>WhatsApp</span>
@@ -71,7 +71,7 @@ function closePrivacyModal() {
         <!-- Localização -->
         <div class="flex flex-col gap-3">
           <h3 class="text-white text-md font-semibold tracking-wide uppercase">{{ t('footerLocation') }}</h3>
-          <div class="flex items-start gap-2 text-gray-400 text-[14px] leading-relaxed pt-2">
+          <div class="flex items-start gap-2 text-[#a0a0a0] text-[14px] leading-relaxed pt-2">
             <i class="fa-solid fa-location-dot mt-0.5"></i>
             <div>
               <p>Portugal, Braga</p>
@@ -83,15 +83,15 @@ function closePrivacyModal() {
       </div>
 
       <!-- Separator -->
-      <div class="border-t border-gray-700 mt-10 pt-8 mb-1">
+      <div class="border-t border-[#a0a0a0] mt-10 pt-8 mb-1">
         <div class="flex flex-col sm:flex-row justify-center items-center gap-1 sm:gap-0">
-          <p class="text-gray-500 text-sm">
+          <p class="text-[#a0a0a0] text-sm">
             {{ t('footerAllRights') }}
           </p>
-          <span class="hidden sm:inline text-gray-600 text-xs mx-2">|</span>
+          <span class="hidden sm:inline text-[#a0a0a0] text-xs mx-2">|</span>
           <button
             @click="openPrivacyModal()"
-            class="text-gray-500 text-sm hover:text-[#b53d3d] transition-colors duration-200 underline underline-offset-2"
+            class="text-[#a0a0a0] text-sm hover:text-[#b53d3d] transition-colors duration-200 underline underline-offset-2"
           >
             {{ t('privacyPolicy') }}
           </button>
@@ -114,7 +114,7 @@ function closePrivacyModal() {
               <h2 class="text-white text-lg font-semibold">{{ t('privacyPolicy') }}</h2>
               <button
                 @click="closePrivacyModal()"
-                class="text-gray-400 hover:text-white transition-colors duration-200 p-1"
+                class="text-[#a0a0a0] hover:text-white transition-colors duration-200 p-1"
               >
                 <i class="fa-solid fa-xmark text-xl"></i>
               </button>
@@ -124,7 +124,7 @@ function closePrivacyModal() {
                 <strong class="text-white">{{ t(`privacyS${i}Title`) }}</strong><br>
                 <span v-html="t(`privacyS${i}Text`)"></span>
               </p>
-              <p class="text-gray-500 text-xs pt-2">
+              <p class="text-[#a0a0a0] text-xs pt-2">
                 {{ t('privacyLastUpdated') }}
               </p>
             </div>
