@@ -35,14 +35,23 @@ const translations: Record<string, { subject: string; body: string }> = {
 }
 
 async function sendEmail(apiKey: string, to: string, subject: string, text: string, from: string) {
-  await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${apiKey}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ from, to: [to], subject, text }),
-  }).catch((err) => console.error('Resend email error:', err))
+  try {
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ from, to: [to], subject, text }),
+    })
+
+    if (!res.ok) {
+      const errorBody = await res.text().catch(() => 'No response body')
+      console.error(`Resend email failed (${res.status}):`, errorBody)
+    }
+  } catch (err) {
+    console.error('Resend email network error:', err)
+  }
 }
 
 export default defineEventHandler(async (event) => {
