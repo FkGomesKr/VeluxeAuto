@@ -129,6 +129,7 @@ onClickOutside(dropdownRef, () => {
   width: 100%;
   top: 0;
   left: 0;
+  position: relative;
   transition: transform 0.4s ease-in-out;
   z-index: 1000;
 }
