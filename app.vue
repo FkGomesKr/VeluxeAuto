@@ -23,11 +23,9 @@ useHead({
   background-color: #d47474;
   color: white; 
 }
-html {
-  background-color: #121212;
-}
-body {
-  background-color: #201818;
+html, body {
+  background: linear-gradient(to bottom, #121212 50%, #201818 100%);
+  background-attachment: fixed;
   font-family: 'Nunito Sans', sans-serif;
   color: #121212;
   overflow-x: hidden;
