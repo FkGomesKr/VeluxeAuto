@@ -78,6 +78,13 @@ export default {
   contactBarLocationText: "Estamos situados na região de Braga, Portugal. Interesse na aquisição de uma das nossas viaturas? Vamos marcar um encontro!",
   contactBarContactTitle: "Contactos",
   contactBarContactText: "Entre em contacto connosco através do WhatsApp, Instagram, Facebook ou Email. Respondemos a todas as mensagens o mais rapidamente possível. Está ocupado de momento? Deixe-nos a aqui as suas informações de e nós iremos contactá-lo!",
+  contactFormBarTitle: "Envie-nos uma mensagem OU deixe o seu contacto",
+  contactFormPlaceholder: "Escreva a sua mensagem aqui...",
+  contactFormName: "Nome",
+  contactFormEmail: "Email",
+  contactFormPhone: "Telemóvel",
+  contactFormSubmit: "Enviar informações",
+  contactFormContactRequired: "Preencha pelo menos o email ou o telemóvel se quiser enviar-nos os seus dados",
   whatsappPreMessage: "Olá, estou interessado em comprar um carro. Podemos conversar?",
   emailSubject: "Interesse em viatura",
   emailPreMessage: "Olá, estou interessado em comprar um carro. Podemos conversar?"
