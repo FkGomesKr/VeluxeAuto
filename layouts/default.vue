@@ -9,7 +9,9 @@ import { Analytics } from '@vercel/analytics/nuxt'
     <SpeedInsights/>
     <Analytics />
     <Navbar />
-    <NuxtPage />
-    <Footer />
+    <main class="relative" style="z-index: 1;">
+      <NuxtPage />
+      <Footer />
+    </main>
   </div>
 </template>
