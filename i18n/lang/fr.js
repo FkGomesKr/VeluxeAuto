@@ -75,7 +75,10 @@ export default {
   contactBarScheduleTitle: "Horaires",
   contactBarScheduleText: "Nous sommes disponibles tous les jours, y compris les week-ends et jours fériés. Nous vous recontactons dès que possible — que ce soit pour répondre à vos questions sur un véhicule ou pour vous contacter si vous nous avez laissé vos coordonnées.",
   contactBarLocationTitle: "Localisation",
-  contactBarLocationText: "Nous sommes situés dans la région de Braga, au Portugal. Rendez-nous visite pour découvrir nos véhicules en personne et bénéficier d'un service personnalisé.",
+  contactBarLocationText: "Nous sommes situés dans la région de Braga, au Portugal. Intéressé par l'acquisition d'un de nos véhicules ? Prenons rendez-vous !",
   contactBarContactTitle: "Contacts",
-  contactBarContactText: "Contactez-nous via WhatsApp, Instagram ou Facebook. Nous répondons à tous les messages le plus rapidement possible."
+  contactBarContactText: "Contactez-nous via WhatsApp, Instagram, Facebook ou Email. Nous répondons à tous les messages le plus rapidement possible. Vous êtes occupé en ce moment ? Laissez-nous vos coordonnées ici et nous vous contacterons !",
+  whatsappPreMessage: "Bonjour, je suis intéressé par l'achat d'une voiture. Pouvons-nous en discuter ?",
+  emailSubject: "Intérêt pour un véhicule",
+  emailPreMessage: "Bonjour, je suis intéressé par l'achat d'une voiture. Pouvons-nous en discuter ?"
 };

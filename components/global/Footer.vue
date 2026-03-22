@@ -1,8 +1,16 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 const { t } = useI18n()
 const showPrivacyModal = ref(false)
+
+const whatsappUrl = computed(() =>
+  `https://wa.me/351912247691?text=${encodeURIComponent(t('whatsappPreMessage'))}`
+)
+
+const emailUrl = computed(() =>
+  `mailto:veluxeauto@gmail.com?subject=${encodeURIComponent(t('emailSubject'))}&body=${encodeURIComponent(t('emailPreMessage'))}`
+)
 
 function openPrivacyModal() {
   showPrivacyModal.value = true
@@ -57,13 +65,20 @@ function closePrivacyModal() {
               <span>Facebook</span>
             </a>
             <a
-              href="https://wa.me/351912247691?text=Olá, estou interessado em comprar um carro. Podemos conversar?"
+              :href="whatsappUrl"
               target="_blank"
               rel="noopener noreferrer"
               class="flex items-center gap-2.5 text-[#a0a0a0] text-[14px] hover:text-[#25d366] transition-colors duration-200"
             >
               <i class="fa-brands fa-whatsapp text-lg"></i>
               <span>WhatsApp</span>
+            </a>
+            <a
+              :href="emailUrl"
+              class="flex items-center gap-2.5 text-[#a0a0a0] text-[14px] hover:text-[#d44638] transition-colors duration-200"
+            >
+              <i class="fa-solid fa-envelope text-lg"></i>
+              <span>Email</span>
             </a>
           </div>
         </div>

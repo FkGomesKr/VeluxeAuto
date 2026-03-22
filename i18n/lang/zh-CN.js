@@ -75,7 +75,10 @@ export default {
     contactBarScheduleTitle: "营业时间",
     contactBarScheduleText: "我们每天都可以联系，包括周末和节假日。我们会尽快与您沟通——无论是解答关于车辆的问题，还是在您留下联系方式后主动与您联系。",
     contactBarLocationTitle: "位置",
-    contactBarLocationText: "我们位于葡萄牙布拉加地区。欢迎您亲自来访，查看我们的车辆并获得个性化服务。",
+    contactBarLocationText: "我们位于葡萄牙布拉加地区。有兴趣购买我们的车辆？让我们安排一次见面！",
     contactBarContactTitle: "联系方式",
-    contactBarContactText: "通过WhatsApp、Instagram或Facebook联系我们。我们会尽快回复所有消息。"
+    contactBarContactText: "通过WhatsApp、Instagram、Facebook或电子邮件联系我们。我们会尽快回复所有消息。现在没空？在这里留下您的信息，我们会主动联系您！",
+    whatsappPreMessage: "你好，我有兴趣买车。我们可以聊聊吗？",
+    emailSubject: "对车辆感兴趣",
+    emailPreMessage: "你好，我有兴趣买车。我们可以聊聊吗？"
   }
