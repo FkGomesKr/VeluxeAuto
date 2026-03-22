@@ -42,6 +42,7 @@ export default defineNuxtConfig({
     SUPABASE_URL: process.env.SUPABASE_URL,
     SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY,
     SUPABASE_STORAGE_BUCKET: process.env.SUPABASE_STORAGE_BUCKET || 'car-images',
+    RESEND_API_KEY: process.env.RESEND_API_KEY,
   },
 
   // Vercel/server edge caching: Cache-Control so responses are cached and we spare DB + Supabase

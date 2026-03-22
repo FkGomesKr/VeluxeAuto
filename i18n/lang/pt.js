@@ -75,7 +75,20 @@ export default {
   contactBarScheduleTitle: "Horário",
   contactBarScheduleText: "Estamos disponíveis todos os dias, incluindo fins de semana e feriados. Comunicamos assim que possível — seja para responder a questões sobre uma viatura ou para o contactar caso nos tenha deixado os seus dados.",
   contactBarLocationTitle: "Localização",
-  contactBarLocationText: "Estamos situados na região de Braga, Portugal. Vamos marcar um encontro mediante interesse na aquisição de uma das nossas viaturas.",
+  contactBarLocationText: "Estamos situados na região de Braga, Portugal. Interesse na aquisição de uma das nossas viaturas? Vamos marcar um encontro!",
   contactBarContactTitle: "Contactos",
-  contactBarContactText: "Entre em contacto connosco através do WhatsApp, Instagram ou Facebook. Respondemos a todas as mensagens o mais rapidamente possível."
+  contactBarContactText: "Entre em contacto connosco através do WhatsApp, Instagram, Facebook ou Email. Respondemos a todas as mensagens o mais rapidamente possível. Está ocupado de momento? Deixe-nos a aqui as suas informações de e nós iremos contactá-lo!",
+  contactFormBarTitle: "Envie-nos uma mensagem OU deixe o seu contacto",
+  contactFormPlaceholder: "Escreva a sua mensagem aqui...",
+  contactFormName: "Nome",
+  contactFormEmail: "Email",
+  contactFormPhone: "Telemóvel",
+  contactFormSubmit: "Enviar informações",
+  contactFormContactRequired: "Preencha pelo menos o email ou o telemóvel se quiser enviar-nos os seus dados",
+  confirmationEmailSubject: "VeluxeAuto — Recebemos a sua mensagem",
+  confirmationEmailBody: "Olá {name}, obrigado por nos contactar! Recebemos as suas informações e iremos entrar em contacto o mais brevemente possível. Até já!",
+  whatsappPreMessage: "Olá, estou interessado em comprar um carro. Podemos conversar?",
+  emailSubject: "Interesse em viatura",
+  emailPreMessage: "Olá, estou interessado em comprar um carro. Podemos conversar?",
+  backToContact: "Voltar"
 }

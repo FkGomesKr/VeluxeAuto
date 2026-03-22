@@ -75,7 +75,20 @@ export default {
     contactBarScheduleTitle: "Öffnungszeiten",
     contactBarScheduleText: "Wir sind jeden Tag erreichbar, auch an Wochenenden und Feiertagen. Wir melden uns so schnell wie möglich — ob zur Beantwortung von Fragen zu einem Fahrzeug oder um Sie zu kontaktieren, falls Sie uns Ihre Daten hinterlassen haben.",
     contactBarLocationTitle: "Standort",
-    contactBarLocationText: "Wir befinden uns in der Region Braga, Portugal. Besuchen Sie uns, um unsere Fahrzeuge persönlich zu besichtigen und eine individuelle Beratung zu erhalten.",
+    contactBarLocationText: "Wir befinden uns in der Region Braga, Portugal. Interesse am Erwerb eines unserer Fahrzeuge? Vereinbaren wir einen Termin!",
     contactBarContactTitle: "Kontakte",
-    contactBarContactText: "Kontaktieren Sie uns über WhatsApp, Instagram oder Facebook. Wir antworten auf alle Nachrichten so schnell wie möglich."
+    contactBarContactText: "Kontaktieren Sie uns über WhatsApp, Instagram, Facebook oder E-Mail. Wir antworten auf alle Nachrichten so schnell wie möglich. Gerade keine Zeit? Hinterlassen Sie uns hier Ihre Daten und wir werden Sie kontaktieren!",
+    contactFormBarTitle: "Senden Sie uns eine Nachricht ODER hinterlassen Sie Ihren Kontakt",
+    contactFormPlaceholder: "Schreiben Sie Ihre Nachricht hier...",
+    contactFormName: "Name",
+    contactFormEmail: "E-Mail",
+    contactFormPhone: "Telefon",
+    contactFormSubmit: "Informationen senden",
+    contactFormContactRequired: "Füllen Sie mindestens die E-Mail oder Telefonnummer aus, wenn Sie uns Ihre Daten senden möchten",
+    confirmationEmailSubject: "VeluxeAuto — Wir haben Ihre Nachricht erhalten",
+    confirmationEmailBody: "Hallo {name}, vielen Dank für Ihre Kontaktaufnahme! Wir haben Ihre Informationen erhalten und werden uns so schnell wie möglich bei Ihnen melden. Bis bald!",
+    backToContact: "Zurück",
+    whatsappPreMessage: "Hallo, ich interessiere mich für den Kauf eines Autos. Können wir sprechen?",
+    emailSubject: "Interesse an einem Fahrzeug",
+    emailPreMessage: "Hallo, ich interessiere mich für den Kauf eines Autos. Können wir sprechen?"
   }

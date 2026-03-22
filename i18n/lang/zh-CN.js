@@ -75,7 +75,20 @@ export default {
     contactBarScheduleTitle: "营业时间",
     contactBarScheduleText: "我们每天都可以联系，包括周末和节假日。我们会尽快与您沟通——无论是解答关于车辆的问题，还是在您留下联系方式后主动与您联系。",
     contactBarLocationTitle: "位置",
-    contactBarLocationText: "我们位于葡萄牙布拉加地区。欢迎您亲自来访，查看我们的车辆并获得个性化服务。",
+    contactBarLocationText: "我们位于葡萄牙布拉加地区。有兴趣购买我们的车辆？让我们安排一次见面！",
     contactBarContactTitle: "联系方式",
-    contactBarContactText: "通过WhatsApp、Instagram或Facebook联系我们。我们会尽快回复所有消息。"
+    contactBarContactText: "通过WhatsApp、Instagram、Facebook或电子邮件联系我们。我们会尽快回复所有消息。现在没空？在这里留下您的信息，我们会主动联系您！",
+    contactFormBarTitle: "给我们留言 或 留下您的联系方式",
+    contactFormPlaceholder: "在此输入您的消息...",
+    contactFormName: "姓名",
+    contactFormEmail: "电子邮件",
+    contactFormPhone: "电话",
+    contactFormSubmit: "发送信息",
+    contactFormContactRequired: "如果您想向我们发送您的信息，请至少填写电子邮件或电话号码",
+    confirmationEmailSubject: "VeluxeAuto — 我们已收到您的消息",
+    confirmationEmailBody: "您好 {name}，感谢您联系我们！我们已收到您的信息，将尽快与您联系。再见！",
+    backToContact: "返回",
+    whatsappPreMessage: "你好，我有兴趣买车。我们可以聊聊吗？",
+    emailSubject: "对车辆感兴趣",
+    emailPreMessage: "你好，我有兴趣买车。我们可以聊聊吗？"
   }
