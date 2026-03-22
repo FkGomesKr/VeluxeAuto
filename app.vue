@@ -23,11 +23,10 @@ useHead({
   background-color: #d47474;
   color: white; 
 }
+
 html, body {
-  background: linear-gradient(to bottom, #121212 50%, #201818 100%);
-  background-attachment: fixed;
+  background-color: #121212;
   font-family: 'Nunito Sans', sans-serif;
   color: #121212;
-  overflow-x: hidden;
 }
 </style>
