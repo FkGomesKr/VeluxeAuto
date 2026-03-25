@@ -290,7 +290,7 @@ function toggleOpenFilters() {
     setTimeout(() => {
       openFilters.value = false;
       isHiding.value = false;
-    }, 1000); 
+    }, 700); 
   } else {
     openFilters.value = true;
     nextTick(() => {
@@ -301,13 +301,13 @@ function toggleOpenFilters() {
 </script>
 
 <template>
-  <div class="w-full relative mt-[-120px] bg-[#121212] min-h-[510px]">
+  <div class="w-full relative bg-[#121212] mt-[-90px] md:mt-[-40px] transition-[min-height] duration-[0.7s] ease-in-out" :class="openFilters && !isHiding ? 'min-h-[1040px] md:min-h-[570px]' : 'min-h-[530px] md:min-h-[310px]'">
       <div v-if="openFilters" class="block h-[925px] md:hidden "></div>
-      <img class="hidden md:block w-full h-[550px] object-cover pointer-events-none" src="https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/homePage/bgHero.jpg" alt="Background Image Hero Section">
+      <img class="hidden md:hidden w-full h-[550px] object-cover pointer-events-none" src="https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/homePage/bgHero.jpg" alt="Background Image Hero Section">
       <div class="absolute inset-0 top-[140px] md:top-[22%] flex flex-col items-center w-full">
         <div class="bg-[#201818] px-0 lg:px-8 pt-10 pb-6 rounded-xl md:rounded-[100px] items-center justify-center w-full max-w-[300px] md:max-w-[700px] lg:max-w-[900px] test">
-          <div class="text-[#D32F2F] flex justify-between items-center mr-8 px-6 md:px-10 mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2m0 2a8 8 0 0 1 8 8c0 2.4-1 4.5-2.7 6c-1.4-1.3-3.3-2-5.3-2s-3.8.7-5.3 2C5 16.5 4 14.4 4 12a8 8 0 0 1 8-8m2 1.89c-.38.01-.74.26-.9.65l-1.29 3.23l-.1.23c-.71.13-1.3.6-1.57 1.26c-.41 1.03.09 2.19 1.12 2.6s2.19-.09 2.6-1.12c.26-.66.14-1.42-.29-1.98l.1-.26l1.29-3.21l.01-.03c.2-.51-.05-1.09-.56-1.3c-.13-.05-.26-.07-.41-.07M10 6a1 1 0 0 0-1 1a1 1 0 0 0 1 1a1 1 0 0 0 1-1a1 1 0 0 0-1-1M7 9a1 1 0 0 0-1 1a1 1 0 0 0 1 1a1 1 0 0 0 1-1a1 1 0 0 0-1-1m10 0a1 1 0 0 0-1 1a1 1 0 0 0 1 1a1 1 0 0 0 1-1a1 1 0 0 0-1-1"/></svg>
+          <div class="text-[#D32F2F] flex justify-center md:justify-between items-center mr-0 md:mr-8 px-6 md:px-10 mb-4">
+            <svg class="hidden md:block" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2m0 2a8 8 0 0 1 8 8c0 2.4-1 4.5-2.7 6c-1.4-1.3-3.3-2-5.3-2s-3.8.7-5.3 2C5 16.5 4 14.4 4 12a8 8 0 0 1 8-8m2 1.89c-.38.01-.74.26-.9.65l-1.29 3.23l-.1.23c-.71.13-1.3.6-1.57 1.26c-.41 1.03.09 2.19 1.12 2.6s2.19-.09 2.6-1.12c.26-.66.14-1.42-.29-1.98l.1-.26l1.29-3.21l.01-.03c.2-.51-.05-1.09-.56-1.3c-.13-.05-.26-.07-.41-.07M10 6a1 1 0 0 0-1 1a1 1 0 0 0 1 1a1 1 0 0 0 1-1a1 1 0 0 0-1-1M7 9a1 1 0 0 0-1 1a1 1 0 0 0 1 1a1 1 0 0 0 1-1a1 1 0 0 0-1-1m10 0a1 1 0 0 0-1 1a1 1 0 0 0 1 1a1 1 0 0 0 1-1a1 1 0 0 0-1-1"/></svg>
             <h1 class="text-[#D32F2F] text-center text-2xl font-bold mr-0 md:mr-10">
               {{ t('filtersTitle') }}
             </h1>
@@ -316,7 +316,7 @@ function toggleOpenFilters() {
           <!-- md:pr-12 reserves space for the filter toggle (absolute) so column % match the rows below -->
           <div class="relative flex flex-col gap-6 md:gap-0 px-0 md:px-3 pl-6 md:pl-0 md:pr-12">
             <!-- Full width like expanded rows — do not use flex-1 beside the button or 30/36/30% won’t match -->
-            <div class="flex w-full flex-col gap-8 md:flex-row md:justify-center items-end">
+            <div class="flex w-full flex-col gap-3 md:gap-8 md:flex-row md:justify-center">
               <div class="w-[70%] md:w-[27%] md:min-w-0 rounded-xl relative pl-0 md:pl-6">
                 <label class="text-xs text-[#b53d3d] ml-2 font-semibold">{{ t('brand') }}</label>
                 <select v-model="marca" class="bg-transparent hover:bg-transparent w-full px-3 py-2 bg-gray-800 text-white rounded-2xl border appearance-none focus:outline-none border-[#b53d3d]">
@@ -326,7 +326,7 @@ function toggleOpenFilters() {
                 <svg class="absolute top-[50%] right-2 pointer-events-none" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 12 12"><path fill="white" d="M3.076 4.617A1 1 0 0 1 4 4h4a1 1 0 0 1 .707 1.707l-2 2a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1-.217-1.09"/></svg>
               </div>
 
-              <div class="hero-year-slider hero-slider-col relative w-full md:w-[42%] flex flex-col gap-3 px-4 md:px-3 pb-0 translate-y-3">
+              <div class="hero-year-slider hero-slider-col relative w-[90%] md:w-[42%] flex flex-col gap-3 pl-2 pr-3 md:px-3 pb-0 translate-y-9 mb-6 md:mb-0">
                 <label class="text-xs text-[#b53d3d] font-semibold absolute top-[-30px]">{{ t('year') }}</label>
                 <div class="slider-with-labels w-full">
                   <div id="year-slider" class="slider relative"></div>
@@ -353,10 +353,10 @@ function toggleOpenFilters() {
             </div>
             <button
               type="button"
-              class="absolute top-[31px] lg:right-[10px] md:right-[28px] right-[15px] border-0 bg-transparent cursor-pointer z-10"
+              class="absolute top-[31px] lg:right-[10px] md:right-[28px] right-[30px] border-0 bg-transparent cursor-pointer z-10"
               @click="toggleOpenFilters()"
               >
-              <svg :class="{'rotate-[90deg]': openFilters && !isHiding}" class="transition duration-[1s] ease-in-out" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="none" stroke="white" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1.5" d="M21.25 12H8.895m-4.361 0H2.75m18.5 6.607h-5.748m-4.361 0H2.75m18.5-13.214h-3.105m-4.361 0H2.75m13.214 2.18a2.18 2.18 0 1 0 0-4.36a2.18 2.18 0 0 0 0 4.36Zm-9.25 6.607a2.18 2.18 0 1 0 0-4.36a2.18 2.18 0 0 0 0 4.36Zm6.607 6.608a2.18 2.18 0 1 0 0-4.361a2.18 2.18 0 0 0 0 4.36Z"/></svg>
+              <svg :class="{'rotate-[90deg]': openFilters && !isHiding}" class="transition duration-[0.2s] ease-in-out" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="none" stroke="white" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1.5" d="M21.25 12H8.895m-4.361 0H2.75m18.5 6.607h-5.748m-4.361 0H2.75m18.5-13.214h-3.105m-4.361 0H2.75m13.214 2.18a2.18 2.18 0 1 0 0-4.36a2.18 2.18 0 0 0 0 4.36Zm-9.25 6.607a2.18 2.18 0 1 0 0-4.36a2.18 2.18 0 0 0 0 4.36Zm6.607 6.608a2.18 2.18 0 1 0 0-4.361a2.18 2.18 0 0 0 0 4.36Z"/></svg>
             </button>
           </div>
           
@@ -371,8 +371,8 @@ function toggleOpenFilters() {
             <div class="w-full flex justify-center items-center">
               <div class="mt-6 bg-[#b53d3d] opacity-[0.3] h-[1px] w-full ml-10 mr-12 py-[1px]"></div>
             </div>
-            <div class="flex flex-col gap-8 md:flex-row justify-center items-start md:items-end px-0 md:px-3 mt-2 pl-6 md:pl-0 md:pr-12">
-              <div class="w-[70%] md:w-[27%] rounded-xl relative pl-0 md:pl-6">
+            <div class="flex flex-col gap-3 md:gap-8 md:flex-row justify-center px-0 md:px-3 mt-2 pl-6 md:pl-0 md:pr-12">
+              <div class="w-[90%] md:w-[27%] rounded-xl relative pl-0 md:pl-6">
                 <label class="text-xs text-[#b53d3d] ml-2 font-semibold">{{ t('model') }}</label>
                 <select v-model="modelo" class="bg-transparent hover:bg-transparent w-full px-3 py-2 bg-gray-800 text-white rounded-2xl border appearance-none focus:outline-none border-[#b53d3d]">
                   <option class="bg-[#201818]" value="">{{ t('select') }}</option>
@@ -381,7 +381,7 @@ function toggleOpenFilters() {
                 <svg class="absolute top-[50%] right-2 pointer-events-none" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 12 12"><path fill="white" d="M3.076 4.617A1 1 0 0 1 4 4h4a1 1 0 0 1 .707 1.707l-2 2a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1-.217-1.09"/></svg>
               </div>
 
-              <div class="hero-price-slider hero-slider-col relative w-full md:w-[42%] flex flex-col gap-3 px-4 md:px-3 pb-0 translate-y-3">
+              <div class="hero-price-slider hero-slider-col relative w-[90%] md:w-[42%] flex flex-col gap-3 pl-2 pr-3 md:px-3 pb-0 translate-y-9 mb-6 md:mb-0">
                 <label class="text-xs text-[#b53d3d] font-semibold absolute top-[-30px] mr-6">{{ t('budget') }}</label>
                 <div class="slider-with-labels w-full">
                   <div id="price-slider" class="slider relative"></div>
@@ -396,7 +396,6 @@ function toggleOpenFilters() {
                 </div>
               </div>
 
-              <!-- Dropdown Combustível -->
               <div class="w-[90%] md:w-[27%] relative pr-0 md:pr-10">
                 <label class="text-xs text-[#b53d3d] ml-2 font-semibold">{{ t('typology') }}</label>
                 <select v-model="tipologia" class="bg-transparent w-full px-3 py-2 bg-gray-800 text-white rounded-2xl border appearance-none focus:outline-none border-[#b53d3d]">
@@ -406,8 +405,13 @@ function toggleOpenFilters() {
                 <svg class="absolute top-[50%] right-2 md:right-12 pointer-events-none" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 12 12"><path fill="white" d="M3.076 4.617A1 1 0 0 1 4 4h4a1 1 0 0 1 .707 1.707l-2 2a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1-.217-1.09"/></svg>
               </div>
             </div>
-            <div class="flex flex-col gap-8 md:flex-row justify-center items-start md:items-end px-0 md:px-3 mt-3 pl-6 md:pl-0 md:pr-12">
-              <div class="w-[70%] md:w-[27%] rounded-xl pl-0 md:pl-6 relative">
+
+            <div class="w-full flex justify-center items-center block md:hidden">
+              <div class="mt-6 bg-[#b53d3d] opacity-[0.3] h-[1px] w-full ml-10 mr-12 py-[1px]"></div>
+            </div>
+
+            <div class="flex flex-col gap-3 md:gap-8 md:flex-row justify-center px-0 md:px-3 mt-3 pl-6 md:pl-0 md:pr-12">
+              <div class="w-[90%] md:w-[27%] rounded-xl pl-0 md:pl-6 relative">
                 <label class="text-xs text-[#b53d3d] ml-2 font-semibold">{{ t('transmission') }}</label>
                 <select v-model="transmissao" class="bg-transparent hover:bg-transparent w-full px-3 py-2 bg-gray-800 text-white rounded-2xl border appearance-none focus:outline-none border-[#b53d3d]">
                   <option class="bg-[#201818]" value="">{{ t('select') }}</option>
@@ -416,7 +420,7 @@ function toggleOpenFilters() {
                 <svg class="absolute top-[50%] right-2 pointer-events-none" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 12 12"><path fill="white" d="M3.076 4.617A1 1 0 0 1 4 4h4a1 1 0 0 1 .707 1.707l-2 2a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1-.217-1.09"/></svg>
               </div>
 
-              <div class="hero-km-slider hero-slider-col relative w-full md:w-[42%] flex flex-col gap-3 px-4 md:px-3 pb-0 translate-y-3">
+              <div class="hero-km-slider hero-slider-col relative w-[90%] md:w-[42%] flex flex-col gap-3 pl-2 pr-3 md:px-3 pb-0 translate-y-9 mb-6 md:mb-0">
                 <label class="text-xs text-[#b53d3d] font-semibold absolute top-[-30px] ml-1 md:ml-0 mr-6">{{ t('kilometers') }}</label>
                 <div class="slider-with-labels w-full">
                   <div id="kilometer-slider" class="slider relative"></div>
@@ -431,7 +435,6 @@ function toggleOpenFilters() {
                 </div>
               </div>
 
-              <!-- Dropdown Combustível -->
               <div class="w-[90%] md:w-[27%] relative pr-0 md:pr-10">
                 <label class="text-xs text-[#b53d3d] ml-2 font-semibold">{{ t('capacity') }}</label>
                 <select v-model="lugares" class="bg-transparent w-full px-3 py-2 bg-gray-800 text-white rounded-2xl border appearance-none focus:outline-none border-[#b53d3d]">
@@ -441,7 +444,7 @@ function toggleOpenFilters() {
                 <svg class="absolute top-[50%] right-2 md:right-12 pointer-events-none" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 12 12"><path fill="white" d="M3.076 4.617A1 1 0 0 1 4 4h4a1 1 0 0 1 .707 1.707l-2 2a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1-.217-1.09"/></svg>
               </div>
             </div>
-            <div class="w-full flex justify-center items-center">
+            <div class="w-full flex justify-center items-center hidden md:block">
               <div class="mt-6 bg-[#b53d3d] opacity-[0.3] h-[1px] w-full ml-10 mr-12 py-[1px]"></div>
             </div>
           </div>
@@ -544,7 +547,7 @@ function toggleOpenFilters() {
 }
 
 .appearSmooth {
-  animation: slide-down 1.4s ease-in-out;
+  animation: slide-down 0.7s ease-in-out;
   overflow: hidden;
 }
 
@@ -560,7 +563,7 @@ function toggleOpenFilters() {
 }
 
 .disappearSmooth {
-  animation: slide-up 1s ease-in-out;
+  animation: slide-up 0.7s ease-in-out;
   overflow: hidden;
 }
 
