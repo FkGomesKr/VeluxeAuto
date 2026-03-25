@@ -3,7 +3,7 @@
 const { t, locale } = useI18n();
 </script>
 <template>
-    <div class="h-16 bg-[#121212]"></div>
+    <div class="h-20 bg-[#121212]"></div>
     <hr class="bar">
     <hr class="bar2">
     <div class="w-full flex flex-col items-center justify-start gap-24 h-[700px] sm:h-[840px] bg-[#121212] overflow-hidden xl:overflow-visible">
