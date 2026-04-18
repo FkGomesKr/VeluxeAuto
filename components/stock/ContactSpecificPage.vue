@@ -88,7 +88,7 @@ function resetAndClose() {
 </script>
 
 <template>
-  <div class="flex flex-col rounded-l-xl bg-[#201818] p-6 contact-scroll overflow-y-auto">
+  <div class="flex flex-col rounded-l-xl bg-[#201818] p-5 contact-scroll overflow-y-auto h-full">
 
     <!-- Success state -->
     <div v-if="formSubmitted" class="flex-1 flex flex-col items-center justify-center gap-5 text-center py-10">
