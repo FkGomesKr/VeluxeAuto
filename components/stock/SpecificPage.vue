@@ -74,9 +74,27 @@ const fullscreenSwiper = ref<any>(null);
 const mobileSwiper = ref<any>(null);
 const desktopSwiper = ref<any>(null);
 const activeSlideIndex = ref(0);
+const isZoomed = ref(false);
+const zoomOrigin = ref('center center');
+
+const toggleZoom = (e: MouseEvent) => {
+  if (window.innerWidth < 1024) return;
+  if (!isZoomed.value) {
+    const rect = (e.target as HTMLElement).getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    zoomOrigin.value = `${x}% ${y}%`;
+  }
+  isZoomed.value = !isZoomed.value;
+};
 
 const onSlideChange = (swiper: any) => {
   activeSlideIndex.value = swiper.realIndex;
+};
+
+const onFullscreenSlideChange = (swiper: any) => {
+  activeSlideIndex.value = swiper.realIndex;
+  isZoomed.value = false;
 };
 
 const onFullscreenSwiperInit = (swiper: any) => {
@@ -101,6 +119,7 @@ const openFullscreen = () => {
 const closeFullscreen = () => {
   const idx = fullscreenSwiper.value?.realIndex ?? activeSlideIndex.value;
   activeSlideIndex.value = idx;
+  isZoomed.value = false;
   window.removeEventListener('keydown', handleKeydown);
   mobileSwiper.value?.slideToLoop(idx, 0);
   desktopSwiper.value?.slideToLoop(idx, 0);
@@ -538,17 +557,21 @@ onUnmounted(() => {
           :effect="'fade'"
           :initial-slide="activeSlideIndex"
           @swiper="onFullscreenSwiperInit"
+          @slideChange="onFullscreenSlideChange"
         >
-          <SwiperSlide v-for="carIMG in carro.imagens" class="w-full relative h-full flex justify-center items-center">
+          <SwiperSlide v-for="carIMG in carro.imagens" class="w-full relative h-full flex justify-center items-center overflow-hidden">
             <img 
               v-if="!failedImages.has(carIMG)"
-              class="max-h-full w-full object-contain" 
+              class="max-h-full w-full object-contain lg:transition-transform lg:duration-300 lg:ease-in-out"
+              :class="[isZoomed ? 'lg:scale-[2.2] lg:cursor-zoom-out' : 'lg:cursor-zoom-in']"
+              :style="{ transformOrigin: zoomOrigin }"
               :src="carIMG" 
               alt="Car Image"
               loading="eager"
               decoding="async"
               @error="onImageError(carIMG)"
               @load="onImageLoad(carIMG)"
+              @click.prevent="toggleZoom"
             >
             <div
               v-else
