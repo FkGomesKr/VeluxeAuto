@@ -69,6 +69,16 @@ watch(() => props.id, (newId) => {
   }
 })
 
+const showContactForm = ref(false);
+
+function flipToContact() {
+  showContactForm.value = true;
+}
+
+function flipBack() {
+  showContactForm.value = false;
+}
+
 const isFullscreen = ref(false);
 const fullscreenSwiper = ref<any>(null);
 const mobileSwiper = ref<any>(null);
@@ -143,157 +153,160 @@ onUnmounted(() => {
   <!-- Car Details -->
   <div v-else class="bg-[#121212] p-4 sm:p-10 lg:p-2 xl:p-10 pt-2 sm:pt-12 xl:pt-20">
     <div class="h-8 xl:h-16"> </div>
-    <div class="flex flex-col lg:flex-row justify-center test2 rounded-xl">
-      <div class="bg-[#201818] w-full lg:w-1/2 rounded-t-xl rounded-b-xl rounded-l-xl lg:rounded-tr-none lg:rounded-br-none p-6 sm:p-6 pb-2 lg:p-6 text-white">
-        <h1 class="pl-2.5 lg:pl-0 text-white text-xl xs:text-2xl md:text-3xl lg:text-2xl xl:text-3xl text-left pb-3 font-black pr-3 sm:pr-0">
-          {{ carro.marca + " - " + carro.modelo }}
-        </h1>
-        <div class="w-full pb-2 lg:w-2/5 xl:w-1/2 bg-[#201818] rounded-r-xl flex lg:hidden flex-col sm:flex-row justify-center items-center relative">
-          <div
-            v-if="!isImageAreaReady"
-            class="absolute inset-0 z-10 flex items-center justify-center bg-[#201818] rounded-xl"
-          >
-            <div class="loading-spinner"></div>
-          </div>
-          <Swiper
-              class="rounded-xl rounded-r-xl w-[95%] lg:w-full object-fit overflow-hidden"
-              :modules="[Navigation]"
-              :slides-per-view="1"
-              space-between="4"
-              :loop="true"
-              :navigation="{ nextEl: '.swiper-button-next-custom', prevEl: '.swiper-button-prev-custom' }"
-              :speed="500"
-              :effect="'fade'"
-              @swiper="(s: any) => mobileSwiper = s"
-              @slideChange="onSlideChange"
-          >
-            <SwiperSlide v-for="(carIMG, index) in carro.imagens" :key="index" class="w-full relative pb-4 bg-[#201818]">
-                <img 
-                  v-if="!failedImages.has(carIMG)"
-                  class="max-h-[240px] xs:max-h-[300px] sm:max-h-[450px] rounded-xl w-full h-auto object-cover" 
-                  :src="carIMG" 
-                  alt="Car Image"
-                  :loading="index === 0 ? 'eager' : 'lazy'"
-                  decoding="async"
-                  @error="onImageError(carIMG)"
-                  @load="onImageLoad(carIMG)"
-                >
-                <div
-                  v-else
-                  class="flex flex-col items-center justify-center gap-3 h-[240px] xs:h-[300px] sm:h-[450px] w-full bg-[#1a1212] rounded-xl"
-                >
-                  <svg fill="#a0a0a0" width="100" height="36" viewBox="0 0 122.88 43.49" xmlns="http://www.w3.org/2000/svg"><path d="M103.94,23.97c5.39,0,9.76,4.37,9.76,9.76c0,5.39-4.37,9.76-9.76,9.76c-5.39,0-9.76-4.37-9.76-9.76 C94.18,28.34,98.55,23.97,103.94,23.97L103.94,23.97z M23,29.07v3.51h3.51C26.09,30.86,24.73,29.49,23,29.07L23,29.07z M26.52,34.87H23v3.51C24.73,37.97,26.09,36.6,26.52,34.87L26.52,34.87z M20.71,38.39v-3.51H17.2 C17.62,36.6,18.99,37.96,20.71,38.39L20.71,38.39z M17.2,32.59h3.51v-3.51C18.99,29.49,17.62,30.86,17.2,32.59L17.2,32.59z M105.09,29.07v3.51h3.51C108.18,30.86,106.82,29.49,105.09,29.07L105.09,29.07z M108.6,34.87h-3.51v3.51 C106.82,37.97,108.18,36.6,108.6,34.87L108.6,34.87z M102.8,38.39v-3.51h-3.51C99.71,36.6,101.07,37.96,102.8,38.39L102.8,38.39z M99.28,32.59h3.51v-3.51C101.07,29.49,99.71,30.86,99.28,32.59L99.28,32.59z M49.29,12.79c-1.54-0.35-3.07-0.35-4.61-0.28 C56.73,6.18,61.46,2.07,75.57,2.9l-1.94,12.87L50.4,16.65c0.21-0.61,0.33-0.94,0.37-1.55C50.88,13.36,50.86,13.15,49.29,12.79 L49.29,12.79z M79.12,3.13L76.6,15.6l24.13-0.98c2.48-0.1,2.91-1.19,1.41-3.28c-0.68-0.95-1.44-1.89-2.31-2.82 C93.59,1.86,87.38,3.24,79.12,3.13L79.12,3.13z M0.46,27.28H1.2c0.46-2.04,1.37-3.88,2.71-5.53c2.94-3.66,4.28-3.2,8.65-3.99 l24.46-4.61c5.43-3.86,11.98-7.3,19.97-10.2C64.4,0.25,69.63-0.01,77.56,0c4.54,0.01,9.14,0.28,13.81,0.84 c2.37,0.15,4.69,0.47,6.97,0.93c2.73,0.55,5.41,1.31,8.04,2.21l9.8,5.66c2.89,1.67,3.51,3.62,3.88,6.81l1.38,11.78h1.43v6.51 c-0.2,2.19-1.06,2.52-2.88,2.52h-2.37c0.92-20.59-28.05-24.11-27.42,1.63H34.76c3.73-17.75-14.17-23.91-22.96-13.76 c-2.67,3.09-3.6,7.31-3.36,12.3H2.03c-0.51-0.24-0.91-0.57-1.21-0.98c-1.05-1.43-0.82-5.74-0.74-8.23 C0.09,27.55-0.12,27.28,0.46,27.28L0.46,27.28z M21.86,23.97c5.39,0,9.76,4.37,9.76,9.76c0,5.39-4.37,9.76-9.76,9.76 c-5.39,0-9.76-4.37-9.76-9.76C12.1,28.34,16.47,23.97,21.86,23.97L21.86,23.97z"/></svg>
-                  <span class="text-[#a0a0a0] text-md font-light">{{ t('imageUnavailable') }}</span>
+    <div class="flex flex-col lg:flex-row justify-center rounded-xl">
+      <div class="w-full lg:w-1/2 flip-perspective bg-[#201818] rounded-l-xl flex" :class="{ 'is-flipped items-start justify-center': showContactForm, 'items-center justify-center': !showContactForm }">
+        <div class="flip-card" :class="{ 'is-flipped': showContactForm}">
+          <!-- FRONT FACE: Car details -->
+          <div class="flip-face flip-front bg-[#201818] rounded-t-xl rounded-b-xl rounded-l-xl lg:rounded-tr-none lg:rounded-br-none pl-6 text-white">
+            <h1 class="ml-0 xs:ml-8 text-white text-xl xs:text-2xl md:text-3xl lg:text-2xl xl:text-3xl text-left pb-3 font-black pr-3 sm:pr-0">
+              {{ carro.marca + " - " + carro.modelo }}
+            </h1>
+            <div class="w-full pb-2 lg:w-2/5 xl:w-1/2 bg-[#201818] rounded-r-xl flex lg:hidden flex-col sm:flex-row justify-center items-center relative">
+              <div
+                v-if="!isImageAreaReady"
+                class="absolute inset-0 z-10 flex items-center justify-center bg-[#201818] rounded-xl"
+              >
+                <div class="loading-spinner"></div>
+              </div>
+              <Swiper
+                  class="rounded-xl rounded-r-xl w-[95%] lg:w-full object-fit overflow-hidden"
+                  :modules="[Navigation]"
+                  :slides-per-view="1"
+                  space-between="4"
+                  :loop="true"
+                  :navigation="{ nextEl: '.swiper-button-next-custom', prevEl: '.swiper-button-prev-custom' }"
+                  :speed="500"
+                  :effect="'fade'"
+                  @swiper="(s: any) => mobileSwiper = s"
+                  @slideChange="onSlideChange"
+              >
+                <SwiperSlide v-for="(carIMG, index) in carro.imagens" :key="index" class="w-full relative pb-4 bg-[#201818]">
+                    <img 
+                      v-if="!failedImages.has(carIMG)"
+                      class="max-h-[240px] xs:max-h-[300px] sm:max-h-[450px] rounded-xl w-full h-auto object-cover" 
+                      :src="carIMG" 
+                      alt="Car Image"
+                      :loading="index === 0 ? 'eager' : 'lazy'"
+                      decoding="async"
+                      @error="onImageError(carIMG)"
+                      @load="onImageLoad(carIMG)"
+                    >
+                    <div
+                      v-else
+                      class="flex flex-col items-center justify-center gap-3 h-[240px] xs:h-[300px] sm:h-[450px] w-full bg-[#1a1212] rounded-xl"
+                    >
+                      <svg fill="#a0a0a0" width="100" height="36" viewBox="0 0 122.88 43.49" xmlns="http://www.w3.org/2000/svg"><path d="M103.94,23.97c5.39,0,9.76,4.37,9.76,9.76c0,5.39-4.37,9.76-9.76,9.76c-5.39,0-9.76-4.37-9.76-9.76 C94.18,28.34,98.55,23.97,103.94,23.97L103.94,23.97z M23,29.07v3.51h3.51C26.09,30.86,24.73,29.49,23,29.07L23,29.07z M26.52,34.87H23v3.51C24.73,37.97,26.09,36.6,26.52,34.87L26.52,34.87z M20.71,38.39v-3.51H17.2 C17.62,36.6,18.99,37.96,20.71,38.39L20.71,38.39z M17.2,32.59h3.51v-3.51C18.99,29.49,17.62,30.86,17.2,32.59L17.2,32.59z M105.09,29.07v3.51h3.51C108.18,30.86,106.82,29.49,105.09,29.07L105.09,29.07z M108.6,34.87h-3.51v3.51 C106.82,37.97,108.18,36.6,108.6,34.87L108.6,34.87z M102.8,38.39v-3.51h-3.51C99.71,36.6,101.07,37.96,102.8,38.39L102.8,38.39z M99.28,32.59h3.51v-3.51C101.07,29.49,99.71,30.86,99.28,32.59L99.28,32.59z M49.29,12.79c-1.54-0.35-3.07-0.35-4.61-0.28 C56.73,6.18,61.46,2.07,75.57,2.9l-1.94,12.87L50.4,16.65c0.21-0.61,0.33-0.94,0.37-1.55C50.88,13.36,50.86,13.15,49.29,12.79 L49.29,12.79z M79.12,3.13L76.6,15.6l24.13-0.98c2.48-0.1,2.91-1.19,1.41-3.28c-0.68-0.95-1.44-1.89-2.31-2.82 C93.59,1.86,87.38,3.24,79.12,3.13L79.12,3.13z M0.46,27.28H1.2c0.46-2.04,1.37-3.88,2.71-5.53c2.94-3.66,4.28-3.2,8.65-3.99 l24.46-4.61c5.43-3.86,11.98-7.3,19.97-10.2C64.4,0.25,69.63-0.01,77.56,0c4.54,0.01,9.14,0.28,13.81,0.84 c2.37,0.15,4.69,0.47,6.97,0.93c2.73,0.55,5.41,1.31,8.04,2.21l9.8,5.66c2.89,1.67,3.51,3.62,3.88,6.81l1.38,11.78h1.43v6.51 c-0.2,2.19-1.06,2.52-2.88,2.52h-2.37c0.92-20.59-28.05-24.11-27.42,1.63H34.76c3.73-17.75-14.17-23.91-22.96-13.76 c-2.67,3.09-3.6,7.31-3.36,12.3H2.03c-0.51-0.24-0.91-0.57-1.21-0.98c-1.05-1.43-0.82-5.74-0.74-8.23 C0.09,27.55-0.12,27.28,0.46,27.28L0.46,27.28z M21.86,23.97c5.39,0,9.76,4.37,9.76,9.76c0,5.39-4.37,9.76-9.76,9.76 c-5.39,0-9.76-4.37-9.76-9.76C12.1,28.34,16.47,23.97,21.86,23.97L21.86,23.97z"/></svg>
+                      <span class="text-[#a0a0a0] text-md font-light">{{ t('imageUnavailable') }}</span>
+                    </div>
+                    <!-- Fullscreen Button -->
+                    <button v-if="!failedImages.has(carIMG)" @click="openFullscreen()" class="fullscreen-btn">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M7 14H5v5h5v-2H7zm-2-4h2V7h3V5H5zm12 7h-3v2h5v-5h-2zM14 5v2h3v3h2V5z"/>
+                      </svg>
+                    </button>
+                </SwiperSlide>
+                <div class="swiper-button-prev-custom transition duration-300 ease-in-out">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16"><path fill="currentColor" d="M9.428 11.84c.663.458 1.571-.013 1.571-.816V4.975c0-.803-.908-1.274-1.571-.816L5.644 6.776a1.486 1.486 0 0 0 0 2.447z"/></svg>
                 </div>
-                <!-- Fullscreen Button -->
-                <button v-if="!failedImages.has(carIMG)" @click="openFullscreen()" class="fullscreen-btn">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M7 14H5v5h5v-2H7zm-2-4h2V7h3V5H5zm12 7h-3v2h5v-5h-2zM14 5v2h3v3h2V5z"/>
-                  </svg>
-                </button>
-            </SwiperSlide>
-            <div class="swiper-button-prev-custom transition duration-300 ease-in-out">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16"><path fill="currentColor" d="M9.428 11.84c.663.458 1.571-.013 1.571-.816V4.975c0-.803-.908-1.274-1.571-.816L5.644 6.776a1.486 1.486 0 0 0 0 2.447z"/></svg>
+                <div class="swiper-button-next-custom transition duration-300 ease-in-out">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16"><path fill="currentColor" d="M7.571 11.84C6.908 12.298 6 11.827 6 11.024V4.975c0-.803.908-1.274 1.571-.816l3.784 2.617a1.486 1.486 0 0 1 0 2.447z"/></svg>
+                </div>
+              </Swiper>
             </div>
-            <div class="swiper-button-next-custom transition duration-300 ease-in-out">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16"><path fill="currentColor" d="M7.571 11.84C6.908 12.298 6 11.827 6 11.024V4.975c0-.803.908-1.274 1.571-.816l3.784 2.617a1.486 1.486 0 0 1 0 2.447z"/></svg>
+            <div class="mt-0 xl:mt-6 2xl:mt-10 flex flex-wrap justify-between items-center ml-0 xs:ml-8">
+              <div class="flex justify-start items-center font-light text-[15px] w-1/2 sm:w-1/3">
+                <svg class="mr-3 text-[#b53d3d]" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16">
+                  <g fill="currentColor">
+                    <path d="M3 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1-.5-.5z"/>
+                    <path d="M1 2a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v8a2 2 0 0 1 2 2v.5a.5.5 0 0 0 1 0V8h-.5a.5.5 0 0 1-.5-.5V4.375a.5.5 0 0 1 .5-.5h1.495c-.011-.476-.053-.894-.201-1.222a.97.97 0 0 0-.394-.458c-.184-.11-.464-.195-.9-.195a.5.5 0 0 1 0-1q.846-.002 1.412.336c.383.228.634.551.794.907c.295.655.294 1.465.294 2.081v3.175a.5.5 0 0 1-.5.501H15v4.5a1.5 1.5 0 0 1-3 0V12a1 1 0 0 0-1-1v4h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1zm9 0a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v13h8z"/>
+                  </g>
+                </svg>
+                <div class="flex flex-col justify-center items-start mt-2 text-[14px] sm:text-[15px]">
+                  <p class="leading-[13px] text-gray-500">
+                    {{ t('fuel') }}
+                  </p>
+                  <p class="font-medium">
+                    {{ carro.combustivel }}
+                  </p>
+                  
+                </div>
+              </div>
+              <div class="flex justify-start items-center font-light text-[15px] w-1/2 sm:w-1/3">
+                <svg class="mr-3 mt-1 text-[#b53d3d]" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 2048 2048">
+                  <path fill="currentColor" d="M1792 993q60 41 107 93t81 114t50 131t18 141q0 119-45 224t-124 183t-183 123t-224 46q-91 0-176-27t-156-78t-126-122t-85-157H128V128h256V0h128v128h896V0h128v128h256zM256 256v256h1408V256h-128v128h-128V256H512v128H384V256zm643 1280q-3-31-3-64q0-86 24-167t73-153h-97v-128h128v86q41-51 91-90t108-67t121-42t128-15q100 0 192 33V640H256v896zm573 384q93 0 174-35t142-96t96-142t36-175q0-93-35-174t-96-142t-142-96t-175-36q-93 0-174 35t-142 96t-96 142t-36 175q0 93 35 174t96 142t142 96t175 36m64-512h192v128h-320v-384h128zM384 1024h128v128H384zm256 0h128v128H640zm0-256h128v128H640zm-256 512h128v128H384zm256 0h128v128H640zm384-384H896V768h128zm256 0h-128V768h128zm256 0h-128V768h128z"/>
+                </svg>
+                <div class="flex flex-col justify-center items-start mt-2 text-[14px] sm:text-[15px]">
+                  <p class="leading-[13px] text-gray-500">
+                    {{ t('year') }}
+                  </p>
+                  <p class="font-medium">
+                    {{ carro.anoReg }}
+                  </p>
+                  
+                </div>
+              </div>
+              <div class="hidden sm:flex justify-start items-center font-light text-[15px] w-1/2 sm:w-1/3">
+                <svg class="mr-3 mt-1 text-[#b53d3d]" xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 20 20">
+                  <path fill="currentColor" d="M10 2a2 2 0 0 0-.5 3.937V9.5a.5.5 0 0 0 1 0V5.937A2 2 0 0 0 10 2M3 5a1 1 0 0 1 2 0v4a.5.5 0 0 0 .5.5H8a.5.5 0 0 0 0-1H6V5a2 2 0 1 0-4 0v11a2 2 0 1 0 4 0v-3.5h2V16a2 2 0 1 0 4 0v-3h4.5a1.5 1.5 0 0 0 1.5-1.5V5a2 2 0 1 0-4 0v3.5h-2a.5.5 0 0 0 0 1h2.5A.5.5 0 0 0 15 9V5a1 1 0 1 1 2 0v6.5a.5.5 0 0 1-.5.5h-5a.5.5 0 0 0-.5.5V16a1 1 0 1 1-2 0v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4a1 1 0 1 1-2 0z"/>
+                </svg>
+                <div class="flex flex-col justify-center items-start mt-2 text-[14px] sm:text-[15px]">
+                  <p class="leading-[22px] text-gray-500">
+                    {{ t('transmission') }}
+                  </p>
+                  <p class="font-medium leading-[14px]">
+                    {{ carro.transmissao }}
+                  </p>
+                  
+                </div>
+              </div>
             </div>
-          </Swiper>
-        </div>
-        <div class="pl-6 mt-0 xl:mt-6 2xl:mt-10 sm:pl-0 flex flex-wrap justify-between items-center">
-          <div class="flex justify-start items-center font-light text-[15px] w-1/2 sm:w-1/3">
-            <svg class="mr-3 text-[#b53d3d]" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16">
-              <g fill="currentColor">
-                <path d="M3 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1-.5-.5z"/>
-                <path d="M1 2a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v8a2 2 0 0 1 2 2v.5a.5.5 0 0 0 1 0V8h-.5a.5.5 0 0 1-.5-.5V4.375a.5.5 0 0 1 .5-.5h1.495c-.011-.476-.053-.894-.201-1.222a.97.97 0 0 0-.394-.458c-.184-.11-.464-.195-.9-.195a.5.5 0 0 1 0-1q.846-.002 1.412.336c.383.228.634.551.794.907c.295.655.294 1.465.294 2.081v3.175a.5.5 0 0 1-.5.501H15v4.5a1.5 1.5 0 0 1-3 0V12a1 1 0 0 0-1-1v4h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1zm9 0a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v13h8z"/>
-              </g>
-            </svg>
-            <div class="flex flex-col justify-center items-start mt-2 text-[14px] sm:text-[15px]">
-              <p class="leading-[13px] text-gray-500">
-                {{ t('fuel') }}
-              </p>
-              <p class="font-medium">
-                {{ carro.combustivel }}
-              </p>
-              
-            </div>
-          </div>
-          <div class="flex justify-start items-center font-light text-[15px] w-1/2 sm:w-1/3">
-            <svg class="mr-3 mt-1 text-[#b53d3d]" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 2048 2048">
-              <path fill="currentColor" d="M1792 993q60 41 107 93t81 114t50 131t18 141q0 119-45 224t-124 183t-183 123t-224 46q-91 0-176-27t-156-78t-126-122t-85-157H128V128h256V0h128v128h896V0h128v128h256zM256 256v256h1408V256h-128v128h-128V256H512v128H384V256zm643 1280q-3-31-3-64q0-86 24-167t73-153h-97v-128h128v86q41-51 91-90t108-67t121-42t128-15q100 0 192 33V640H256v896zm573 384q93 0 174-35t142-96t96-142t36-175q0-93-35-174t-96-142t-142-96t-175-36q-93 0-174 35t-142 96t-96 142t-36 175q0 93 35 174t96 142t142 96t175 36m64-512h192v128h-320v-384h128zM384 1024h128v128H384zm256 0h128v128H640zm0-256h128v128H640zm-256 512h128v128H384zm256 0h128v128H640zm384-384H896V768h128zm256 0h-128V768h128zm256 0h-128V768h128z"/>
-            </svg>
-            <div class="flex flex-col justify-center items-start mt-2 text-[14px] sm:text-[15px]">
-              <p class="leading-[13px] text-gray-500">
-                {{ t('year') }}
-              </p>
-              <p class="font-medium">
-                {{ carro.anoReg }}
-              </p>
-              
-            </div>
-          </div>
-          <div class="hidden sm:flex justify-start items-center font-light text-[15px] w-1/2 sm:w-1/3">
-            <svg class="mr-3 mt-1 text-[#b53d3d]" xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 20 20">
-              <path fill="currentColor" d="M10 2a2 2 0 0 0-.5 3.937V9.5a.5.5 0 0 0 1 0V5.937A2 2 0 0 0 10 2M3 5a1 1 0 0 1 2 0v4a.5.5 0 0 0 .5.5H8a.5.5 0 0 0 0-1H6V5a2 2 0 1 0-4 0v11a2 2 0 1 0 4 0v-3.5h2V16a2 2 0 1 0 4 0v-3h4.5a1.5 1.5 0 0 0 1.5-1.5V5a2 2 0 1 0-4 0v3.5h-2a.5.5 0 0 0 0 1h2.5A.5.5 0 0 0 15 9V5a1 1 0 1 1 2 0v6.5a.5.5 0 0 1-.5.5h-5a.5.5 0 0 0-.5.5V16a1 1 0 1 1-2 0v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4a1 1 0 1 1-2 0z"/>
-            </svg>
-            <div class="flex flex-col justify-center items-start mt-2 text-[14px] sm:text-[15px]">
-              <p class="leading-[22px] text-gray-500">
-                {{ t('transmission') }}
-              </p>
-              <p class="font-medium leading-[14px]">
-                {{ carro.transmissao }}
-              </p>
-              
-            </div>
-          </div>
-        </div>
 
-        <div class="pl-6 sm:pl-0 flex flex-wrap justify-between items-center mt-4 sm:mt-8">
-          <div class="flex justify-start items-center font-light text-[15px] w-1/2 sm:w-1/3">
-            <svg class="mr-3 text-[#b53d3d]" xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24">
-              <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2 21.998V11.996m20 10.002V11.996M12 21.998v-1m0-3.001v-1M5.725 5.655l.83.758m0 0c.16-.268.435-.738.527-1.032c.799-2.57.87-3.278 2.103-3.38h5.627c1.234.102 1.304.81 2.103 3.38c.091.294.318.764.477 1.032m-10.837 0C5.951 7.433 5.15 8.1 5.03 8.98c-.02.145 0 1.752 0 2.918c0 .876.844.85 1.666.918c.523.043 1.046.138 1.57.143c2.906.03 4.828.033 7.702.002c.556-.006 1.116-.11 1.67-.158c.625-.053 1.28-.123 1.33-.905c.077-1.165.02-2.773 0-2.918c-.12-.88-.97-1.547-1.575-2.567m-10.837 0h10.837m0 0l.972-.759M5.204 8.43l1.208.92m4.146 1.162h2.939m4.123-1.185l1.335-.425M7.082 12.855L7.004 14.5m9.978-1.623V14.5" color="currentColor"/>
-            </svg>
-            <div class="flex flex-col justify-center items-start mt-2 text-[14px] sm:text-[15px]">
-              <p class="leading-[13px] text-gray-500">
-                {{ t('kilometers') }}
-              </p>
-              <p class="font-medium">
-                {{ carro.kms + " km" }}
-              </p>
-              
-            </div>
+            <div class="flex justify-between items-center mt-4 sm:mt-8 ml-0 xs:ml-8">
+              <div class="flex justify-start items-center font-light text-[15px] w-1/2 sm:w-1/3">
+                <svg class="mr-3 text-[#b53d3d]" xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24">
+                  <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2 21.998V11.996m20 10.002V11.996M12 21.998v-1m0-3.001v-1M5.725 5.655l.83.758m0 0c.16-.268.435-.738.527-1.032c.799-2.57.87-3.278 2.103-3.38h5.627c1.234.102 1.304.81 2.103 3.38c.091.294.318.764.477 1.032m-10.837 0C5.951 7.433 5.15 8.1 5.03 8.98c-.02.145 0 1.752 0 2.918c0 .876.844.85 1.666.918c.523.043 1.046.138 1.57.143c2.906.03 4.828.033 7.702.002c.556-.006 1.116-.11 1.67-.158c.625-.053 1.28-.123 1.33-.905c.077-1.165.02-2.773 0-2.918c-.12-.88-.97-1.547-1.575-2.567m-10.837 0h10.837m0 0l.972-.759M5.204 8.43l1.208.92m4.146 1.162h2.939m4.123-1.185l1.335-.425M7.082 12.855L7.004 14.5m9.978-1.623V14.5" color="currentColor"/>
+                </svg>
+                <div class="flex flex-col justify-center items-start mt-2 text-[14px] sm:text-[15px]">
+                  <p class="leading-[13px] text-gray-500">
+                    {{ t('kilometers') }}
+                  </p>
+                  <p class="font-medium">
+                    {{ carro.kms + " km" }}
+                  </p>
+                  
+                </div>
+              </div>
+              <div class="flex justify-start items-center font-light text-[15px] w-1/2 sm:w-1/3">
+                <svg class="mr-3 mt-1 text-[#b53d3d]" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24">
+                  <path fill="currentColor" d="M17 4.5C17 5.9 15.9 7 14.5 7S12 5.9 12 4.5S13.1 2 14.5 2S17 3.1 17 4.5M15 8h-.8c-2.1 0-4.1-1.2-5.1-3.1c-.1-.1-.2-.2-.2-.3l-1.8.8c.5 1.4 2.1 3.2 4.4 4.1l-1.8 5l-3.9-1.1L3 18.9l2 .5l1.8-3.6l4.5 1.2c1 .2 2-.3 2.4-1.2L16 9.4c.2-.7-.3-1.4-1-1.4m3.9-1l-3.4 9.4c-.6 1.6-2.1 2.6-3.7 2.6c-.3 0-.7 0-1-.1l-2.9-.8l-.9 1.8l2 .5l1.4.4c.5.1 1 .2 1.5.2c2.5 0 4.7-1.5 5.6-3.9L21 7z"/>
+                </svg>
+                <div class="flex flex-col justify-center items-start mt-2 text-[14px] sm:text-[15px]">
+                  <p class="leading-[13px] text-gray-500">
+                    {{ t('capacity') }}
+                  </p>
+                  <p class="font-medium">
+                    {{ carro.lugares }}
+                  </p>
+                  
+                </div>
+              </div>
+              <div class="hidden sm:flex justify-start items-center font-light text-[15px] w-1/2 sm:w-1/3">
+                <svg class="mr-3 mt-1 text-[#b53d3d]" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+                  <path fill="currentColor" d="M19 14h-3v2h3zm3 7H3V11l8-8h10a1 1 0 0 1 1 1zM11.83 5l-6 6H20V5z"/>
+                </svg>
+                <div class="flex flex-col justify-center items-start mt-2 text-[14px] sm:text-[15px]">
+                  <p class="leading-[13px] text-gray-500">
+                    {{ t('doors') }}
+                  </p>
+                  <p class="font-medium">
+                    {{ carro.portas }}
+                  </p>
+                  
+                </div>
+              </div>
           </div>
-          <div class="flex justify-start items-center font-light text-[15px] w-1/2 sm:w-1/3">
-            <svg class="mr-3 mt-1 text-[#b53d3d]" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24">
-              <path fill="currentColor" d="M17 4.5C17 5.9 15.9 7 14.5 7S12 5.9 12 4.5S13.1 2 14.5 2S17 3.1 17 4.5M15 8h-.8c-2.1 0-4.1-1.2-5.1-3.1c-.1-.1-.2-.2-.2-.3l-1.8.8c.5 1.4 2.1 3.2 4.4 4.1l-1.8 5l-3.9-1.1L3 18.9l2 .5l1.8-3.6l4.5 1.2c1 .2 2-.3 2.4-1.2L16 9.4c.2-.7-.3-1.4-1-1.4m3.9-1l-3.4 9.4c-.6 1.6-2.1 2.6-3.7 2.6c-.3 0-.7 0-1-.1l-2.9-.8l-.9 1.8l2 .5l1.4.4c.5.1 1 .2 1.5.2c2.5 0 4.7-1.5 5.6-3.9L21 7z"/>
-            </svg>
-            <div class="flex flex-col justify-center items-start mt-2 text-[14px] sm:text-[15px]">
-              <p class="leading-[13px] text-gray-500">
-                {{ t('capacity') }}
-              </p>
-              <p class="font-medium">
-                {{ carro.lugares }}
-              </p>
-              
-            </div>
-          </div>
-          <div class="hidden sm:flex justify-start items-center font-light text-[15px] w-1/2 sm:w-1/3">
-            <svg class="mr-3 mt-1 text-[#b53d3d]" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-              <path fill="currentColor" d="M19 14h-3v2h3zm3 7H3V11l8-8h10a1 1 0 0 1 1 1zM11.83 5l-6 6H20V5z"/>
-            </svg>
-            <div class="flex flex-col justify-center items-start mt-2 text-[14px] sm:text-[15px]">
-              <p class="leading-[13px] text-gray-500">
-                {{ t('doors') }}
-              </p>
-              <p class="font-medium">
-                {{ carro.portas }}
-              </p>
-              
-            </div>
-          </div>
-        </div>
 
-        <div class="pl-6 sm:pl-0 flex flex-wrap justify-between items-center mt-4 sm:mt-8">
+        <div class="flex justify-between items-center mt-4 sm:mt-8 ml-0 xs:ml-8">
           <div class="flex justify-start items-center font-light text-[15px] w-1/2 sm:w-1/3">
             <svg class="mr-3 mt-1 text-[#b53d3d]" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" color="currentColor">
               <path d="M5 6v-.5c0-.943 0-1.414.293-1.707S6.057 3.5 7 3.5s1.414 0 1.707.293S9 4.557 9 5.5V6m6-1h3"/>
@@ -352,7 +365,7 @@ onUnmounted(() => {
           </div>
         </div>
 
-        <div class="pl-6 sm:pl-0 flex flex-wrap justify-between items-center mt-4 sm:mt-8">
+        <div class="flex justify-between items-center mt-4 sm:mt-8 ml-0 xs:ml-8">
           <div class="flex justify-start items-center font-light text-[15px] w-1/2 sm:w-1/3">
             <svg class="mr-3 mt-1 text-[#b53d3d]" xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24">
               <path fill="currentColor" d="M17.5 12a1.5 1.5 0 0 1-1.5-1.5A1.5 1.5 0 0 1 17.5 9a1.5 1.5 0 0 1 1.5 1.5a1.5 1.5 0 0 1-1.5 1.5m-3-4A1.5 1.5 0 0 1 13 6.5A1.5 1.5 0 0 1 14.5 5A1.5 1.5 0 0 1 16 6.5A1.5 1.5 0 0 1 14.5 8m-5 0A1.5 1.5 0 0 1 8 6.5A1.5 1.5 0 0 1 9.5 5A1.5 1.5 0 0 1 11 6.5A1.5 1.5 0 0 1 9.5 8m-3 4A1.5 1.5 0 0 1 5 10.5A1.5 1.5 0 0 1 6.5 9A1.5 1.5 0 0 1 8 10.5A1.5 1.5 0 0 1 6.5 12M12 3a9 9 0 0 0-9 9a9 9 0 0 0 9 9a1.5 1.5 0 0 0 1.5-1.5c0-.39-.15-.74-.39-1c-.23-.27-.38-.62-.38-1a1.5 1.5 0 0 1 1.5-1.5H16a5 5 0 0 0 5-5c0-4.42-4.03-8-9-8"/>
@@ -397,7 +410,7 @@ onUnmounted(() => {
           </div>
         </div>
 
-        <div class="pl-6 sm:pl-0 flex sm:hidden flex-wrap justify-between items-center mt-4">
+        <div class="flex sm:hidden justify-between items-center mt-4 ml-0 xs:ml-8">
           <div class="flex justify-start items-center font-light text-[15px] w-1/2 sm:w-1/3">
             <svg class="mr-3 mt-1 text-[#b53d3d]" xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 20 20">
               <path fill="currentColor" d="M10 2a2 2 0 0 0-.5 3.937V9.5a.5.5 0 0 0 1 0V5.937A2 2 0 0 0 10 2M3 5a1 1 0 0 1 2 0v4a.5.5 0 0 0 .5.5H8a.5.5 0 0 0 0-1H6V5a2 2 0 1 0-4 0v11a2 2 0 1 0 4 0v-3.5h2V16a2 2 0 1 0 4 0v-3h4.5a1.5 1.5 0 0 0 1.5-1.5V5a2 2 0 1 0-4 0v3.5h-2a.5.5 0 0 0 0 1h2.5A.5.5 0 0 0 15 9V5a1 1 0 1 1 2 0v6.5a.5.5 0 0 1-.5.5h-5a.5.5 0 0 0-.5.5V16a1 1 0 1 1-2 0v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4a1 1 0 1 1-2 0z"/>
@@ -428,7 +441,7 @@ onUnmounted(() => {
           </div>
         </div>
 
-        <div class="pl-6 sm:pl-0 flex sm:hidden flex-wrap justify-between items-center mt-4">
+        <div class="flex sm:hidden justify-between items-center mt-4 ml-0 xs:ml-8">
           <div class="flex justify-start items-center font-light text-[15px] w-1/2 sm:w-1/3">
             <svg class="mr-3 mt-1 text-[#b53d3d]" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
               <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
@@ -464,7 +477,7 @@ onUnmounted(() => {
           </div>
         </div>
         
-        <div class="hidden lg:flex w-full ">
+        <div class="hidden lg:flex w-full">
           <div class="w-full lg:w-1/2 flex justify-center items-center flex-col mt-4 xl:mt-12">
             <div class="flex justify-center items-center">
               <h1 class="text-gray-500 text-lg">
@@ -477,17 +490,27 @@ onUnmounted(() => {
           </div>
 
           <div class="w-1/2 flex justify-center items-center flex-col mt-8 xl:mt-14">
-            <button class="border-2 btc italic border-[#b53d3d] hover:bg-[#b53d3d] text-[14px] xl:text-[16px] text-[#b53d3d] p-3 xl:p-4 ps-6 xl:ps-8 pe-6 xl:pe-8 rounded-xl hover:scale-[1.02] transition duration-300 ease-in-out">
+            <button @click="flipToContact()" class="border-2 btc italic border-[#b53d3d] hover:bg-[#b53d3d] text-[14px] xl:text-[16px] text-[#b53d3d] p-3 xl:p-4 ps-6 xl:ps-8 pe-6 xl:pe-8 rounded-xl hover:scale-[1.02] transition duration-300 ease-in-out">
               {{ t('interested') }}
               <i class="fa-regular fa-paper-plane text-[16p] xl:text-[19px] text-[#b53d3d] py-[5px] icn transition duration-300 ease-in-out"></i>
             </button>
           </div>
         </div>
         <div class="flex lg:hidden w-[95%] justify-center items-center flex-col pt-6 pb-3">
-          <button class="border-2 btc italic border-[#b53d3d] hover:bg-[#b53d3d] text-[14px] xl:text-[16px] text-[#b53d3d] p-3 ps-4 pe-4 rounded-xl hover:scale-[1.02] transition duration-300 ease-in-out">
+          <button @click="flipToContact()" class="border-2 btc italic border-[#b53d3d] hover:bg-[#b53d3d] text-[14px] xl:text-[16px] text-[#b53d3d] p-3 ps-4 pe-4 rounded-xl hover:scale-[1.02] transition duration-300 ease-in-out">
             {{ t('interested') }}
             <i class="fa-regular fa-paper-plane text-[16p] xl:text-[19px] text-[#b53d3d] py-[5px] icn transition duration-300 ease-in-out"></i>
           </button>
+        </div>
+          </div>
+
+          <!-- BACK FACE: Contact form -->
+          <div class="flip-face flip-back rounded-t-xl rounded-b-xl rounded-l-xl lg:rounded-tr-none lg:rounded-br-none">
+            <StockContactSpecificPage
+              :car-name="carro.marca + ' ' + carro.modelo"
+              @close="flipBack()"
+            />
+          </div>
         </div>
       </div>
       <div class="w-full lg:w-2/5 xl:w-1/2 bg-[#201818] rounded-r-xl hidden lg:flex flex-col sm:flex-row justify-center items-center relative">
@@ -559,33 +582,35 @@ onUnmounted(() => {
           @swiper="onFullscreenSwiperInit"
           @slideChange="onFullscreenSlideChange"
         >
-          <SwiperSlide v-for="carIMG in carro.imagens" class="w-full relative h-full flex justify-center items-center overflow-hidden">
-            <img 
-              v-if="!failedImages.has(carIMG)"
-              class="max-h-full w-full object-contain lg:transition-transform lg:duration-300 lg:ease-in-out"
-              :class="[isZoomed ? 'lg:scale-[2.2] lg:cursor-zoom-out' : 'lg:cursor-zoom-in']"
-              :style="{ transformOrigin: zoomOrigin }"
-              :src="carIMG" 
-              alt="Car Image"
-              loading="eager"
-              decoding="async"
-              @error="onImageError(carIMG)"
-              @load="onImageLoad(carIMG)"
-              @click.prevent="toggleZoom"
-            >
-            <div
-              v-else
-              class="flex flex-col items-center justify-center gap-3 h-full w-full"
-            >
+          <SwiperSlide v-for="carIMG in carro.imagens" class="w-full relative overflow-hidden">
+            <div class="fullscreen-slide-inner">
+              <img 
+                v-if="!failedImages.has(carIMG)"
+                class="max-h-full max-w-full object-contain lg:transition-transform lg:duration-300 lg:ease-in-out"
+                :class="[isZoomed ? 'lg:scale-[2.2] lg:cursor-zoom-out' : 'lg:cursor-zoom-in']"
+                :style="{ transformOrigin: zoomOrigin }"
+                :src="carIMG" 
+                alt="Car Image"
+                loading="eager"
+                decoding="async"
+                @error="onImageError(carIMG)"
+                @load="onImageLoad(carIMG)"
+                @click.prevent="toggleZoom"
+              >
+              <div
+                v-else
+                class="flex flex-col items-center justify-center gap-3"
+              >
               <svg fill="#a0a0a0" width="120" height="44" viewBox="0 0 122.88 43.49" xmlns="http://www.w3.org/2000/svg"><path d="M103.94,23.97c5.39,0,9.76,4.37,9.76,9.76c0,5.39-4.37,9.76-9.76,9.76c-5.39,0-9.76-4.37-9.76-9.76 C94.18,28.34,98.55,23.97,103.94,23.97L103.94,23.97z M23,29.07v3.51h3.51C26.09,30.86,24.73,29.49,23,29.07L23,29.07z M26.52,34.87H23v3.51C24.73,37.97,26.09,36.6,26.52,34.87L26.52,34.87z M20.71,38.39v-3.51H17.2 C17.62,36.6,18.99,37.96,20.71,38.39L20.71,38.39z M17.2,32.59h3.51v-3.51C18.99,29.49,17.62,30.86,17.2,32.59L17.2,32.59z M105.09,29.07v3.51h3.51C108.18,30.86,106.82,29.49,105.09,29.07L105.09,29.07z M108.6,34.87h-3.51v3.51 C106.82,37.97,108.18,36.6,108.6,34.87L108.6,34.87z M102.8,38.39v-3.51h-3.51C99.71,36.6,101.07,37.96,102.8,38.39L102.8,38.39z M99.28,32.59h3.51v-3.51C101.07,29.49,99.71,30.86,99.28,32.59L99.28,32.59z M49.29,12.79c-1.54-0.35-3.07-0.35-4.61-0.28 C56.73,6.18,61.46,2.07,75.57,2.9l-1.94,12.87L50.4,16.65c0.21-0.61,0.33-0.94,0.37-1.55C50.88,13.36,50.86,13.15,49.29,12.79 L49.29,12.79z M79.12,3.13L76.6,15.6l24.13-0.98c2.48-0.1,2.91-1.19,1.41-3.28c-0.68-0.95-1.44-1.89-2.31-2.82 C93.59,1.86,87.38,3.24,79.12,3.13L79.12,3.13z M0.46,27.28H1.2c0.46-2.04,1.37-3.88,2.71-5.53c2.94-3.66,4.28-3.2,8.65-3.99 l24.46-4.61c5.43-3.86,11.98-7.3,19.97-10.2C64.4,0.25,69.63-0.01,77.56,0c4.54,0.01,9.14,0.28,13.81,0.84 c2.37,0.15,4.69,0.47,6.97,0.93c2.73,0.55,5.41,1.31,8.04,2.21l9.8,5.66c2.89,1.67,3.51,3.62,3.88,6.81l1.38,11.78h1.43v6.51 c-0.2,2.19-1.06,2.52-2.88,2.52h-2.37c0.92-20.59-28.05-24.11-27.42,1.63H34.76c3.73-17.75-14.17-23.91-22.96-13.76 c-2.67,3.09-3.6,7.31-3.36,12.3H2.03c-0.51-0.24-0.91-0.57-1.21-0.98c-1.05-1.43-0.82-5.74-0.74-8.23 C0.09,27.55-0.12,27.28,0.46,27.28L0.46,27.28z M21.86,23.97c5.39,0,9.76,4.37,9.76,9.76c0,5.39-4.37,9.76-9.76,9.76 c-5.39,0-9.76-4.37-9.76-9.76C12.1,28.34,16.47,23.97,21.86,23.97L21.86,23.97z"/></svg>
               <span class="text-[#a0a0a0] text-lg font-light">{{ t('imageUnavailable') }}</span>
+              </div>
             </div>
           </SwiperSlide>
           <div class="swiper-button-prev-custom transition duration-300 ease-in-out">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16"><path fill="currentColor" d="M9.428 11.84c.663.458 1.571-.013 1.571-.816V4.975c0-.803-.908-1.274-1.571-.816L5.644 6.776a1.486 1.486 0 0 0 0 2.447z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 lg:w-8 lg:h-8" viewBox="0 0 16 16"><path fill="currentColor" d="M9.428 11.84c.663.458 1.571-.013 1.571-.816V4.975c0-.803-.908-1.274-1.571-.816L5.644 6.776a1.486 1.486 0 0 0 0 2.447z"/></svg>
           </div>
           <div class="swiper-button-next-custom transition duration-300 ease-in-out">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16"><path fill="currentColor" d="M7.571 11.84C6.908 12.298 6 11.827 6 11.024V4.975c0-.803.908-1.274 1.571-.816l3.784 2.617a1.486 1.486 0 0 1 0 2.447z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 lg:w-8 lg:h-8" viewBox="0 0 16 16"><path fill="currentColor" d="M7.571 11.84C6.908 12.298 6 11.827 6 11.024V4.975c0-.803.908-1.274 1.571-.816l3.784 2.617a1.486 1.486 0 0 1 0 2.447z"/></svg>
           </div>
         </Swiper>
 
@@ -610,7 +635,6 @@ onUnmounted(() => {
   background-color: #b53d3d;
   font-weight: 700;
   cursor: pointer;
-  padding: 1px;
   top: 50%;
   z-index: 1;
   opacity: 0.6;
@@ -663,21 +687,35 @@ onUnmounted(() => {
 
 .fullscreen-content {
   position: relative;
-  width: 80%;
-  height: 90%;
+  width: 95%;
+  height: 85%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+@media (min-width: 1024px) {
+  .fullscreen-content {
+    width: 80%;
+    height: 90%;
+  }
+}
+
 .close-fullscreen {
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 180px;
+  right: 10px;
   color: white;
   cursor: pointer;
   transition: scale 0.3s ease-in-out;
   z-index: 5;
+}
+
+@media (min-width: 600px) {
+  .close-fullscreen {
+    top: 20px;
+    right: 20px;
+  }
 }
 
 .close-fullscreen:hover {
@@ -687,6 +725,21 @@ onUnmounted(() => {
 .btc:hover,
 .btc:hover .icn {
   color: white;
+}
+
+.fullscreen-content :deep(.swiper),
+.fullscreen-content :deep(.swiper-wrapper),
+.fullscreen-content :deep(.swiper-slide) {
+  height: 100%;
+}
+
+.fullscreen-slide-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
 .loading-spinner {
@@ -702,6 +755,39 @@ onUnmounted(() => {
   to {
     transform: rotate(360deg);
   }
+}
+
+.flip-perspective {
+  perspective: 1200px;
+}
+
+.flip-card {
+  position: relative;
+  width: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.flip-card.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.flip-face {
+  width: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.flip-front {
+  position: relative;
+}
+
+.flip-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  transform: rotateY(180deg);
 }
 
 </style>
