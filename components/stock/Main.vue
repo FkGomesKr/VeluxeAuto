@@ -8,6 +8,19 @@ import 'swiper/css';
 import 'swiper/css/navigation'; 
 
 const {t, locale} = useI18n();
+const failedImages = reactive(new Set<string>())
+const resolvedImages = reactive(new Set<string>())
+function onImageError(src: string) {
+  failedImages.add(src)
+  resolvedImages.add(src)
+}
+function onImageLoad(src: string) {
+  resolvedImages.add(src)
+}
+function isCarImageReady(carro: any): boolean {
+  if (!carro.imagens || carro.imagens.length === 0) return true
+  return carro.imagens.some((img: string) => resolvedImages.has(img))
+}
 const selectedRange = ref([1990, 2024]);
 const selectedRange2 = ref([10000, 400000]);
 const selectedRange3 = ref([3000, 50000]); 
@@ -600,8 +613,15 @@ const resetFilters = () => {
   <div v-else class="bg-[#121212] w-full pb-20 px-5 xs:px-10 lg:px-20 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-10" :class="{'pt-6': openFilters}" :style="{ minHeight: 'calc(100vh - 198px)' }">
     <div
     v-for="(carro, index) in filteredCarros" :key="carro.id" 
-    class="pt-4 pb-1 px-4 test rounded-2xl bg-[#201818] h-fit"
+    class="pt-4 pb-1 px-4 test rounded-2xl bg-[#201818] h-fit relative"
     >
+      <!-- Card loading spinner -->
+      <div
+        v-if="!isCarImageReady(carro)"
+        class="absolute inset-0 z-10 flex items-center justify-center bg-[#201818] rounded-2xl"
+      >
+        <div class="loading-spinner"></div>
+      </div>
       <Swiper
           class="rounded-xl object-fit overflow-hidden test3"
           :modules="[Navigation]"
@@ -617,12 +637,22 @@ const resetFilters = () => {
             :to="localCode=='pt' ? `/stockSingle/${carro.id}` : '/'+localCode+`/stockSingle/${carro.id}`"
             >
               <img 
+                v-if="!failedImages.has(carIMG)"
                 class="hover:scale-[1.04] transition duration-300 ease-in-out max-h-[240px] xs:max-h-[280px] w-full object-cover" 
                 :src="carIMG" 
                 alt="Car Image"
                 loading="lazy"
                 decoding="async"
+                @error="onImageError(carIMG)"
+                @load="onImageLoad(carIMG)"
               >
+              <div
+                v-else
+                class="flex flex-col items-center justify-center gap-3 h-[240px] xs:h-[280px] w-full bg-[#1a1212] rounded-xl"
+              >
+                <svg fill="#a0a0a0" width="80" height="36" viewBox="0 0 122.88 43.49" xmlns="http://www.w3.org/2000/svg"><path d="M103.94,23.97c5.39,0,9.76,4.37,9.76,9.76c0,5.39-4.37,9.76-9.76,9.76c-5.39,0-9.76-4.37-9.76-9.76 C94.18,28.34,98.55,23.97,103.94,23.97L103.94,23.97z M23,29.07v3.51h3.51C26.09,30.86,24.73,29.49,23,29.07L23,29.07z M26.52,34.87H23v3.51C24.73,37.97,26.09,36.6,26.52,34.87L26.52,34.87z M20.71,38.39v-3.51H17.2 C17.62,36.6,18.99,37.96,20.71,38.39L20.71,38.39z M17.2,32.59h3.51v-3.51C18.99,29.49,17.62,30.86,17.2,32.59L17.2,32.59z M105.09,29.07v3.51h3.51C108.18,30.86,106.82,29.49,105.09,29.07L105.09,29.07z M108.6,34.87h-3.51v3.51 C106.82,37.97,108.18,36.6,108.6,34.87L108.6,34.87z M102.8,38.39v-3.51h-3.51C99.71,36.6,101.07,37.96,102.8,38.39L102.8,38.39z M99.28,32.59h3.51v-3.51C101.07,29.49,99.71,30.86,99.28,32.59L99.28,32.59z M49.29,12.79c-1.54-0.35-3.07-0.35-4.61-0.28 C56.73,6.18,61.46,2.07,75.57,2.9l-1.94,12.87L50.4,16.65c0.21-0.61,0.33-0.94,0.37-1.55C50.88,13.36,50.86,13.15,49.29,12.79 L49.29,12.79z M79.12,3.13L76.6,15.6l24.13-0.98c2.48-0.1,2.91-1.19,1.41-3.28c-0.68-0.95-1.44-1.89-2.31-2.82 C93.59,1.86,87.38,3.24,79.12,3.13L79.12,3.13z M0.46,27.28H1.2c0.46-2.04,1.37-3.88,2.71-5.53c2.94-3.66,4.28-3.2,8.65-3.99 l24.46-4.61c5.43-3.86,11.98-7.3,19.97-10.2C64.4,0.25,69.63-0.01,77.56,0c4.54,0.01,9.14,0.28,13.81,0.84 c2.37,0.15,4.69,0.47,6.97,0.93c2.73,0.55,5.41,1.31,8.04,2.21l9.8,5.66c2.89,1.67,3.51,3.62,3.88,6.81l1.38,11.78h1.43v6.51 c-0.2,2.19-1.06,2.52-2.88,2.52h-2.37c0.92-20.59-28.05-24.11-27.42,1.63H34.76c3.73-17.75-14.17-23.91-22.96-13.76 c-2.67,3.09-3.6,7.31-3.36,12.3H2.03c-0.51-0.24-0.91-0.57-1.21-0.98c-1.05-1.43-0.82-5.74-0.74-8.23 C0.09,27.55-0.12,27.28,0.46,27.28L0.46,27.28z M21.86,23.97c5.39,0,9.76,4.37,9.76,9.76c0,5.39-4.37,9.76-9.76,9.76 c-5.39,0-9.76-4.37-9.76-9.76C12.1,28.34,16.47,23.97,21.86,23.97L21.86,23.97z"/></svg>
+                <span class="text-[#a0a0a0] text-md font-light">{{ t('imageUnavailable') }}</span>
+              </div>
             </NuxtLink>
         </SwiperSlide>
         <div class="swiper-button-prev-custom transition duration-300 ease-in-out">
@@ -642,18 +672,18 @@ const resetFilters = () => {
           </h1>
         </div>
         <h2 class="w-full text-white text-[15px] md:text-[17px] xl:text-[20px]">{{ carro.modelo }}</h2>
-        <div class="w-full flex items-center justify-start text-white mt-6">
-          <div class="w-full flex items-center gap-1 justify-start">
-            <svg class="mb-1" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 2048 2048"><path fill="currentColor" d="M1792 993q60 41 107 93t81 114t50 131t18 141q0 119-45 224t-124 183t-183 123t-224 46q-91 0-176-27t-156-78t-126-122t-85-157H128V128h256V0h128v128h896V0h128v128h256zM256 256v256h1408V256h-128v128h-128V256H512v128H384V256zm643 1280q-3-31-3-64q0-86 24-167t73-153h-97v-128h128v86q41-51 91-90t108-67t121-42t128-15q100 0 192 33V640H256v896zm573 384q93 0 174-35t142-96t96-142t36-175q0-93-35-174t-96-142t-142-96t-175-36q-93 0-174 35t-142 96t-96 142t-36 175q0 93 35 174t96 142t142 96t175 36m64-512h192v128h-320v-384h128zM384 1024h128v128H384zm256 0h128v128H640zm0-256h128v128H640zm-256 512h128v128H384zm256 0h128v128H640zm384-384H896V768h128zm256 0h-128V768h128zm256 0h-128V768h128z"/></svg>
-            <p class="text-xs lg:text-sm font-semibold">{{ carro.anoReg }}</p>
-          </div>
-          <div class="w-full flex items-center gap-1 justify-start">
-            <svg class="mb-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><g fill="currentColor"><path d="M3 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1-.5-.5z"/><path d="M1 2a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v8a2 2 0 0 1 2 2v.5a.5.5 0 0 0 1 0V8h-.5a.5.5 0 0 1-.5-.5V4.375a.5.5 0 0 1 .5-.5h1.495c-.011-.476-.053-.894-.201-1.222a.97.97 0 0 0-.394-.458c-.184-.11-.464-.195-.9-.195a.5.5 0 0 1 0-1q.846-.002 1.412.336c.383.228.634.551.794.907c.295.655.294 1.465.294 2.081v3.175a.5.5 0 0 1-.5.501H15v4.5a1.5 1.5 0 0 1-3 0V12a1 1 0 0 0-1-1v4h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1zm9 0a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v13h8z"/></g></svg>
-            <p class="text-xs lg:text-sm font-semibold">{{ t(carro.combustivel) }}</p>
-          </div>
+        <div class="w-full flex items-between justify-center text-white mt-6">
           <div class="w-full flex items-center gap-1 justify-start">
             <svg class="mb-1" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2 21.998V11.996m20 10.002V11.996M12 21.998v-1m0-3.001v-1M5.725 5.655l.83.758m0 0c.16-.268.435-.738.527-1.032c.799-2.57.87-3.278 2.103-3.38h5.627c1.234.102 1.304.81 2.103 3.38c.091.294.318.764.477 1.032m-10.837 0C5.951 7.433 5.15 8.1 5.03 8.98c-.02.145 0 1.752 0 2.918c0 .876.844.85 1.666.918c.523.043 1.046.138 1.57.143c2.906.03 4.828.033 7.702.002c.556-.006 1.116-.11 1.67-.158c.625-.053 1.28-.123 1.33-.905c.077-1.165.02-2.773 0-2.918c-.12-.88-.97-1.547-1.575-2.567m-10.837 0h10.837m0 0l.972-.759M5.204 8.43l1.208.92m4.146 1.162h2.939m4.123-1.185l1.335-.425M7.082 12.855L7.004 14.5m9.978-1.623V14.5" color="currentColor"/></svg>
             <p class="text-xs lg:text-sm font-semibold">{{ carro.kms + "km" }}</p>
+          </div>
+          <div class="w-full flex items-center gap-1 justify-center">
+            <svg class="mb-1" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 2048 2048"><path fill="currentColor" d="M1792 993q60 41 107 93t81 114t50 131t18 141q0 119-45 224t-124 183t-183 123t-224 46q-91 0-176-27t-156-78t-126-122t-85-157H128V128h256V0h128v128h896V0h128v128h256zM256 256v256h1408V256h-128v128h-128V256H512v128H384V256zm643 1280q-3-31-3-64q0-86 24-167t73-153h-97v-128h128v86q41-51 91-90t108-67t121-42t128-15q100 0 192 33V640H256v896zm573 384q93 0 174-35t142-96t96-142t36-175q0-93-35-174t-96-142t-142-96t-175-36q-93 0-174 35t-142 96t-96 142t-36 175q0 93 35 174t96 142t142 96t175 36m64-512h192v128h-320v-384h128zM384 1024h128v128H384zm256 0h128v128H640zm0-256h128v128H640zm-256 512h128v128H384zm256 0h128v128H640zm384-384H896V768h128zm256 0h-128V768h128zm256 0h-128V768h128z"/></svg>
+            <p class="text-xs lg:text-sm font-semibold">{{ carro.anoReg }}</p>
+          </div>
+          <div class="w-full flex items-center gap-1 justify-end">
+            <svg class="mb-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><g fill="currentColor"><path d="M3 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1-.5-.5z"/><path d="M1 2a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v8a2 2 0 0 1 2 2v.5a.5.5 0 0 0 1 0V8h-.5a.5.5 0 0 1-.5-.5V4.375a.5.5 0 0 1 .5-.5h1.495c-.011-.476-.053-.894-.201-1.222a.97.97 0 0 0-.394-.458c-.184-.11-.464-.195-.9-.195a.5.5 0 0 1 0-1q.846-.002 1.412.336c.383.228.634.551.794.907c.295.655.294 1.465.294 2.081v3.175a.5.5 0 0 1-.5.501H15v4.5a1.5 1.5 0 0 1-3 0V12a1 1 0 0 0-1-1v4h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1zm9 0a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v13h8z"/></g></svg>
+            <p class="text-xs lg:text-sm font-semibold">{{ t(carro.combustivel) }}</p>
           </div>
         </div>
         <NuxtLink  

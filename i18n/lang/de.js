@@ -90,5 +90,6 @@ export default {
     backToContact: "Zurück",
     whatsappPreMessage: "Hallo, ich interessiere mich für den Kauf eines Autos. Können wir sprechen?",
     emailSubject: "Interesse an einem Fahrzeug",
-    emailPreMessage: "Hallo, ich interessiere mich für den Kauf eines Autos. Können wir sprechen?"
+    emailPreMessage: "Hallo, ich interessiere mich für den Kauf eines Autos. Können wir sprechen?",
+    imageUnavailable: "Bild nicht verfügbar"
   }

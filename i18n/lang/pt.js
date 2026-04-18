@@ -90,5 +90,6 @@ export default {
   whatsappPreMessage: "Olá, estou interessado em comprar um carro. Podemos conversar?",
   emailSubject: "Interesse em viatura",
   emailPreMessage: "Olá, estou interessado em comprar um carro. Podemos conversar?",
-  backToContact: "Voltar"
+  backToContact: "Voltar",
+  imageUnavailable: "Imagem indisponível"
 }

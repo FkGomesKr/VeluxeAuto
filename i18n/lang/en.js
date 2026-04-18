@@ -90,6 +90,7 @@ export default {
     backToContact: "Back",
     whatsappPreMessage: "Hello, I'm interested in buying a car. Can we talk?",
     emailSubject: "Interest in a vehicle",
-    emailPreMessage: "Hello, I'm interested in buying a car. Can we talk?"
+    emailPreMessage: "Hello, I'm interested in buying a car. Can we talk?",
+    imageUnavailable: "Image unavailable"
   }
   
