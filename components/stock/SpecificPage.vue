@@ -70,14 +70,46 @@ watch(() => props.id, (newId) => {
 })
 
 const isFullscreen = ref(false);
+const fullscreenSwiper = ref<any>(null);
+const mobileSwiper = ref<any>(null);
+const desktopSwiper = ref<any>(null);
+const activeSlideIndex = ref(0);
+
+const onSlideChange = (swiper: any) => {
+  activeSlideIndex.value = swiper.realIndex;
+};
+
+const onFullscreenSwiperInit = (swiper: any) => {
+  fullscreenSwiper.value = swiper;
+};
+
+const handleKeydown = (e: KeyboardEvent) => {
+  if (e.key === 'Escape') {
+    closeFullscreen();
+  } else if (e.key === 'ArrowLeft') {
+    fullscreenSwiper.value?.slidePrev();
+  } else if (e.key === 'ArrowRight') {
+    fullscreenSwiper.value?.slideNext();
+  }
+};
 
 const openFullscreen = () => {
   isFullscreen.value = true;
+  window.addEventListener('keydown', handleKeydown);
 };
 
 const closeFullscreen = () => {
+  const idx = fullscreenSwiper.value?.realIndex ?? activeSlideIndex.value;
+  activeSlideIndex.value = idx;
+  window.removeEventListener('keydown', handleKeydown);
+  mobileSwiper.value?.slideToLoop(idx, 0);
+  desktopSwiper.value?.slideToLoop(idx, 0);
   isFullscreen.value = false;
 };
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', handleKeydown);
+});
 
 </script>
 <template>
@@ -113,6 +145,8 @@ const closeFullscreen = () => {
               :navigation="{ nextEl: '.swiper-button-next-custom', prevEl: '.swiper-button-prev-custom' }"
               :speed="500"
               :effect="'fade'"
+              @swiper="(s: any) => mobileSwiper = s"
+              @slideChange="onSlideChange"
           >
             <SwiperSlide v-for="(carIMG, index) in carro.imagens" :key="index" class="w-full relative pb-4 bg-[#201818]">
                 <img 
@@ -147,7 +181,7 @@ const closeFullscreen = () => {
             </div>
           </Swiper>
         </div>
-        <div class="pl-6 sm:pl-0 flex flex-wrap justify-between items-center">
+        <div class="pl-6 mt-0 xl:mt-6 2xl:mt-10 sm:pl-0 flex flex-wrap justify-between items-center">
           <div class="flex justify-start items-center font-light text-[15px] w-1/2 sm:w-1/3">
             <svg class="mr-3 text-[#b53d3d]" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16">
               <g fill="currentColor">
@@ -281,10 +315,10 @@ const closeFullscreen = () => {
           <div class="hidden sm:flex justify-start items-center font-light text-[15px] w-1/2 sm:w-1/3">
             <svg class="mr-3 mt-1 text-[#b53d3d]" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
               <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                <path stroke-dasharray="48" stroke-dashoffset="48" d="M11 9h6v10h-6.5l-2 -2h-2.5v-6.5l1.5 -1.5Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.6s" values="48;0"/></path>
-                <path fill="currentColor" fill-opacity="0" d="M17 13h0v-3h0v8h0v-3h0z" opacity="0"><animate fill="freeze" attributeName="d" begin="0.6s" dur="0.2s" values="M17 13h0v-3h0v8h0v-3h0z;M17 13h4v-3h1v8h-1v-3h-4z"/><set fill="freeze" attributeName="fill-opacity" begin="0.8s" to="1"/><set fill="freeze" attributeName="opacity" begin="0.6s" to="1"/></path>
-                <path d="M6 14h0M6 11v6" opacity="0"><animate fill="freeze" attributeName="d" begin="0.8s" dur="0.2s" values="M6 14h0M6 11v6;M6 14h-4M2 11v6"/><set fill="freeze" attributeName="opacity" begin="0.8s" to="1"/></path>
-                <path d="M11 9v0M8 9h6" opacity="0"><animate fill="freeze" attributeName="d" begin="1s" dur="0.2s" values="M11 9v0M8 9h6;M11 9v-4M8 5h6"/><set fill="freeze" attributeName="opacity" begin="1s" to="1"/></path>
+                <path d="M11 9h6v10h-6.5l-2 -2h-2.5v-6.5l1.5 -1.5Z"/>
+                <path fill="currentColor" d="M17 13h4v-3h1v8h-1v-3h-4z"/>
+                <path d="M6 14h-4M2 11v6"/>
+                <path d="M11 9v-4M8 5h6"/>
               </g>
             </svg>
             <div class="flex flex-col justify-center items-start mt-2 text-[14px] sm:text-[15px]">
@@ -379,10 +413,10 @@ const closeFullscreen = () => {
           <div class="flex justify-start items-center font-light text-[15px] w-1/2 sm:w-1/3">
             <svg class="mr-3 mt-1 text-[#b53d3d]" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
               <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                <path stroke-dasharray="48" stroke-dashoffset="48" d="M11 9h6v10h-6.5l-2 -2h-2.5v-6.5l1.5 -1.5Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.6s" values="48;0"/></path>
-                <path fill="currentColor" fill-opacity="0" d="M17 13h0v-3h0v8h0v-3h0z" opacity="0"><animate fill="freeze" attributeName="d" begin="0.6s" dur="0.2s" values="M17 13h0v-3h0v8h0v-3h0z;M17 13h4v-3h1v8h-1v-3h-4z"/><set fill="freeze" attributeName="fill-opacity" begin="0.8s" to="1"/><set fill="freeze" attributeName="opacity" begin="0.6s" to="1"/></path>
-                <path d="M6 14h0M6 11v6" opacity="0"><animate fill="freeze" attributeName="d" begin="0.8s" dur="0.2s" values="M6 14h0M6 11v6;M6 14h-4M2 11v6"/><set fill="freeze" attributeName="opacity" begin="0.8s" to="1"/></path>
-                <path d="M11 9v0M8 9h6" opacity="0"><animate fill="freeze" attributeName="d" begin="1s" dur="0.2s" values="M11 9v0M8 9h6;M11 9v-4M8 5h6"/><set fill="freeze" attributeName="opacity" begin="1s" to="1"/></path>
+                <path d="M11 9h6v10h-6.5l-2 -2h-2.5v-6.5l1.5 -1.5Z"/>
+                <path fill="currentColor" d="M17 13h4v-3h1v8h-1v-3h-4z"/>
+                <path d="M6 14h-4M2 11v6"/>
+                <path d="M11 9v-4M8 5h6"/>
               </g>
             </svg>
             <div class="flex flex-col justify-center items-start mt-2 text-[14px] sm:text-[15px]">
@@ -453,11 +487,13 @@ const closeFullscreen = () => {
             :navigation="{ nextEl: '.swiper-button-next-custom', prevEl: '.swiper-button-prev-custom' }"
             :speed="500"
             :effect="'fade'"
+            @swiper="(s: any) => desktopSwiper = s"
+            @slideChange="onSlideChange"
         >
           <SwiperSlide v-for="(carIMG, index) in carro.imagens" :key="index" class="w-full relative p-3 bg-[#201818]">
               <img 
                 v-if="!failedImages.has(carIMG)"
-                class="max-h-[240px] xs:max-h-[300px] sm:max-h-[450px] rounded-xl w-full h-auto object-cover" 
+                class="max-h-[240px] xs:max-h-[300px] sm:max-h-[450px] lg:max-h-[500px] xl:max-h-[550px] rounded-xl w-full h-auto object-cover" 
                 :src="carIMG" 
                 alt="Car Image"
                 :loading="index === 0 ? 'eager' : 'lazy'"
@@ -467,7 +503,7 @@ const closeFullscreen = () => {
               >
               <div
                 v-else
-                class="flex flex-col items-center justify-center gap-3 h-[240px] xs:h-[300px] sm:h-[450px] w-full bg-[#1a1212] rounded-xl"
+                class="flex flex-col items-center justify-center gap-3 h-[240px] xs:h-[300px] sm:h-[450px] lg:h-[500px] xl:h-[550px] w-full bg-[#1a1212] rounded-xl"
               >
                 <svg fill="#a0a0a0" width="100" height="36" viewBox="0 0 122.88 43.49" xmlns="http://www.w3.org/2000/svg"><path d="M103.94,23.97c5.39,0,9.76,4.37,9.76,9.76c0,5.39-4.37,9.76-9.76,9.76c-5.39,0-9.76-4.37-9.76-9.76 C94.18,28.34,98.55,23.97,103.94,23.97L103.94,23.97z M23,29.07v3.51h3.51C26.09,30.86,24.73,29.49,23,29.07L23,29.07z M26.52,34.87H23v3.51C24.73,37.97,26.09,36.6,26.52,34.87L26.52,34.87z M20.71,38.39v-3.51H17.2 C17.62,36.6,18.99,37.96,20.71,38.39L20.71,38.39z M17.2,32.59h3.51v-3.51C18.99,29.49,17.62,30.86,17.2,32.59L17.2,32.59z M105.09,29.07v3.51h3.51C108.18,30.86,106.82,29.49,105.09,29.07L105.09,29.07z M108.6,34.87h-3.51v3.51 C106.82,37.97,108.18,36.6,108.6,34.87L108.6,34.87z M102.8,38.39v-3.51h-3.51C99.71,36.6,101.07,37.96,102.8,38.39L102.8,38.39z M99.28,32.59h3.51v-3.51C101.07,29.49,99.71,30.86,99.28,32.59L99.28,32.59z M49.29,12.79c-1.54-0.35-3.07-0.35-4.61-0.28 C56.73,6.18,61.46,2.07,75.57,2.9l-1.94,12.87L50.4,16.65c0.21-0.61,0.33-0.94,0.37-1.55C50.88,13.36,50.86,13.15,49.29,12.79 L49.29,12.79z M79.12,3.13L76.6,15.6l24.13-0.98c2.48-0.1,2.91-1.19,1.41-3.28c-0.68-0.95-1.44-1.89-2.31-2.82 C93.59,1.86,87.38,3.24,79.12,3.13L79.12,3.13z M0.46,27.28H1.2c0.46-2.04,1.37-3.88,2.71-5.53c2.94-3.66,4.28-3.2,8.65-3.99 l24.46-4.61c5.43-3.86,11.98-7.3,19.97-10.2C64.4,0.25,69.63-0.01,77.56,0c4.54,0.01,9.14,0.28,13.81,0.84 c2.37,0.15,4.69,0.47,6.97,0.93c2.73,0.55,5.41,1.31,8.04,2.21l9.8,5.66c2.89,1.67,3.51,3.62,3.88,6.81l1.38,11.78h1.43v6.51 c-0.2,2.19-1.06,2.52-2.88,2.52h-2.37c0.92-20.59-28.05-24.11-27.42,1.63H34.76c3.73-17.75-14.17-23.91-22.96-13.76 c-2.67,3.09-3.6,7.31-3.36,12.3H2.03c-0.51-0.24-0.91-0.57-1.21-0.98c-1.05-1.43-0.82-5.74-0.74-8.23 C0.09,27.55-0.12,27.28,0.46,27.28L0.46,27.28z M21.86,23.97c5.39,0,9.76,4.37,9.76,9.76c0,5.39-4.37,9.76-9.76,9.76 c-5.39,0-9.76-4.37-9.76-9.76C12.1,28.34,16.47,23.97,21.86,23.97L21.86,23.97z"/></svg>
                 <span class="text-[#a0a0a0] text-md font-light">{{ t('imageUnavailable') }}</span>
@@ -500,6 +536,8 @@ const closeFullscreen = () => {
           :navigation="{ nextEl: '.swiper-button-next-custom', prevEl: '.swiper-button-prev-custom' }"
           :speed="500"
           :effect="'fade'"
+          :initial-slide="activeSlideIndex"
+          @swiper="onFullscreenSwiperInit"
         >
           <SwiperSlide v-for="carIMG in carro.imagens" class="w-full relative h-full flex justify-center items-center">
             <img 
@@ -593,7 +631,7 @@ const closeFullscreen = () => {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.95);
   display: flex;
   justify-content: center;
   align-items: center;
