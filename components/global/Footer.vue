@@ -100,7 +100,7 @@ function closePrivacyModal() {
       <!-- Separator -->
       <div class="border-t border-[#a0a0a0] mt-10 pt-8 mb-1">
         <div class="flex flex-col sm:flex-row justify-center items-center gap-1 sm:gap-0">
-          <p class="text-[#a0a0a0] text-sm">
+          <p class="text-[#a0a0a0] text-sm text-center">
             {{ t('footerAllRights') }}
           </p>
           <span class="hidden sm:inline text-[#a0a0a0] text-xs mx-2">|</span>

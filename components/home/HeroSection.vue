@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onClickOutside } from "@vueuse/core";
-import { ref, onMounted, computed, nextTick } from 'vue';
+import { ref, onMounted, computed, nextTick, watch } from 'vue';
 import noUiSlider from 'nouislider';
 import 'nouislider/dist/nouislider.css';
 
@@ -42,26 +42,25 @@ const kmHandlePct = computed(() => [
   rangeToPct(selectedRange2.value[1], KM_MIN, KM_MAX),
 ]);
 
-const marcas = [
-  {
-    title: "Audi"
-  },
-  {
-    title: "BMW"
-  },
-  {
-    title: "Mercedes"
-  },
-  {
-    title: "Fiat"
-  },
-  {
-    title: "Toyota"
-  },
-  {
-    title: "Peugeot"
-  }
-]
+const { getCars } = useApi()
+const carros = ref<any[]>([])
+
+onMounted(async () => {
+  try { carros.value = await getCars() } catch {}
+})
+
+const marcas = computed(() =>
+  [...new Set(carros.value.map(c => c.marca))].sort().map(m => ({ title: m }))
+)
+
+const modelos = computed(() => {
+  const pool = marca.value
+    ? carros.value.filter(c => c.marca.toLowerCase() === marca.value.toLowerCase())
+    : carros.value
+  return [...new Set(pool.map(c => c.modelo))].sort().map(m => ({ title: m }))
+})
+
+watch(marca, () => { modelo.value = '' })
 
 const combustiveis = [
   {
@@ -376,7 +375,7 @@ function toggleOpenFilters() {
                 <label class="text-xs text-[#b53d3d] ml-2 font-semibold">{{ t('model') }}</label>
                 <select v-model="modelo" class="bg-transparent hover:bg-transparent w-full px-3 py-2 bg-gray-800 text-white rounded-2xl border appearance-none focus:outline-none border-[#b53d3d]">
                   <option class="bg-[#201818]" value="">{{ t('select') }}</option>
-                  <option class="bg-[#201818]" v-for="marca in marcas" :key="marca.title" :value="marca.title">{{ marca.title }}</option>
+                  <option class="bg-[#201818]" v-for="opt in modelos" :key="opt.title" :value="opt.title">{{ opt.title }}</option>
                 </select>
                 <svg class="absolute top-[50%] right-2 pointer-events-none" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 12 12"><path fill="white" d="M3.076 4.617A1 1 0 0 1 4 4h4a1 1 0 0 1 .707 1.707l-2 2a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1-.217-1.09"/></svg>
               </div>
