@@ -221,7 +221,7 @@ onUnmounted(() => {
                     {{ t('fuel') }}
                   </p>
                   <p class="font-medium text-white">
-                    {{ carro.combustivel }}
+                    {{ t(carro.combustivel) }}
                   </p>
                   
                 </div>
@@ -249,7 +249,7 @@ onUnmounted(() => {
                     {{ t('transmission') }}
                   </p>
                   <p class="font-medium leading-[14px] text-white">
-                    {{ carro.transmissao }}
+                    {{ t(carro.transmissao) }}
                   </p>
                   
                 </div>
@@ -384,7 +384,7 @@ onUnmounted(() => {
                   {{ t('state') }}
                 </p>
                 <p class="font-medium text-white">
-                  {{ carro.estado }}
+                  {{ t(carro.estado) }}
                 </p>
                 
               </div>
