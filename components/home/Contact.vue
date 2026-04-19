@@ -336,6 +336,7 @@ const bars = computed(() => [
   width: 100%;
   transform-style: preserve-3d;
   transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  touch-action: pan-y;
 }
 
 .flip-card.is-flipped {
@@ -346,6 +347,7 @@ const bars = computed(() => [
   width: 100%;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  touch-action: pan-y;
 }
 
 .flip-front {
