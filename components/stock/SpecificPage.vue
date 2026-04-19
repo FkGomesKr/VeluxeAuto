@@ -509,7 +509,7 @@ onUnmounted(() => {
                   {{ t('transmission') }}
                 </p>
                 <p class="font-medium leading-[14px] text-white">
-                  {{ carro.transmissao }}
+                  {{ t(carro.transmissao) }}
                 </p>
                 
               </div>
