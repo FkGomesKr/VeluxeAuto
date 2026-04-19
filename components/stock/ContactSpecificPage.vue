@@ -88,7 +88,7 @@ function resetAndClose() {
 </script>
 
 <template>
-  <div class="flex flex-col rounded-l-xl bg-[#201818] p-5 contact-scroll overflow-y-auto h-full">
+  <div class="flex flex-col rounded-xl bg-[#201818] p-5">
 
     <!-- Success state -->
     <div v-if="formSubmitted" class="flex-1 flex flex-col items-center justify-center gap-5 text-center py-10">
@@ -109,7 +109,7 @@ function resetAndClose() {
 
     <!-- Form state -->
     <template v-else>
-      <div class="flex items-center gap-3 mb-5">
+      <div class="flex items-center gap-3 mb-2">
         <button
           @click="emit('close')"
           class="group/back text-[#a0a0a0] hover:text-white transition-colors duration-200 p-1"
@@ -118,7 +118,7 @@ function resetAndClose() {
             <path d="M19 12H5m7-7-7 7 7 7" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
         </button>
-        <h3 class="text-xl font-semibold text-white">{{ t('contactFormBarTitle') }}</h3>
+        <h3 class="text-md xl:text-xl font-semibold text-white">{{ t('contactFormBarTitle') }}</h3>
       </div>
 
       <p class="text-[#a0a0a0] text-sm mb-4">
