@@ -170,8 +170,8 @@ onUnmounted(() => {
       <div class="w-full lg:w-1/2 flip-perspective bg-[#201818] rounded-xl lg:rounded-l-xl lg:rounded-[0px] flex" :class="{ 'is-flipped items-start justify-center': showContactForm, 'items-center justify-center': !showContactForm }">
         <div class="flip-card" :class="{ 'is-flipped': showContactForm, 'content-swapped': contentSwapped }">
           <!-- FRONT FACE: Car details -->
-          <div class="flip-face flip-front bg-[#201818] rounded-xl lg:rounded-tr-none lg:rounded-br-none pl-6 text-whit flex flex-col justify-between lg:py-8" :class="{ 'py-0': contentSwapped, 'py-4': !contentSwapped }">
-            <h1 class="ml-0 xs:ml-8 text-white text-xl xs:text-2xl md:text-3xl lg:text-2xl xl:text-3xl text-left pb-3 font-black pr-3 sm:pr-0">
+          <div class="flip-face flip-front bg-[#201818] rounded-xl lg:rounded-tr-none lg:rounded-br-none px-2 text-white flex flex-col justify-between lg:py-8" :class="{ 'py-0': contentSwapped, 'py-4': !contentSwapped }">
+            <h1 class="ml-0 xs:ml-8 text-white text-xl xs:text-2xl md:text-3xl lg:text-2xl xl:text-3xl text-left pb-3 font-black pr-3 sm:pr-0 pl-3">
               {{ carro.marca + " - " + carro.modelo }}
             </h1>
             <div class="w-full pb-2 lg:w-2/5 xl:w-1/2 bg-[#201818] rounded-r-xl flex lg:hidden flex-col sm:flex-row justify-center items-center relative">
@@ -226,7 +226,7 @@ onUnmounted(() => {
                 </div>
               </Swiper>
             </div>
-            <div class="mt-0 xl:mt-6 2xl:mt-10 flex flex-wrap justify-between items-center ml-0 xs:ml-8">
+            <div class="mt-0 xl:mt-6 2xl:mt-10 flex flex-wrap justify-between items-center ml-0 xs:ml-8 pl-4">
               <div class="flex justify-start items-center font-light text-[15px] w-1/2 sm:w-1/3">
                 <svg class="mr-3 text-[#b53d3d]" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16">
                   <g fill="currentColor">
@@ -274,7 +274,7 @@ onUnmounted(() => {
               </div>
             </div>
 
-            <div class="flex justify-between items-center mt-4 sm:mt-8 ml-0 xs:ml-8">
+            <div class="flex justify-between items-center mt-4 sm:mt-8 ml-0 xs:ml-8 pl-4">
               <div class="flex justify-start items-center font-light text-[15px] w-1/2 sm:w-1/3">
                 <svg class="mr-3 text-[#b53d3d]" xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24">
                   <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2 21.998V11.996m20 10.002V11.996M12 21.998v-1m0-3.001v-1M5.725 5.655l.83.758m0 0c.16-.268.435-.738.527-1.032c.799-2.57.87-3.278 2.103-3.38h5.627c1.234.102 1.304.81 2.103 3.38c.091.294.318.764.477 1.032m-10.837 0C5.951 7.433 5.15 8.1 5.03 8.98c-.02.145 0 1.752 0 2.918c0 .876.844.85 1.666.918c.523.043 1.046.138 1.57.143c2.906.03 4.828.033 7.702.002c.556-.006 1.116-.11 1.67-.158c.625-.053 1.28-.123 1.33-.905c.077-1.165.02-2.773 0-2.918c-.12-.88-.97-1.547-1.575-2.567m-10.837 0h10.837m0 0l.972-.759M5.204 8.43l1.208.92m4.146 1.162h2.939m4.123-1.185l1.335-.425M7.082 12.855L7.004 14.5m9.978-1.623V14.5" color="currentColor"/>
@@ -319,7 +319,7 @@ onUnmounted(() => {
               </div>
           </div>
 
-          <div class="flex justify-between items-center mt-4 sm:mt-8 ml-0 xs:ml-8">
+          <div class="flex justify-between items-center mt-4 sm:mt-8 ml-0 xs:ml-8 pl-4">
             <div class="flex justify-start items-center font-light text-[15px] w-1/2 sm:w-1/3">
               <svg class="mr-3 mt-1 text-[#b53d3d]" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" color="currentColor">
                 <path d="M5 6v-.5c0-.943 0-1.414.293-1.707S6.057 3.5 7 3.5s1.414 0 1.707.293S9 4.557 9 5.5V6m6-1h3"/>
@@ -378,7 +378,7 @@ onUnmounted(() => {
             </div>
           </div>
 
-          <div class="flex justify-between items-center mt-4 sm:mt-8 ml-0 xs:ml-8">
+          <div class="flex justify-between items-center mt-4 sm:mt-8 ml-0 xs:ml-8 pl-4">
             <div class="flex justify-start items-center font-light text-[15px] w-1/2 sm:w-1/3">
               <svg class="mr-3 mt-1 text-[#b53d3d]" xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M17.5 12a1.5 1.5 0 0 1-1.5-1.5A1.5 1.5 0 0 1 17.5 9a1.5 1.5 0 0 1 1.5 1.5a1.5 1.5 0 0 1-1.5 1.5m-3-4A1.5 1.5 0 0 1 13 6.5A1.5 1.5 0 0 1 14.5 5A1.5 1.5 0 0 1 16 6.5A1.5 1.5 0 0 1 14.5 8m-5 0A1.5 1.5 0 0 1 8 6.5A1.5 1.5 0 0 1 9.5 5A1.5 1.5 0 0 1 11 6.5A1.5 1.5 0 0 1 9.5 8m-3 4A1.5 1.5 0 0 1 5 10.5A1.5 1.5 0 0 1 6.5 9A1.5 1.5 0 0 1 8 10.5A1.5 1.5 0 0 1 6.5 12M12 3a9 9 0 0 0-9 9a9 9 0 0 0 9 9a1.5 1.5 0 0 0 1.5-1.5c0-.39-.15-.74-.39-1c-.23-.27-.38-.62-.38-1a1.5 1.5 0 0 1 1.5-1.5H16a5 5 0 0 0 5-5c0-4.42-4.03-8-9-8"/>
@@ -423,7 +423,7 @@ onUnmounted(() => {
             </div>
           </div>
 
-          <div class="flex sm:hidden justify-between items-center mt-4 ml-0 xs:ml-8">
+          <div class="flex sm:hidden justify-between items-center mt-4 ml-0 xs:ml-8 pl-4">
             <div class="flex justify-start items-center font-light text-[15px] w-1/2 sm:w-1/3">
               <svg class="mr-3 mt-1 text-[#b53d3d]" xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 20 20">
                 <path fill="currentColor" d="M10 2a2 2 0 0 0-.5 3.937V9.5a.5.5 0 0 0 1 0V5.937A2 2 0 0 0 10 2M3 5a1 1 0 0 1 2 0v4a.5.5 0 0 0 .5.5H8a.5.5 0 0 0 0-1H6V5a2 2 0 1 0-4 0v11a2 2 0 1 0 4 0v-3.5h2V16a2 2 0 1 0 4 0v-3h4.5a1.5 1.5 0 0 0 1.5-1.5V5a2 2 0 1 0-4 0v3.5h-2a.5.5 0 0 0 0 1h2.5A.5.5 0 0 0 15 9V5a1 1 0 1 1 2 0v6.5a.5.5 0 0 1-.5.5h-5a.5.5 0 0 0-.5.5V16a1 1 0 1 1-2 0v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4a1 1 0 1 1-2 0z"/>
@@ -454,7 +454,7 @@ onUnmounted(() => {
             </div>
           </div>
 
-          <div class="flex sm:hidden justify-between items-center mt-4 ml-0 xs:ml-8">
+          <div class="flex sm:hidden justify-between items-center mt-4 ml-0 xs:ml-8 pl-4">
             <div class="flex justify-start items-center font-light text-[15px] w-1/2 sm:w-1/3">
               <svg class="mr-3 mt-1 text-[#b53d3d]" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
                 <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
@@ -816,13 +816,17 @@ onUnmounted(() => {
 }
 
 @media (max-width: 1023px) {
+  .flip-front {
+    z-index: 1;
+  }
+
   .flip-card.content-swapped .flip-front {
     height: 0;
     overflow: hidden;
   }
 
   .flip-back {
-    z-index: 10;
+    z-index: 20;
   }
 
   .flip-card.content-swapped .flip-back {
