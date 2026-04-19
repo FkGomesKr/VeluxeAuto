@@ -105,6 +105,80 @@ const toggleZoom = (e: MouseEvent) => {
   isZoomed.value = !isZoomed.value;
 };
 
+// Mobile pinch-to-zoom state
+const mobileScale = ref(1);
+const mobileTranslateX = ref(0);
+const mobileTranslateY = ref(0);
+const pinchStartDistance = ref(0);
+const pinchStartScale = ref(1);
+const panStartX = ref(0);
+const panStartY = ref(0);
+const isPinching = ref(false);
+const isPanning = ref(false);
+
+function getTouchDistance(t1: Touch, t2: Touch) {
+  return Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY);
+}
+
+function resetMobileZoom() {
+  mobileScale.value = 1;
+  mobileTranslateX.value = 0;
+  mobileTranslateY.value = 0;
+  isPinching.value = false;
+  isPanning.value = false;
+  if (fullscreenSwiper.value) fullscreenSwiper.value.allowTouchMove = true;
+}
+
+function onPinchStart(e: TouchEvent) {
+  if (window.innerWidth >= 1024) return;
+  if (e.touches.length === 2) {
+    isPinching.value = true;
+    isPanning.value = false;
+    pinchStartDistance.value = getTouchDistance(e.touches[0], e.touches[1]);
+    pinchStartScale.value = mobileScale.value;
+    if (fullscreenSwiper.value) fullscreenSwiper.value.allowTouchMove = false;
+  } else if (e.touches.length === 1 && mobileScale.value > 1) {
+    isPanning.value = true;
+    panStartX.value = e.touches[0].clientX - mobileTranslateX.value;
+    panStartY.value = e.touches[0].clientY - mobileTranslateY.value;
+    if (fullscreenSwiper.value) fullscreenSwiper.value.allowTouchMove = false;
+  }
+}
+
+function onPinchMove(e: TouchEvent) {
+  if (window.innerWidth >= 1024) return;
+  if (e.touches.length === 2 && isPinching.value) {
+    e.preventDefault();
+    const dist = getTouchDistance(e.touches[0], e.touches[1]);
+    mobileScale.value = Math.min(Math.max(pinchStartScale.value * (dist / pinchStartDistance.value), 1), 4);
+  } else if (e.touches.length === 1 && isPanning.value && mobileScale.value > 1) {
+    e.preventDefault();
+    mobileTranslateX.value = e.touches[0].clientX - panStartX.value;
+    mobileTranslateY.value = e.touches[0].clientY - panStartY.value;
+  }
+}
+
+function onPinchEnd(e: TouchEvent) {
+  if (window.innerWidth >= 1024) return;
+  if (e.touches.length < 2) isPinching.value = false;
+  if (e.touches.length === 0) {
+    isPanning.value = false;
+    if (mobileScale.value <= 1.05) resetMobileZoom();
+  }
+  if (e.touches.length === 1 && mobileScale.value > 1) {
+    isPanning.value = true;
+    panStartX.value = e.touches[0].clientX - mobileTranslateX.value;
+    panStartY.value = e.touches[0].clientY - mobileTranslateY.value;
+  }
+}
+
+const mobileTransformStyle = computed(() => {
+  if (mobileScale.value <= 1) return {};
+  return {
+    transform: `scale(${mobileScale.value}) translate(${mobileTranslateX.value / mobileScale.value}px, ${mobileTranslateY.value / mobileScale.value}px)`,
+  };
+});
+
 const onSlideChange = (swiper: any) => {
   activeSlideIndex.value = swiper.realIndex;
 };
@@ -112,6 +186,7 @@ const onSlideChange = (swiper: any) => {
 const onFullscreenSlideChange = (swiper: any) => {
   activeSlideIndex.value = swiper.realIndex;
   isZoomed.value = false;
+  resetMobileZoom();
 };
 
 const onFullscreenSwiperInit = (swiper: any) => {
@@ -137,6 +212,7 @@ const closeFullscreen = () => {
   const idx = fullscreenSwiper.value?.realIndex ?? activeSlideIndex.value;
   activeSlideIndex.value = idx;
   isZoomed.value = false;
+  resetMobileZoom();
   window.removeEventListener('keydown', handleKeydown);
   mobileSwiper.value?.slideToLoop(idx, 0);
   desktopSwiper.value?.slideToLoop(idx, 0);
@@ -597,12 +673,17 @@ onUnmounted(() => {
           @slideChange="onFullscreenSlideChange"
         >
           <SwiperSlide v-for="(carIMG, index) in carro.imagens" :key="index" class="w-full relative overflow-hidden">
-            <div class="fullscreen-slide-inner">
+            <div
+              class="fullscreen-slide-inner"
+              @touchstart="onPinchStart"
+              @touchmove="onPinchMove"
+              @touchend="onPinchEnd"
+            >
               <img 
                 v-if="!failedImages.has(carIMG)"
                 class="max-h-full max-w-full object-contain lg:transition-transform lg:duration-300 lg:ease-in-out"
                 :class="[isZoomed ? 'lg:scale-[2.2] lg:cursor-zoom-out' : 'lg:cursor-zoom-in']"
-                :style="{ transformOrigin: zoomOrigin }"
+                :style="{ transformOrigin: zoomOrigin, ...mobileTransformStyle }"
                 :src="carIMG" 
                 alt="Car Image"
                 :loading="Math.abs(Number(index) - activeSlideIndex) <= 1 ? 'eager' : 'lazy'"
@@ -769,6 +850,12 @@ onUnmounted(() => {
   justify-content: center;
   align-items: center;
   overflow: hidden;
+}
+
+@media (max-width: 1023px) {
+  .fullscreen-slide-inner {
+    touch-action: none;
+  }
 }
 
 .loading-spinner {
