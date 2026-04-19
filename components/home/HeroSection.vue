@@ -303,7 +303,7 @@ function toggleOpenFilters() {
 <template>
   <div class="w-full relative bg-[#121212] mt-[-90px] md:mt-[-40px] transition-[min-height] duration-[0.7s] ease-in-out" :class="openFilters && !isHiding ? 'min-h-[1040px] md:min-h-[570px]' : 'min-h-[530px] md:min-h-[310px]'">
       <div v-if="openFilters" class="block h-[925px] md:hidden "></div>
-      <img class="hidden md:hidden w-full h-[550px] object-cover pointer-events-none" src="https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/homePage/bgHero.jpg" alt="Background Image Hero Section">
+      <!-- <img class="hidden md:hidden w-full h-[550px] object-cover pointer-events-none" src="https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/homePage/bgHero.jpg" alt="Background Image Hero Section"> -->
       <div class="absolute inset-0 top-[140px] md:top-[22%] flex flex-col items-center w-full">
         <div class="bg-[#201818] px-0 lg:px-8 pt-10 pb-6 rounded-xl md:rounded-[100px] items-center justify-center w-full max-w-[300px] md:max-w-[700px] lg:max-w-[900px] test">
           <div class="text-[#D32F2F] flex justify-center md:justify-between items-center mr-0 md:mr-8 px-6 md:px-10 mb-4">
