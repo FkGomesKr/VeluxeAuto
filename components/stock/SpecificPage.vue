@@ -67,12 +67,22 @@ watch(() => props.id, (newId) => {
 })
 
 const showContactForm = ref(false);
+const contentSwapped = ref(false);
+let swapTimeout: ReturnType<typeof setTimeout> | null = null;
 
 function flipToContact() {
   showContactForm.value = true;
+  swapTimeout = setTimeout(() => {
+    contentSwapped.value = true;
+  }, 700);
 }
 
 function flipBack() {
+  if (swapTimeout) {
+    clearTimeout(swapTimeout);
+    swapTimeout = null;
+  }
+  contentSwapped.value = false;
   showContactForm.value = false;
 }
 
@@ -158,9 +168,9 @@ onUnmounted(() => {
     </NuxtLink>
     <div class="flex flex-col lg:flex-row lg:items-stretch justify-center rounded-xl">
       <div class="w-full lg:w-1/2 flip-perspective bg-[#201818] rounded-xl lg:rounded-l-xl lg:rounded-[0px] flex" :class="{ 'is-flipped items-start justify-center': showContactForm, 'items-center justify-center': !showContactForm }">
-        <div class="flip-card" :class="{ 'is-flipped': showContactForm}">
+        <div class="flip-card" :class="{ 'is-flipped': showContactForm, 'content-swapped': contentSwapped }">
           <!-- FRONT FACE: Car details -->
-          <div class="flip-face flip-front bg-[#201818] rounded-xl lg:rounded-tr-none lg:rounded-br-none pl-6 text-whit flex flex-col justify-between py-4 sm:py-8">
+          <div class="flip-face flip-front bg-[#201818] rounded-xl lg:rounded-tr-none lg:rounded-br-none pl-6 text-whit flex flex-col justify-between lg:py-8" :class="{ 'py-0': contentSwapped, 'py-4': !contentSwapped }">
             <h1 class="ml-0 xs:ml-8 text-white text-xl xs:text-2xl md:text-3xl lg:text-2xl xl:text-3xl text-left pb-3 font-black pr-3 sm:pr-0">
               {{ carro.marca + " - " + carro.modelo }}
             </h1>
@@ -806,12 +816,16 @@ onUnmounted(() => {
 }
 
 @media (max-width: 1023px) {
-  .flip-card.is-flipped .flip-front {
+  .flip-card.content-swapped .flip-front {
     height: 0;
     overflow: hidden;
   }
 
-  .flip-card.is-flipped .flip-back {
+  .flip-back {
+    z-index: 10;
+  }
+
+  .flip-card.content-swapped .flip-back {
     position: relative;
     height: auto;
   }
