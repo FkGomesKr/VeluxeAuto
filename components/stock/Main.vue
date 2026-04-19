@@ -604,9 +604,24 @@ const resetFilters = () => {
     </div>
   </div>
 
-  <!-- Loading State -->
-  <div v-if="isLoading" class="bg-[#121212] text-center w-full pb-20 flex justify-center items-center" :style="{ height: 'calc(100vh - 198px)' }">
-    <div class="loading-spinner"></div>
+  <!-- Loading State: Skeleton Cards -->
+  <div v-if="isLoading" class="bg-[#121212] w-full pb-20 px-5 xs:px-10 lg:px-20 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-10" :style="{ minHeight: 'calc(100vh - 198px)' }">
+    <div v-for="n in 6" :key="'skeleton-' + n" class="pt-4 pb-1 px-4 rounded-2xl bg-[#201818]">
+      <div class="skeleton-pulse rounded-xl h-[240px] xs:h-[280px] w-full"></div>
+      <div class="flex flex-col justify-center items-center w-full p-3 pb-2">
+        <div class="w-full flex justify-between">
+          <div class="skeleton-pulse h-6 w-[40%] rounded-md"></div>
+          <div class="skeleton-pulse h-6 w-[30%] rounded-md"></div>
+        </div>
+        <div class="skeleton-pulse h-5 w-[55%] rounded-md mt-2 self-start"></div>
+        <div class="w-full flex items-center justify-center mt-6 gap-4">
+          <div class="skeleton-pulse h-4 w-[28%] rounded-md"></div>
+          <div class="skeleton-pulse h-4 w-[22%] rounded-md"></div>
+          <div class="skeleton-pulse h-4 w-[28%] rounded-md"></div>
+        </div>
+        <div class="skeleton-pulse h-10 w-3/4 rounded-full mt-3 mb-[1px]"></div>
+      </div>
+    </div>
   </div>
   <!-- Error State -->
   <div v-else-if="error" class="bg-[#121212] text-center w-full flex flex-col justify-center items-center gap-4 px-6" :style="{ height: 'calc(100vh - 198px)' }">
@@ -630,12 +645,24 @@ const resetFilters = () => {
     v-for="(carro, index) in filteredCarros" :key="carro.id" 
     class="pt-4 pb-1 px-4 test rounded-2xl bg-[#201818] h-fit relative"
     >
-      <!-- Card loading spinner -->
       <div
         v-if="!isCarImageReady(carro)"
-        class="absolute inset-0 z-10 flex items-center justify-center bg-[#201818] rounded-2xl"
+        class="absolute inset-0 z-10 rounded-2xl bg-[#201818] pt-4 px-4 pb-1 overflow-hidden"
       >
-        <div class="loading-spinner"></div>
+        <div class="skeleton-pulse rounded-xl h-[240px] xs:h-[280px] w-full"></div>
+        <div class="flex flex-col justify-center items-center w-full p-3 pb-2">
+          <div class="w-full flex justify-between">
+            <div class="skeleton-pulse h-6 w-[40%] rounded-md"></div>
+            <div class="skeleton-pulse h-6 w-[30%] rounded-md"></div>
+          </div>
+          <div class="skeleton-pulse h-5 w-[55%] rounded-md mt-2 self-start"></div>
+          <div class="w-full flex items-center justify-center mt-6 gap-4">
+            <div class="skeleton-pulse h-4 w-[28%] rounded-md"></div>
+            <div class="skeleton-pulse h-4 w-[22%] rounded-md"></div>
+            <div class="skeleton-pulse h-4 w-[28%] rounded-md"></div>
+          </div>
+          <div class="skeleton-pulse h-10 w-3/4 rounded-full mt-3 mb-[1px]"></div>
+        </div>
       </div>
       <Swiper
           class="rounded-xl object-fit overflow-hidden test3"
@@ -898,18 +925,23 @@ const resetFilters = () => {
   border: none !important;
 }
 
-.loading-spinner {
-  width: 60px;
-  height: 60px;
-  border: 4px solid rgba(255, 255, 255, 0.1);
-  border-top-color: white;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
+.skeleton-pulse {
+  background: linear-gradient(
+    90deg,
+    #2a2020 25%,
+    #3a2e2e 50%,
+    #2a2020 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
   }
 }
 </style>
