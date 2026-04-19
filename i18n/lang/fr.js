@@ -91,5 +91,9 @@ export default {
   whatsappPreMessage: "Bonjour, je suis intéressé par l'achat d'une voiture. Pouvons-nous en discuter ?",
   emailSubject: "Intérêt pour un véhicule",
   emailPreMessage: "Bonjour, je suis intéressé par l'achat d'une voiture. Pouvons-nous en discuter ?",
-  imageUnavailable: "Image non disponible"
+  imageUnavailable: "Image non disponible",
+  notFoundTitle: "Page introuvable",
+  notFoundText: "La page que vous recherchez n'existe pas ou a été déplacée. Vérifiez l'adresse ou retournez à la page d'accueil.",
+  notFoundHome: "Retour à l'accueil",
+  notFoundStock: "Voir le stock"
 };

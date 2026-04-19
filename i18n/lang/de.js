@@ -91,5 +91,9 @@ export default {
     whatsappPreMessage: "Hallo, ich interessiere mich für den Kauf eines Autos. Können wir sprechen?",
     emailSubject: "Interesse an einem Fahrzeug",
     emailPreMessage: "Hallo, ich interessiere mich für den Kauf eines Autos. Können wir sprechen?",
-    imageUnavailable: "Bild nicht verfügbar"
+    imageUnavailable: "Bild nicht verfügbar",
+    notFoundTitle: "Seite nicht gefunden",
+    notFoundText: "Die gesuchte Seite existiert nicht oder wurde verschoben. Überprüfen Sie die Adresse oder kehren Sie zur Startseite zurück.",
+    notFoundHome: "Zurück zur Startseite",
+    notFoundStock: "Bestand ansehen"
   }
