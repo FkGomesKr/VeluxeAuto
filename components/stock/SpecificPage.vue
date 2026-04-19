@@ -585,7 +585,11 @@ onUnmounted(() => {
               </button>
             </div>
           </div>
-          <div class="flex lg:hidden w-[95%] justify-center items-center flex-col pt-6 pb-3">
+          <div class="flex lg:hidden w-[95%] justify-center items-center flex-col pt-6 pb-3 gap-3">
+            <div class="flex flex-col items-center">
+              <p class="text-[#a0a0a0] text-base">{{ t('price') }}</p>
+              <p class="text-white text-2xl font-bold italic">{{ carro.preco + " €" }}</p>
+            </div>
             <button @click="flipToContact()" class="border-2 btc italic border-[#b53d3d] hover:bg-[#b53d3d] text-[14px] xl:text-[16px] text-[#b53d3d] p-3 ps-4 pe-4 rounded-xl hover:scale-[1.02] transition duration-300 ease-in-out">
               {{ t('interested') }}
               <i class="fa-regular fa-paper-plane text-[16p] xl:text-[19px] text-[#b53d3d] py-[5px] icn transition duration-300 ease-in-out"></i>
