@@ -60,8 +60,7 @@ const carros = ref<any[]>([])
 const isLoading = ref(true)
 const error = ref<string | null>(null)
 
-// Load cars on component mount
-onMounted(async () => {
+async function loadCars() {
   try {
     isLoading.value = true
     error.value = null
@@ -73,6 +72,14 @@ onMounted(async () => {
   } finally {
     isLoading.value = false
   }
+}
+
+function retryLoad() {
+  loadCars()
+}
+
+onMounted(() => {
+  loadCars()
 })
 
 
@@ -451,8 +458,8 @@ const resetFilters = () => {
 </script>
 
 <template>
-  <div class="bg-[#121212] pt-8 pb-1 px-5 xs:px-10 lg:px-20 flex justify-between items-end" :class="{'pb-6': !openFilters || isHiding}">
-    <div class="w-[140px] text-white flex justify-start items-center">
+  <div class="bg-[#121212] pt-8 pb-1 px-10 lg:px-20 flex justify-between items-end" :class="{'pb-6': !openFilters || isHiding}">
+    <div class="w-[140px] text-white flex justify-start items-center pl-1 md:pl-0">
       <button
         @click="toggleOpenFilters()"
         >
@@ -467,7 +474,7 @@ const resetFilters = () => {
     </div>
 
     <div class="relative w-[140px] mt-2">
-      <select v-model="orderFilter" class="bg-transparent w-[140px] hover:bg-transparent px-3 py-2 bg-gray-800 text-white rounded-2xl border appearance-none focus:outline-none border-[#b53d3d]">
+      <select v-model="orderFilter" class="bg-transparent w-[140px] hover:bg-transparent px-3 py-2 text-white rounded-2xl border appearance-none focus:outline-none border-[#b53d3d]">
         <option class="bg-[#121212]" value="">{{ t('orderBy') }}</option>
         <option class="bg-[#121212]" v-for="marca in orderByOptions" :key="marca.title" :value="marca.title">{{ marca.title }}</option>
       </select>
@@ -477,7 +484,7 @@ const resetFilters = () => {
 
 
   <div v-if="openFilters"
-    class="w-full bg-[#121212] pt-1 flex justify-center items-center px-5 xs:px-10 lg:px-20"
+    class="w-full bg-[#121212] pt-1 flex justify-center items-center px-10 xs:px-10 lg:px-20"
   >
     <div 
     :class="{
@@ -486,8 +493,8 @@ const resetFilters = () => {
     }"
     class="w-full bg-[#121212] transition-all duration-[1.5s] ease-in-out"
     > 
-    <div class="flex w-full flex-col md:gap-12 gap-2 md:flex-row md:justify-center items-end pt-2 pl-6 md:pl-0">
-        <div class="w-[70%] md:w-[27%] md:min-w-0 rounded-xl relative">
+    <div class="flex w-full gap-3 md:gap-8 md:flex-row md:justify-center items-center md:items-end flex-col md:flex-row pt-2 md:pl-0">
+        <div class="w-[99%] md:w-[27%] md:min-w-0 rounded-xl relative pl-2 md:pl-0">
           <label class="text-xs text-[#b53d3d] ml-2 font-semibold">{{ t('brand') }}</label>
           <select v-model="marca" class="bg-transparent hover:bg-transparent w-full px-3 py-2 bg-gray-800 text-white rounded-2xl border appearance-none focus:outline-none border-[#b53d3d]">
             <option class="bg-[#121212]" value="">{{ t('select') }}</option>
@@ -496,7 +503,7 @@ const resetFilters = () => {
           <svg class="absolute top-[50%] right-2 pointer-events-none" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 12 12"><path fill="white" d="M3.076 4.617A1 1 0 0 1 4 4h4a1 1 0 0 1 .707 1.707l-2 2a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1-.217-1.09"/></svg>
         </div>
 
-        <div class="stock-year-slider stock-slider-col relative w-full md:w-[42%] flex flex-col gap-3 px-4 md:px-3 pb-0 translate-y-3">
+        <div class="stock-year-slider stock-slider-col relative w-[98%] md:w-[42%] flex flex-col gap-3 px-4 md:px-3 pb-0 translate-y-3 mt-5 md:mt-0">
           <label class="text-xs text-[#b53d3d] font-semibold absolute top-[-30px]">{{ t('year') }}</label>
           <div class="slider-with-labels w-full">
             <div id="year-slider" class="slider relative"></div>
@@ -504,14 +511,14 @@ const resetFilters = () => {
               <span
                 v-for="(pct, i) in yearHandlePct"
                 :key="'year-val-' + i"
-                class="slider-value-chip slider-value-chip--year"
-                :style="{ left: pct + '%' }"
+                class="slider-value-chip"
+                :style="{ left: pct + '%', transform: `translateX(-${pct * 0.70}%)` }"
               >{{ Math.round(selectedRange[i]) }}</span>
             </div>
           </div>
         </div>
 
-        <div class="w-[90%] md:w-[27%] md:min-w-0 relative">
+        <div class="w-[99%] md:w-[27%] md:min-w-0 relative pl-2 md:pl-0">
           <label class="text-xs text-[#b53d3d] ml-2 font-semibold">{{ t('fuel') }}</label>
           <select v-model="combustivel" class="bg-transparent w-full px-3 py-2 bg-gray-800 text-white rounded-2xl border appearance-none focus:outline-none border-[#b53d3d]">
             <option class="bg-[#121212]" value="">{{ t('select') }}</option>
@@ -523,8 +530,8 @@ const resetFilters = () => {
       <div class="w-full flex justify-center items-center bg-[#121212]">
         <div class="mt-6 bg-[#b53d3d] opacity-[0.3] h-[1px] w-full py-[1px]"></div>
       </div>
-      <div class="flex w-full flex-col md:gap-12 gap-2 md:flex-row md:justify-center items-start md:items-end mt-2 pl-6 md:pl-0">
-        <div class="w-[70%] md:w-[27%] md:min-w-0 rounded-xl relative">
+      <div class="flex w-full gap-3 md:gap-8 md:flex-row md:justify-center items-center md:items-end flex-col md:flex-row pt-2 md:pl-0">
+        <div class="w-[99%] md:w-[27%] md:min-w-0 rounded-xl relative pl-2 md:pl-0">
           <label class="text-xs text-[#b53d3d] ml-2 font-semibold">{{ t('model') }}</label>
           <select v-model="modelo" class="bg-transparent hover:bg-transparent w-full px-3 py-2 bg-gray-800 text-white rounded-2xl border appearance-none focus:outline-none border-[#b53d3d]">
             <option class="bg-[#121212]" value="">{{ t('select') }}</option>
@@ -533,22 +540,22 @@ const resetFilters = () => {
           <svg class="absolute top-[50%] right-2 pointer-events-none" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 12 12"><path fill="white" d="M3.076 4.617A1 1 0 0 1 4 4h4a1 1 0 0 1 .707 1.707l-2 2a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1-.217-1.09"/></svg>
         </div>
 
-        <div class="stock-price-slider stock-slider-col relative w-full md:w-[42%] flex flex-col gap-3 px-4 md:px-3 pb-0 translate-y-3">
-          <label class="text-xs text-[#b53d3d] font-semibold absolute top-[-30px] mr-6">{{ t('budget') }}</label>
+        <div class="stock-price-slider stock-slider-col relative w-[98%] md:w-[42%] flex flex-col gap-3 px-4 md:px-3 pb-0 translate-y-3 mt-5 md:mt-0">
+          <label class="text-xs text-[#b53d3d] font-semibold absolute top-[-30px]">{{ t('budget') }}</label>
           <div class="slider-with-labels w-full">
             <div id="price-slider" class="slider relative"></div>
             <div class="slider-value-row stock-price-value-row relative min-h-[1.375rem] pointer-events-none">
               <span
                 v-for="(pct, i) in priceHandlePct"
                 :key="'price-val-' + i"
-                class="slider-value-chip slider-value-chip--price"
-                :style="{ left: pct + '%' }"
+                class="slider-value-chip"
+                :style="{ left: pct + '%', transform: `translateX(-${pct * 0.80}%)` }"
               >{{ Math.round(selectedRange3[i]) }}€</span>
             </div>
           </div>
         </div>
 
-        <div class="w-[90%] md:w-[27%] md:min-w-0 relative">
+        <div class="w-[99%] md:w-[27%] md:min-w-0 relative pl-2 md:pl-0">
           <label class="text-xs text-[#b53d3d] ml-2 font-semibold">{{ t('typology') }}</label>
           <select v-model="tipologia" class="bg-transparent w-full px-3 py-2 bg-gray-800 text-white rounded-2xl border appearance-none focus:outline-none border-[#b53d3d]">
             <option class="bg-[#121212]" value="">{{ t('select') }}</option>
@@ -557,8 +564,8 @@ const resetFilters = () => {
           <svg class="absolute top-[50%] right-2 pointer-events-none" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 12 12"><path fill="white" d="M3.076 4.617A1 1 0 0 1 4 4h4a1 1 0 0 1 .707 1.707l-2 2a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1-.217-1.09"/></svg>
         </div>
       </div>
-      <div class="flex w-full flex-col md:gap-12 gap-2 md:flex-row md:justify-center items-start md:items-end mt-3 pl-6 md:pl-0">
-        <div class="w-[70%] md:w-[27%] md:min-w-0 rounded-xl relative">
+      <div class="flex w-full gap-3 md:gap-8 md:flex-row md:justify-center items-center md:items-end flex-col md:flex-row mt-3 md:pl-0 ">
+        <div class="w-[99%] md:w-[27%] md:min-w-0 rounded-xl relative pl-2 md:pl-0">
           <label class="text-xs text-[#b53d3d] ml-2 font-semibold">{{ t('transmission') }}</label>
           <select v-model="transmissao" class="bg-transparent hover:bg-transparent w-full px-3 py-2 bg-gray-800 text-white rounded-2xl border appearance-none focus:outline-none border-[#b53d3d]">
             <option class="bg-[#121212]" value="">{{ t('select') }}</option>
@@ -567,22 +574,22 @@ const resetFilters = () => {
           <svg class="absolute top-[50%] right-2 pointer-events-none" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 12 12"><path fill="white" d="M3.076 4.617A1 1 0 0 1 4 4h4a1 1 0 0 1 .707 1.707l-2 2a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1-.217-1.09"/></svg>
         </div>
 
-        <div class="stock-km-slider stock-slider-col relative w-full md:w-[42%] flex flex-col gap-3 px-4 md:px-3 pb-0 translate-y-3">
-          <label class="text-xs text-[#b53d3d] font-semibold absolute top-[-30px] ml-1 md:ml-0 mr-6">{{ t('kilometers') }}</label>
+        <div class="stock-km-slider stock-slider-col relative w-[98%] md:w-[42%] flex flex-col gap-3 px-4 md:px-3 pb-0 translate-y-3 mt-5 md:mt-0">
+          <label class="text-xs text-[#b53d3d] font-semibold absolute top-[-30px]">{{ t('kilometers') }}</label>
           <div class="slider-with-labels w-full">
             <div id="kilometer-slider" class="slider relative"></div>
             <div class="slider-value-row stock-km-value-row relative min-h-[1.375rem] pointer-events-none">
               <span
                 v-for="(pct, i) in kmHandlePct"
                 :key="'km-val-' + i"
-                class="slider-value-chip slider-value-chip--km"
-                :style="{ left: pct + '%' }"
+                class="slider-value-chip"
+                :style="{ left: pct + '%', transform: `translateX(-${pct * 0.85}%)` }"
               >{{ Math.round(selectedRange2[i]) }}km</span>
             </div>
           </div>
         </div>
 
-        <div class="w-[90%] md:w-[27%] md:min-w-0 relative">
+        <div class="w-[99%] md:w-[27%] md:min-w-0 relative pl-2 md:pl-0">
           <label class="text-xs text-[#b53d3d] ml-2 font-semibold">{{ t('capacity') }}</label>
           <select v-model="lugares" class="bg-transparent w-full px-3 py-2 bg-gray-800 text-white rounded-2xl border appearance-none focus:outline-none border-[#b53d3d]">
             <option class="bg-[#121212]" value="">{{ t('select') }}</option>
@@ -597,17 +604,40 @@ const resetFilters = () => {
     </div>
   </div>
 
-  <!-- Loading State -->
-  <div v-if="isLoading" class="bg-[#121212] text-center w-full pb-20 flex justify-center items-center" :style="{ height: 'calc(100vh - 198px)' }">
-    <div class="loading-spinner"></div>
+  <!-- Loading State: Skeleton Cards -->
+  <div v-if="isLoading" class="bg-[#121212] w-full pb-20 px-5 xs:px-10 lg:px-20 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-10" :style="{ minHeight: 'calc(100vh - 198px)' }">
+    <div v-for="n in 6" :key="'skeleton-' + n" class="pt-4 pb-1 px-4 rounded-2xl bg-[#201818]">
+      <div class="skeleton-pulse rounded-xl h-[240px] xs:h-[280px] w-full"></div>
+      <div class="flex flex-col justify-center items-center w-full p-3 pb-2">
+        <div class="w-full flex justify-between">
+          <div class="skeleton-pulse h-6 w-[40%] rounded-md"></div>
+          <div class="skeleton-pulse h-6 w-[30%] rounded-md"></div>
+        </div>
+        <div class="skeleton-pulse h-5 w-[55%] rounded-md mt-2 self-start"></div>
+        <div class="w-full flex items-center justify-center mt-6 gap-4">
+          <div class="skeleton-pulse h-4 w-[28%] rounded-md"></div>
+          <div class="skeleton-pulse h-4 w-[22%] rounded-md"></div>
+          <div class="skeleton-pulse h-4 w-[28%] rounded-md"></div>
+        </div>
+        <div class="skeleton-pulse h-10 w-3/4 rounded-full mt-3 mb-[1px]"></div>
+      </div>
+    </div>
   </div>
   <!-- Error State -->
-  <div v-else-if="error" class="bg-[#121212] text-center w-full pb-20 flex justify-center items-center text-3xl lg:text-5xl font-black text-red-500" :style="{ height: 'calc(100vh - 198px)' }">
-    {{ error }}
+  <div v-else-if="error" class="bg-[#121212] text-center w-full flex flex-col justify-center items-center gap-4 px-6" :style="{ height: 'calc(100vh - 198px)' }">
+    <i class="fa-solid fa-screwdriver-wrench text-5xl sm:text-6xl text-[#b53d3d]"></i>
+    <p class="text-white text-xl sm:text-2xl font-semibold">{{ t('maintenanceTitle') }}</p>
+    <p class="text-[#a0a0a0] text-sm sm:text-base max-w-md">{{ t('maintenanceText') }}</p>
+    <button
+      @click="retryLoad()"
+      class="mt-4 px-8 py-3.5 rounded-xl bg-[#b53d3d] hover:bg-[#c94a4a] text-white font-semibold text-sm transition-all duration-300 hover:-translate-y-0.5 shadow-[0_4px_20px_rgba(181,61,61,0.3)] hover:shadow-[0_6px_30px_rgba(181,61,61,0.5)] cursor-pointer"
+    >
+      {{ t('maintenanceRetry') }}
+    </button>
   </div>
   <!-- No Results -->
   <div v-else-if="filteredCarros.length==0" class="bg-[#121212] text-center w-full pb-20 flex justify-center items-center text-3xl lg:text-5xl font-black text-white" :style="{ height: 'calc(100vh - 198px)' }">
-    No cars correspond the preferences.
+    {{ t('noCarsFound') }}
   </div>
   <!-- Cars Grid -->
   <div v-else class="bg-[#121212] w-full pb-20 px-5 xs:px-10 lg:px-20 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-10" :class="{'pt-6': openFilters}" :style="{ minHeight: 'calc(100vh - 198px)' }">
@@ -615,12 +645,24 @@ const resetFilters = () => {
     v-for="(carro, index) in filteredCarros" :key="carro.id" 
     class="pt-4 pb-1 px-4 test rounded-2xl bg-[#201818] h-fit relative"
     >
-      <!-- Card loading spinner -->
       <div
         v-if="!isCarImageReady(carro)"
-        class="absolute inset-0 z-10 flex items-center justify-center bg-[#201818] rounded-2xl"
+        class="absolute inset-0 z-10 rounded-2xl bg-[#201818] pt-4 px-4 pb-1 overflow-hidden"
       >
-        <div class="loading-spinner"></div>
+        <div class="skeleton-pulse rounded-xl h-[240px] xs:h-[280px] w-full"></div>
+        <div class="flex flex-col justify-center items-center w-full p-3 pb-2">
+          <div class="w-full flex justify-between">
+            <div class="skeleton-pulse h-6 w-[40%] rounded-md"></div>
+            <div class="skeleton-pulse h-6 w-[30%] rounded-md"></div>
+          </div>
+          <div class="skeleton-pulse h-5 w-[55%] rounded-md mt-2 self-start"></div>
+          <div class="w-full flex items-center justify-center mt-6 gap-4">
+            <div class="skeleton-pulse h-4 w-[28%] rounded-md"></div>
+            <div class="skeleton-pulse h-4 w-[22%] rounded-md"></div>
+            <div class="skeleton-pulse h-4 w-[28%] rounded-md"></div>
+          </div>
+          <div class="skeleton-pulse h-10 w-3/4 rounded-full mt-3 mb-[1px]"></div>
+        </div>
       </div>
       <Swiper
           class="rounded-xl object-fit overflow-hidden test3"
@@ -789,19 +831,6 @@ const resetFilters = () => {
   color: rgba(255, 255, 255, 0.9);
   white-space: nowrap;
   line-height: 1.25;
-  margin-left: 4px;
-}
-
-.slider-value-chip--year {
-  transform: translateX(-50%);
-}
-
-.slider-value-chip--price {
-  transform: translateX(-50%);
-}
-
-.slider-value-chip--km {
-  transform: translateX(-55%);
 }
 
 .stock-slider-col {
@@ -896,18 +925,23 @@ const resetFilters = () => {
   border: none !important;
 }
 
-.loading-spinner {
-  width: 60px;
-  height: 60px;
-  border: 4px solid rgba(255, 255, 255, 0.1);
-  border-top-color: white;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
+.skeleton-pulse {
+  background: linear-gradient(
+    90deg,
+    #2a2020 25%,
+    #3a2e2e 50%,
+    #2a2020 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
   }
 }
 </style>

@@ -32,7 +32,10 @@ export default {
     stock: "Stock",
     contacts: "Contacts",
     manual: "Manual",
+    manual5: "5-speed manual",
+    manual6: "6-speed manual",
     automatic: "Automatic",
+    littleUse: "Low mileage",
     seats: "Seats",
     gasoline: "Gasoline",
     diesel: "Diesel",
@@ -85,6 +88,7 @@ export default {
     contactFormPhone: "Phone",
     contactFormSubmit: "Send information",
     contactFormContactRequired: "Fill in at least your email or phone number if you'd like to send us your details",
+    contactFormError: "Something went wrong. Please try again.",
     confirmationEmailSubject: "VeluxeAuto — We received your message",
     confirmationEmailBody: "Hello {name}, thank you for contacting us! We received your information and will get in touch as soon as possible. See you soon!",
     backToContact: "Back",
@@ -95,6 +99,14 @@ export default {
     notFoundTitle: "Page not found",
     notFoundText: "The page you're looking for doesn't exist or has been moved. Check the address or go back to the homepage.",
     notFoundHome: "Back to home",
-    notFoundStock: "View stock"
+    notFoundStock: "View stock",
+    noCarsFound: "No cars match your preferences.",
+    maintenanceTitle: "Service temporarily unavailable",
+    maintenanceText: "We're working to fix the issue. Please try again in a few moments.",
+    maintenanceRetry: "Try again",
+    blue: "Blue",
+    black: "Black",
+    white: "White",
+    darkBlue: "Dark blue"
   }
   

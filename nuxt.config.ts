@@ -26,6 +26,7 @@ export default defineNuxtConfig({
     vueI18n: './i18n.config.ts',
   },
   css: [
+    '@fontsource-variable/nunito-sans',
     '@/assets/css/tailwind.css',
     '@fortawesome/fontawesome-free/css/all.css'
   ],
@@ -43,6 +44,7 @@ export default defineNuxtConfig({
     SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY,
     SUPABASE_STORAGE_BUCKET: process.env.SUPABASE_STORAGE_BUCKET || 'car-images',
     RESEND_API_KEY: process.env.RESEND_API_KEY,
+    CACHE_CLEAR_KEY: process.env.CACHE_CLEAR_KEY,
   },
 
   // Vercel/server edge caching: Cache-Control so responses are cached and we spare DB + Supabase

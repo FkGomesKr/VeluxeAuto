@@ -32,7 +32,10 @@ export default {
   stock: "Inventário",
   contacts: "Contactos",
   manual: "Manual",
+  manual5: "Manual de 5 mudanças",
+  manual6: "Manual de 6 mudanças",
   automatic: "Automático",
+  littleUse: "Com pouco uso",
   seats: "Lugares",
   gasoline: "Gasolina",
   diesel: "Gasóleo",
@@ -85,6 +88,7 @@ export default {
   contactFormPhone: "Telemóvel",
   contactFormSubmit: "Enviar informações",
   contactFormContactRequired: "Preencha pelo menos o email ou o telemóvel se quiser enviar-nos os seus dados",
+  contactFormError: "Algo correu mal. Por favor, tente novamente.",
   confirmationEmailSubject: "VeluxeAuto — Recebemos a sua mensagem",
   confirmationEmailBody: "Olá {name}, obrigado por nos contactar! Recebemos as suas informações e iremos entrar em contacto o mais brevemente possível. Até já!",
   whatsappPreMessage: "Olá, estou interessado em comprar um carro. Podemos conversar?",
@@ -95,5 +99,13 @@ export default {
   notFoundTitle: "Página não encontrada",
   notFoundText: "A página que procura não existe ou foi movida. Verifique o endereço ou volte à página inicial.",
   notFoundHome: "Voltar ao início",
-  notFoundStock: "Ver inventário"
+  notFoundStock: "Ver inventário",
+  noCarsFound: "Nenhum carro corresponde às preferências.",
+  maintenanceTitle: "Serviço temporariamente indisponível",
+  maintenanceText: "Estamos a trabalhar para resolver o problema. Por favor, tente novamente dentro de alguns instantes.",
+  maintenanceRetry: "Tentar novamente",
+  blue: "Azul",
+  black: "Preto",
+  white: "Branco",
+  darkBlue: "Azul escuro"
 }

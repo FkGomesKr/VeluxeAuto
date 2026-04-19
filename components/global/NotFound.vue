@@ -11,7 +11,7 @@ function goTo(path: string) {
 </script>
 
 <template>
-  <div class="bg-[#121212] flex flex-col items-center justify-center px-6 text-center">
+  <div class="bg-[#121212] flex flex-col items-center justify-center px-6 text-center py-16">
     <h1 class="text-[120px] sm:text-[160px] font-black leading-none text-transparent bg-clip-text bg-gradient-to-b from-[#b53d3d] to-[#5a1e1e] select-none">
       404
     </h1>

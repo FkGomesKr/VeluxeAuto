@@ -32,7 +32,10 @@ export default {
     stock: "Bestand",
     contacts: "Kontakte",
     manual: "Manuell",
+    manual5: "5-Gang-Schaltgetriebe",
+    manual6: "6-Gang-Schaltgetriebe",
     automatic: "Automatik",
+    littleUse: "Wenig gefahren",
     seats: "Sitzplätze",
     gasoline: "Benzin",
     diesel: "Diesel",
@@ -85,6 +88,7 @@ export default {
     contactFormPhone: "Telefon",
     contactFormSubmit: "Informationen senden",
     contactFormContactRequired: "Füllen Sie mindestens die E-Mail oder Telefonnummer aus, wenn Sie uns Ihre Daten senden möchten",
+    contactFormError: "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
     confirmationEmailSubject: "VeluxeAuto — Wir haben Ihre Nachricht erhalten",
     confirmationEmailBody: "Hallo {name}, vielen Dank für Ihre Kontaktaufnahme! Wir haben Ihre Informationen erhalten und werden uns so schnell wie möglich bei Ihnen melden. Bis bald!",
     backToContact: "Zurück",
@@ -95,5 +99,13 @@ export default {
     notFoundTitle: "Seite nicht gefunden",
     notFoundText: "Die gesuchte Seite existiert nicht oder wurde verschoben. Überprüfen Sie die Adresse oder kehren Sie zur Startseite zurück.",
     notFoundHome: "Zurück zur Startseite",
-    notFoundStock: "Bestand ansehen"
+    notFoundStock: "Bestand ansehen",
+    noCarsFound: "Kein Auto entspricht den Präferenzen.",
+    maintenanceTitle: "Dienst vorübergehend nicht verfügbar",
+    maintenanceText: "Wir arbeiten daran, das Problem zu beheben. Bitte versuchen Sie es in wenigen Augenblicken erneut.",
+    maintenanceRetry: "Erneut versuchen",
+    blue: "Blau",
+    black: "Schwarz",
+    white: "Weiß",
+    darkBlue: "Dunkelblau"
   }

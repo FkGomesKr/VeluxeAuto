@@ -1,32 +1,34 @@
+import { triggerCacheBust } from '~/server/utils/cache-bust'
+
 /**
  * Clear API response cache endpoint
  * POST /api/cache/clear
  * 
- * Useful when you manually update the database and want to see changes immediately
- * without waiting for cache expiration.
+ * Protected by CACHE_CLEAR_KEY. Call from Postman:
+ *   POST https://yourdomain.com/api/cache/clear
+ *   Header: x-cache-key: <your-secret>
  * 
- * Note: In production, you might want to add authentication/authorization
- * 
- * Note: File naming (.post.ts) ensures only POST requests are handled by Nuxt
+ * After calling, car endpoints will return no-cache headers for 30 seconds,
+ * forcing Vercel's edge to fetch fresh data from the database.
  */
 export default defineEventHandler(async (event) => {
-  try {
-    // Clear all cached responses
-    // Nuxt's cache is stored in memory, so we can't directly clear it,
-    // but the cache will expire naturally based on maxAge settings
-    // For now, we'll just return success - cache will refresh on next request
-    
-    // In Nuxt 3, cache invalidation happens automatically when maxAge expires
-    // or you can restart the server to clear all caches
-    
-    return {
-      success: true,
-      message: 'Cache will refresh on next request. For immediate effect, restart the dev server or wait for cache expiration (10-15 minutes).'
-    }
-  } catch (error: any) {
-    throw createError({
-      statusCode: 500,
-      statusMessage: error.message || 'Failed to clear cache'
-    })
+  const config = useRuntimeConfig()
+  const secret = config.CACHE_CLEAR_KEY as string | undefined
+
+  if (!secret) {
+    throw createError({ statusCode: 503, statusMessage: 'Cache clear is not configured' })
+  }
+
+  const provided = getRequestHeader(event, 'x-cache-key')
+
+  if (!provided || provided !== secret) {
+    throw createError({ statusCode: 401, statusMessage: 'Unauthorized' })
+  }
+
+  triggerCacheBust()
+
+  return {
+    success: true,
+    message: 'Cache busted. Requests in the next 30 seconds will bypass edge cache and fetch fresh data.',
   }
 })

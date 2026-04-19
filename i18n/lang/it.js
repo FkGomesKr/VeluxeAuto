@@ -32,7 +32,10 @@ export default {
     stock: "Magazzino",
     contacts: "Contatti",
     manual: "Manuale",
+    manual5: "Manuale a 5 marce",
+    manual6: "Manuale a 6 marce",
     automatic: "Automatico",
+    littleUse: "Con poco utilizzo",
     seats: "Posti",
     gasoline: "Benzina",
     diesel: "Diesel",
@@ -85,6 +88,7 @@ export default {
     contactFormPhone: "Telefono",
     contactFormSubmit: "Invia informazioni",
     contactFormContactRequired: "Compila almeno l'email o il telefono se desideri inviarci i tuoi dati",
+    contactFormError: "Qualcosa è andato storto. Per favore, riprova.",
     confirmationEmailSubject: "VeluxeAuto — Abbiamo ricevuto il tuo messaggio",
     confirmationEmailBody: "Ciao {name}, grazie per averci contattato! Abbiamo ricevuto le tue informazioni e ti contatteremo il prima possibile. A presto!",
     backToContact: "Indietro",
@@ -95,5 +99,13 @@ export default {
     notFoundTitle: "Pagina non trovata",
     notFoundText: "La pagina che stai cercando non esiste o è stata spostata. Controlla l'indirizzo o torna alla pagina principale.",
     notFoundHome: "Torna alla home",
-    notFoundStock: "Vedi inventario"
+    notFoundStock: "Vedi inventario",
+    noCarsFound: "Nessuna auto corrisponde alle preferenze.",
+    maintenanceTitle: "Servizio temporaneamente non disponibile",
+    maintenanceText: "Stiamo lavorando per risolvere il problema. Per favore, riprova tra qualche istante.",
+    maintenanceRetry: "Riprova",
+    blue: "Blu",
+    black: "Nero",
+    white: "Bianco",
+    darkBlue: "Blu scuro"
 };

@@ -303,7 +303,7 @@ function toggleOpenFilters() {
 <template>
   <div class="w-full relative bg-[#121212] mt-[-90px] md:mt-[-40px] transition-[min-height] duration-[0.7s] ease-in-out" :class="openFilters && !isHiding ? 'min-h-[1040px] md:min-h-[570px]' : 'min-h-[530px] md:min-h-[310px]'">
       <div v-if="openFilters" class="block h-[925px] md:hidden "></div>
-      <img class="hidden md:hidden w-full h-[550px] object-cover pointer-events-none" src="https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/homePage/bgHero.jpg" alt="Background Image Hero Section">
+      <!-- <img class="hidden md:hidden w-full h-[550px] object-cover pointer-events-none" src="https://dvqnsnzkbesefygzzxrq.supabase.co/storage/v1/object/public/carImages/homePage/bgHero.jpg" alt="Background Image Hero Section"> -->
       <div class="absolute inset-0 top-[140px] md:top-[22%] flex flex-col items-center w-full">
         <div class="bg-[#201818] px-0 lg:px-8 pt-10 pb-6 rounded-xl md:rounded-[100px] items-center justify-center w-full max-w-[300px] md:max-w-[700px] lg:max-w-[900px] test">
           <div class="text-[#D32F2F] flex justify-center md:justify-between items-center mr-0 md:mr-8 px-6 md:px-10 mb-4">
@@ -334,8 +334,8 @@ function toggleOpenFilters() {
                     <span
                       v-for="(pct, i) in yearHandlePct"
                       :key="'hero-year-' + i"
-                      class="slider-value-chip slider-value-chip--year"
-                      :style="{ left: pct + '%' }"
+                      class="slider-value-chip"
+                      :style="{ left: pct + '%', transform: `translateX(-${pct * 0.70}%)` }"
                     >{{ Math.round(selectedRange[i]) }}</span>
                   </div>
                 </div>
@@ -389,8 +389,8 @@ function toggleOpenFilters() {
                     <span
                       v-for="(pct, i) in priceHandlePct"
                       :key="'hero-price-' + i"
-                      class="slider-value-chip slider-value-chip--price"
-                      :style="{ left: pct + '%' }"
+                      class="slider-value-chip"
+                      :style="{ left: pct + '%', transform: `translateX(-${pct * 0.80}%)` }"
                     >{{ Math.round(selectedRange3[i]) }}€</span>
                   </div>
                 </div>
@@ -428,8 +428,8 @@ function toggleOpenFilters() {
                     <span
                       v-for="(pct, i) in kmHandlePct"
                       :key="'hero-km-' + i"
-                      class="slider-value-chip slider-value-chip--km"
-                      :style="{ left: pct + '%' }"
+                      class="slider-value-chip"
+                      :style="{ left: pct + '%', transform: `translateX(-${pct * 0.85}%)` }"
                     >{{ Math.round(selectedRange2[i]) }}km</span>
                   </div>
                 </div>
@@ -508,19 +508,6 @@ function toggleOpenFilters() {
   color: rgba(255, 255, 255, 0.9);
   white-space: nowrap;
   line-height: 1.25;
-  margin-left: 4px;
-}
-
-.slider-value-chip--year { 
-  transform: translateX(-50%);
-}
-
-.slider-value-chip--price { 
-  transform: translateX(-50%);
-}
-
-.slider-value-chip--km { 
-  transform: translateX(-55%);
 }
 
 .hero-slider-col {

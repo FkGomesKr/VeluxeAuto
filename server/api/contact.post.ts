@@ -1,7 +1,11 @@
 import { createServerSupabaseClient } from '~/server/utils/supabase'
+import { isRateLimited, getClientIp } from '~/server/utils/rate-limit'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const PHONE_RE = /^\+?[\d\s\-().]{7,20}$/
+
+const CONTACT_MAX_REQUESTS = 5
+const CONTACT_WINDOW_MS = 60 * 60 * 1000 // 1 hour
 
 const translations: Record<string, { subject: string; body: string }> = {
   pt: {
@@ -55,6 +59,11 @@ async function sendEmail(apiKey: string, to: string, subject: string, text: stri
 }
 
 export default defineEventHandler(async (event) => {
+  const ip = getClientIp(event)
+  if (isRateLimited(`contact:${ip}`, CONTACT_MAX_REQUESTS, CONTACT_WINDOW_MS)) {
+    throw createError({ statusCode: 429, statusMessage: 'Too many requests. Please try again later.' })
+  }
+
   const body = await readBody(event)
 
   const name = body?.name?.trim()

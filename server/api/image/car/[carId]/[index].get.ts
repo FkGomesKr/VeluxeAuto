@@ -2,16 +2,16 @@ import {
   downloadCarImageFull,
   downloadCarImageThumbOrFull,
 } from '~/server/utils/supabase-storage'
+import { isRateLimited, getClientIp } from '~/server/utils/rate-limit'
 
-/**
- * Image proxy for car images stored in Supabase Storage.
- * GET /api/image/car/:carId/:index
- * Query thumb=1 — stock list only (thumb file, else full). No query — detail gallery (full only).
- * Long Cache-Control for Vercel edge + browser.
- */
-const CACHE_MAX_AGE = 60 * 60 * 24 * 30 // 30 days in seconds
+const CACHE_MAX_AGE = 60 * 60 * 24 * 30 // 30 days
 
 export default defineEventHandler(async (event) => {
+  const ip = getClientIp(event)
+  if (isRateLimited(`image:${ip}`, 300, 60_000)) {
+    throw createError({ statusCode: 429, statusMessage: 'Too many requests' })
+  }
+
   const carId = parseInt(getRouterParam(event, 'carId') || '', 10)
   const index = parseInt(getRouterParam(event, 'index') || '', 10)
 

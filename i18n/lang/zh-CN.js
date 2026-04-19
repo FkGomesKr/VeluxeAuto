@@ -32,7 +32,10 @@ export default {
     stock: "库存",
     contacts: "联系方式",
     manual: "手动",
+    manual5: "5速手动",
+    manual6: "6速手动",
     automatic: "自动",
+    littleUse: "使用较少",
     seats: "座位",
     gasoline: "汽油",
     diesel: "柴油",
@@ -85,6 +88,7 @@ export default {
     contactFormPhone: "电话",
     contactFormSubmit: "发送信息",
     contactFormContactRequired: "如果您想向我们发送您的信息，请至少填写电子邮件或电话号码",
+    contactFormError: "出了点问题，请重试。",
     confirmationEmailSubject: "VeluxeAuto — 我们已收到您的消息",
     confirmationEmailBody: "您好 {name}，感谢您联系我们！我们已收到您的信息，将尽快与您联系。再见！",
     backToContact: "返回",
@@ -95,5 +99,13 @@ export default {
     notFoundTitle: "页面未找到",
     notFoundText: "您要查找的页面不存在或已被移动。请检查地址或返回首页。",
     notFoundHome: "返回首页",
-    notFoundStock: "查看库存"
+    notFoundStock: "查看库存",
+    noCarsFound: "没有符合条件的汽车。",
+    maintenanceTitle: "服务暂时不可用",
+    maintenanceText: "我们正在努力解决问题，请稍后重试。",
+    maintenanceRetry: "重试",
+    blue: "蓝色",
+    black: "黑色",
+    white: "白色",
+    darkBlue: "深蓝色"
   }
