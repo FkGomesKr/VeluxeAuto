@@ -50,7 +50,7 @@ function closePrivacyModal() {
               href="https://www.instagram.com/veluxeauto"
               target="_blank"
               rel="noopener noreferrer"
-              class="flex items-center gap-2.5 text-[#a0a0a0] text-[14px] hover:text-[#ff026a] transition-colors duration-200"
+              class="flex items-center gap-2.5 text-[#a0a0a0] text-[14px] hover:text-[#ff026a] transition-colors duration-200 w-fit"
             >
               <i class="fa-brands fa-instagram text-lg"></i>
               <span>Instagram</span>
@@ -59,7 +59,7 @@ function closePrivacyModal() {
               href="https://www.facebook.com/veluxeauto"
               target="_blank"
               rel="noopener noreferrer"
-              class="flex items-center gap-2.5 text-[#a0a0a0] text-[14px] hover:text-[#0866ff] transition-colors duration-200"
+              class="flex items-center gap-2.5 text-[#a0a0a0] text-[14px] hover:text-[#0866ff] transition-colors duration-200 w-fit"
             >
               <i class="fa-brands fa-facebook-f text-lg"></i>
               <span>Facebook</span>
@@ -68,14 +68,14 @@ function closePrivacyModal() {
               :href="whatsappUrl"
               target="_blank"
               rel="noopener noreferrer"
-              class="flex items-center gap-2.5 text-[#a0a0a0] text-[14px] hover:text-[#25d366] transition-colors duration-200"
+              class="flex items-center gap-2.5 text-[#a0a0a0] text-[14px] hover:text-[#25d366] transition-colors duration-200 w-fit"
             >
               <i class="fa-brands fa-whatsapp text-lg"></i>
               <span>WhatsApp</span>
             </a>
             <a
               :href="emailUrl"
-              class="flex items-center gap-2.5 text-[#a0a0a0] text-[14px] hover:text-[#d44638] transition-colors duration-200"
+              class="flex items-center gap-2.5 text-[#a0a0a0] text-[14px] hover:text-[#d44638] transition-colors duration-200 w-fit"
             >
               <i class="fa-solid fa-envelope text-lg"></i>
               <span>Email</span>

@@ -90,5 +90,10 @@ export default {
     backToContact: "返回",
     whatsappPreMessage: "你好，我有兴趣买车。我们可以聊聊吗？",
     emailSubject: "对车辆感兴趣",
-    emailPreMessage: "你好，我有兴趣买车。我们可以聊聊吗？"
+    emailPreMessage: "你好，我有兴趣买车。我们可以聊聊吗？",
+    imageUnavailable: "图片不可用",
+    notFoundTitle: "页面未找到",
+    notFoundText: "您要查找的页面不存在或已被移动。请检查地址或返回首页。",
+    notFoundHome: "返回首页",
+    notFoundStock: "查看库存"
   }

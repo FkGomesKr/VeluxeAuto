@@ -90,6 +90,11 @@ export default {
     backToContact: "Back",
     whatsappPreMessage: "Hello, I'm interested in buying a car. Can we talk?",
     emailSubject: "Interest in a vehicle",
-    emailPreMessage: "Hello, I'm interested in buying a car. Can we talk?"
+    emailPreMessage: "Hello, I'm interested in buying a car. Can we talk?",
+    imageUnavailable: "Image unavailable",
+    notFoundTitle: "Page not found",
+    notFoundText: "The page you're looking for doesn't exist or has been moved. Check the address or go back to the homepage.",
+    notFoundHome: "Back to home",
+    notFoundStock: "View stock"
   }
   

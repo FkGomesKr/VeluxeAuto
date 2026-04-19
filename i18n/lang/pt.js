@@ -90,5 +90,10 @@ export default {
   whatsappPreMessage: "Olá, estou interessado em comprar um carro. Podemos conversar?",
   emailSubject: "Interesse em viatura",
   emailPreMessage: "Olá, estou interessado em comprar um carro. Podemos conversar?",
-  backToContact: "Voltar"
+  backToContact: "Voltar",
+  imageUnavailable: "Imagem indisponível",
+  notFoundTitle: "Página não encontrada",
+  notFoundText: "A página que procura não existe ou foi movida. Verifique o endereço ou volte à página inicial.",
+  notFoundHome: "Voltar ao início",
+  notFoundStock: "Ver inventário"
 }
