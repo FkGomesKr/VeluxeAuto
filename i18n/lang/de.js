@@ -88,6 +88,7 @@ export default {
     contactFormPhone: "Telefon",
     contactFormSubmit: "Informationen senden",
     contactFormContactRequired: "Füllen Sie mindestens die E-Mail oder Telefonnummer aus, wenn Sie uns Ihre Daten senden möchten",
+    contactFormError: "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
     confirmationEmailSubject: "VeluxeAuto — Wir haben Ihre Nachricht erhalten",
     confirmationEmailBody: "Hallo {name}, vielen Dank für Ihre Kontaktaufnahme! Wir haben Ihre Informationen erhalten und werden uns so schnell wie möglich bei Ihnen melden. Bis bald!",
     backToContact: "Zurück",

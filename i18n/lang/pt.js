@@ -88,6 +88,7 @@ export default {
   contactFormPhone: "Telemóvel",
   contactFormSubmit: "Enviar informações",
   contactFormContactRequired: "Preencha pelo menos o email ou o telemóvel se quiser enviar-nos os seus dados",
+  contactFormError: "Algo correu mal. Por favor, tente novamente.",
   confirmationEmailSubject: "VeluxeAuto — Recebemos a sua mensagem",
   confirmationEmailBody: "Olá {name}, obrigado por nos contactar! Recebemos as suas informações e iremos entrar em contacto o mais brevemente possível. Até já!",
   whatsappPreMessage: "Olá, estou interessado em comprar um carro. Podemos conversar?",

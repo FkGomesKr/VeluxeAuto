@@ -70,7 +70,7 @@ async function submitForm() {
     });
     formSubmitted.value = true;
   } catch {
-    formError.value = 'Something went wrong. Please try again.';
+    formError.value = t('contactFormError');
   } finally {
     submitting.value = false;
   }

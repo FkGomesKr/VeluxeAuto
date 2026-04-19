@@ -79,7 +79,7 @@ async function submitForm() {
     });
     formSubmitted.value = true;
   } catch {
-    formError.value = 'Something went wrong. Please try again.';
+    formError.value = t('contactFormError');
   } finally {
     submitting.value = false;
   }
@@ -103,7 +103,7 @@ const bars = computed(() => [
 </script>
 
 <template>
-  <section id="contactos" class="w-full bg-[#121212] py-12 px-8 md:px-4 sm:px-8 lg:px-16 mb-8">
+  <section id="contactos" class="w-full bg-[#121212] py-12 px-8 md:px-4 sm:px-8 lg:px-16 mb-0 sm:mb-8">
     <div class="max-w-7xl mx-auto flex flex-col items-center">
       <div class="flex flex-col items-center mb-14">
         <h1 class="text-[42px] text-center text-white font-extrabold w-fit leading-[55px]">
@@ -310,7 +310,7 @@ const bars = computed(() => [
       </div>
 
       <!-- Right: Google Maps -->
-      <div class="w-full lg:w-[45%] min-h-[350px] sm:min-h-[420px] rounded-xl shadow-[0_4px_20px_rgba(255,255,255,0.5)]">
+      <div class="w-full lg:w-[45%] min-h-[350px] sm:min-h-[420px] rounded-xl">
         <iframe
           src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=Braga,Portugal&maptype=roadmap&zoom=12"
           class="w-full h-full aspect-square md:aspect-square border-0 rounded-xl"

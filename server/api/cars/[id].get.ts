@@ -1,15 +1,15 @@
 import { CarsService } from '~/server/services/cars.service'
+import { isCacheBusted } from '~/server/utils/cache-bust'
+import { isRateLimited, getClientIp } from '~/server/utils/rate-limit'
 
 const CACHE_MAX_AGE = 24 * 60 * 60 // 24 hours
 
-/**
- * Get car by ID endpoint
- * GET /api/cars/:id
- * Returns car with Portuguese field names for frontend compatibility
- * 
- * Caching is handled via Cache-Control headers (s-maxage for Vercel edge).
- */
 export default defineEventHandler(async (event) => {
+  const ip = getClientIp(event)
+  if (isRateLimited(`car-id:${ip}`, 120, 60_000)) {
+    throw createError({ statusCode: 429, statusMessage: 'Too many requests' })
+  }
+
   try {
     const id = getRouterParam(event, 'id')
     
@@ -39,7 +39,9 @@ export default defineEventHandler(async (event) => {
     }
 
     setResponseHeaders(event, {
-      'Cache-Control': `public, max-age=300, s-maxage=${CACHE_MAX_AGE}, stale-while-revalidate=${CACHE_MAX_AGE}`,
+      'Cache-Control': isCacheBusted()
+        ? 'no-cache, no-store, must-revalidate'
+        : `public, max-age=300, s-maxage=${CACHE_MAX_AGE}, stale-while-revalidate=${CACHE_MAX_AGE}`,
     })
     
     return {

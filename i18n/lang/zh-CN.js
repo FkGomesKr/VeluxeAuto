@@ -88,6 +88,7 @@ export default {
     contactFormPhone: "电话",
     contactFormSubmit: "发送信息",
     contactFormContactRequired: "如果您想向我们发送您的信息，请至少填写电子邮件或电话号码",
+    contactFormError: "出了点问题，请重试。",
     confirmationEmailSubject: "VeluxeAuto — 我们已收到您的消息",
     confirmationEmailBody: "您好 {name}，感谢您联系我们！我们已收到您的信息，将尽快与您联系。再见！",
     backToContact: "返回",
