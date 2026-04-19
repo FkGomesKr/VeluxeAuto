@@ -103,5 +103,9 @@ export default {
     noCarsFound: "没有符合条件的汽车。",
     maintenanceTitle: "服务暂时不可用",
     maintenanceText: "我们正在努力解决问题，请稍后重试。",
-    maintenanceRetry: "重试"
+    maintenanceRetry: "重试",
+    blue: "蓝色",
+    black: "黑色",
+    white: "白色",
+    darkBlue: "深蓝色"
   }

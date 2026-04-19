@@ -103,6 +103,10 @@ export default {
     noCarsFound: "No cars match your preferences.",
     maintenanceTitle: "Service temporarily unavailable",
     maintenanceText: "We're working to fix the issue. Please try again in a few moments.",
-    maintenanceRetry: "Try again"
+    maintenanceRetry: "Try again",
+    blue: "Blue",
+    black: "Black",
+    white: "White",
+    darkBlue: "Dark blue"
   }
   

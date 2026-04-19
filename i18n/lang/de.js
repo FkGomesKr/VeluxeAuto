@@ -103,5 +103,9 @@ export default {
     noCarsFound: "Kein Auto entspricht den Präferenzen.",
     maintenanceTitle: "Dienst vorübergehend nicht verfügbar",
     maintenanceText: "Wir arbeiten daran, das Problem zu beheben. Bitte versuchen Sie es in wenigen Augenblicken erneut.",
-    maintenanceRetry: "Erneut versuchen"
+    maintenanceRetry: "Erneut versuchen",
+    blue: "Blau",
+    black: "Schwarz",
+    white: "Weiß",
+    darkBlue: "Dunkelblau"
   }

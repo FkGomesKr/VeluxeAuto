@@ -103,5 +103,9 @@ export default {
   noCarsFound: "Aucune voiture ne correspond aux préférences.",
   maintenanceTitle: "Service temporairement indisponible",
   maintenanceText: "Nous travaillons à résoudre le problème. Veuillez réessayer dans quelques instants.",
-  maintenanceRetry: "Réessayer"
+  maintenanceRetry: "Réessayer",
+  blue: "Bleu",
+  black: "Noir",
+  white: "Blanc",
+  darkBlue: "Bleu foncé"
 };

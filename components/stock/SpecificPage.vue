@@ -5,6 +5,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 
 const {t, locale} = useI18n();
+const localCode = useCookie("i18n_redirected");
 const failedImages = reactive(new Set<string>())
 const resolvedImages = reactive(new Set<string>())
 function onImageError(src: string) {
@@ -148,6 +149,13 @@ onUnmounted(() => {
   <!-- Car Details -->
   <div v-else class="bg-[#121212] p-4 sm:p-10">
     <div class="h-8 xl:h-16"> </div>
+    <NuxtLink
+      :to="localCode === 'pt' ? '/stock' : '/' + localCode + '/stock'"
+      class="inline-flex items-center gap-1.5 text-[#a0a0a0] hover:text-white transition-colors duration-200 mb-4 group pl-2"
+    >
+      <i class="fa-solid fa-arrow-left text-sm group-hover:-translate-x-1 transition-transform duration-200"></i>
+      <span class="text-medium font-bold">{{ t('stock') }}</span>
+    </NuxtLink>
     <div class="flex flex-col lg:flex-row lg:items-stretch justify-center rounded-xl">
       <div class="w-full lg:w-1/2 flip-perspective bg-[#201818] rounded-xl lg:rounded-l-xl lg:rounded-[0px] flex" :class="{ 'is-flipped items-start justify-center': showContactForm, 'items-center justify-center': !showContactForm }">
         <div class="flip-card" :class="{ 'is-flipped': showContactForm}">
@@ -370,7 +378,7 @@ onUnmounted(() => {
                   {{ t('color') }}
                 </p>
                 <p class="font-medium text-white">
-                  {{ carro.cor }}
+                  {{ t(carro.cor) }}
                 </p>
                 
               </div>
