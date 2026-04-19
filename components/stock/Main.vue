@@ -458,8 +458,8 @@ const resetFilters = () => {
 </script>
 
 <template>
-  <div class="bg-[#121212] pt-8 pb-1 px-5 xs:px-10 lg:px-20 flex justify-between items-end" :class="{'pb-6': !openFilters || isHiding}">
-    <div class="w-[140px] text-white flex justify-start items-center">
+  <div class="bg-[#121212] pt-8 pb-1 px-10 lg:px-20 flex justify-between items-end" :class="{'pb-6': !openFilters || isHiding}">
+    <div class="w-[140px] text-white flex justify-start items-center pl-1 md:pl-0">
       <button
         @click="toggleOpenFilters()"
         >
@@ -474,7 +474,7 @@ const resetFilters = () => {
     </div>
 
     <div class="relative w-[140px] mt-2">
-      <select v-model="orderFilter" class="bg-transparent w-[140px] hover:bg-transparent px-3 py-2 bg-gray-800 text-white rounded-2xl border appearance-none focus:outline-none border-[#b53d3d]">
+      <select v-model="orderFilter" class="bg-transparent w-[140px] hover:bg-transparent px-3 py-2 text-white rounded-2xl border appearance-none focus:outline-none border-[#b53d3d]">
         <option class="bg-[#121212]" value="">{{ t('orderBy') }}</option>
         <option class="bg-[#121212]" v-for="marca in orderByOptions" :key="marca.title" :value="marca.title">{{ marca.title }}</option>
       </select>
@@ -484,7 +484,7 @@ const resetFilters = () => {
 
 
   <div v-if="openFilters"
-    class="w-full bg-[#121212] pt-1 flex justify-center items-center px-5 xs:px-10 lg:px-20"
+    class="w-full bg-[#121212] pt-1 flex justify-center items-center px-10 xs:px-10 lg:px-20"
   >
     <div 
     :class="{
@@ -493,8 +493,8 @@ const resetFilters = () => {
     }"
     class="w-full bg-[#121212] transition-all duration-[1.5s] ease-in-out"
     > 
-    <div class="flex w-full flex-col md:gap-12 gap-2 md:flex-row md:justify-center items-end pt-2 pl-6 md:pl-0">
-        <div class="w-[70%] md:w-[27%] md:min-w-0 rounded-xl relative">
+    <div class="flex w-full gap-3 md:gap-8 md:flex-row md:justify-center items-center md:items-end flex-col md:flex-row pt-2 md:pl-0">
+        <div class="w-[99%] md:w-[27%] md:min-w-0 rounded-xl relative pl-2 md:pl-0">
           <label class="text-xs text-[#b53d3d] ml-2 font-semibold">{{ t('brand') }}</label>
           <select v-model="marca" class="bg-transparent hover:bg-transparent w-full px-3 py-2 bg-gray-800 text-white rounded-2xl border appearance-none focus:outline-none border-[#b53d3d]">
             <option class="bg-[#121212]" value="">{{ t('select') }}</option>
@@ -503,7 +503,7 @@ const resetFilters = () => {
           <svg class="absolute top-[50%] right-2 pointer-events-none" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 12 12"><path fill="white" d="M3.076 4.617A1 1 0 0 1 4 4h4a1 1 0 0 1 .707 1.707l-2 2a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1-.217-1.09"/></svg>
         </div>
 
-        <div class="stock-year-slider stock-slider-col relative w-full md:w-[42%] flex flex-col gap-3 px-4 md:px-3 pb-0 translate-y-3">
+        <div class="stock-year-slider stock-slider-col relative w-[98%] md:w-[42%] flex flex-col gap-3 px-4 md:px-3 pb-0 translate-y-3 mt-5 md:mt-0">
           <label class="text-xs text-[#b53d3d] font-semibold absolute top-[-30px]">{{ t('year') }}</label>
           <div class="slider-with-labels w-full">
             <div id="year-slider" class="slider relative"></div>
@@ -511,14 +511,14 @@ const resetFilters = () => {
               <span
                 v-for="(pct, i) in yearHandlePct"
                 :key="'year-val-' + i"
-                class="slider-value-chip slider-value-chip--year"
-                :style="{ left: pct + '%' }"
+                class="slider-value-chip"
+                :style="{ left: pct + '%', transform: `translateX(-${pct * 0.85}%)` }"
               >{{ Math.round(selectedRange[i]) }}</span>
             </div>
           </div>
         </div>
 
-        <div class="w-[90%] md:w-[27%] md:min-w-0 relative">
+        <div class="w-[99%] md:w-[27%] md:min-w-0 relative pl-2 md:pl-0">
           <label class="text-xs text-[#b53d3d] ml-2 font-semibold">{{ t('fuel') }}</label>
           <select v-model="combustivel" class="bg-transparent w-full px-3 py-2 bg-gray-800 text-white rounded-2xl border appearance-none focus:outline-none border-[#b53d3d]">
             <option class="bg-[#121212]" value="">{{ t('select') }}</option>
@@ -530,8 +530,8 @@ const resetFilters = () => {
       <div class="w-full flex justify-center items-center bg-[#121212]">
         <div class="mt-6 bg-[#b53d3d] opacity-[0.3] h-[1px] w-full py-[1px]"></div>
       </div>
-      <div class="flex w-full flex-col md:gap-12 gap-2 md:flex-row md:justify-center items-start md:items-end mt-2 pl-6 md:pl-0">
-        <div class="w-[70%] md:w-[27%] md:min-w-0 rounded-xl relative">
+      <div class="flex w-full gap-3 md:gap-8 md:flex-row md:justify-center items-center md:items-end flex-col md:flex-row pt-2 md:pl-0">
+        <div class="w-[99%] md:w-[27%] md:min-w-0 rounded-xl relative pl-2 md:pl-0">
           <label class="text-xs text-[#b53d3d] ml-2 font-semibold">{{ t('model') }}</label>
           <select v-model="modelo" class="bg-transparent hover:bg-transparent w-full px-3 py-2 bg-gray-800 text-white rounded-2xl border appearance-none focus:outline-none border-[#b53d3d]">
             <option class="bg-[#121212]" value="">{{ t('select') }}</option>
@@ -540,22 +540,22 @@ const resetFilters = () => {
           <svg class="absolute top-[50%] right-2 pointer-events-none" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 12 12"><path fill="white" d="M3.076 4.617A1 1 0 0 1 4 4h4a1 1 0 0 1 .707 1.707l-2 2a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1-.217-1.09"/></svg>
         </div>
 
-        <div class="stock-price-slider stock-slider-col relative w-full md:w-[42%] flex flex-col gap-3 px-4 md:px-3 pb-0 translate-y-3">
-          <label class="text-xs text-[#b53d3d] font-semibold absolute top-[-30px] mr-6">{{ t('budget') }}</label>
+        <div class="stock-price-slider stock-slider-col relative w-[98%] md:w-[42%] flex flex-col gap-3 px-4 md:px-3 pb-0 translate-y-3 mt-5 md:mt-0">
+          <label class="text-xs text-[#b53d3d] font-semibold absolute top-[-30px]">{{ t('budget') }}</label>
           <div class="slider-with-labels w-full">
             <div id="price-slider" class="slider relative"></div>
             <div class="slider-value-row stock-price-value-row relative min-h-[1.375rem] pointer-events-none">
               <span
                 v-for="(pct, i) in priceHandlePct"
                 :key="'price-val-' + i"
-                class="slider-value-chip slider-value-chip--price"
-                :style="{ left: pct + '%' }"
+                class="slider-value-chip"
+                :style="{ left: pct + '%', transform: `translateX(-${pct * 0.85}%)` }"
               >{{ Math.round(selectedRange3[i]) }}€</span>
             </div>
           </div>
         </div>
 
-        <div class="w-[90%] md:w-[27%] md:min-w-0 relative">
+        <div class="w-[99%] md:w-[27%] md:min-w-0 relative pl-2 md:pl-0">
           <label class="text-xs text-[#b53d3d] ml-2 font-semibold">{{ t('typology') }}</label>
           <select v-model="tipologia" class="bg-transparent w-full px-3 py-2 bg-gray-800 text-white rounded-2xl border appearance-none focus:outline-none border-[#b53d3d]">
             <option class="bg-[#121212]" value="">{{ t('select') }}</option>
@@ -564,8 +564,8 @@ const resetFilters = () => {
           <svg class="absolute top-[50%] right-2 pointer-events-none" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 12 12"><path fill="white" d="M3.076 4.617A1 1 0 0 1 4 4h4a1 1 0 0 1 .707 1.707l-2 2a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1-.217-1.09"/></svg>
         </div>
       </div>
-      <div class="flex w-full flex-col md:gap-12 gap-2 md:flex-row md:justify-center items-start md:items-end mt-3 pl-6 md:pl-0">
-        <div class="w-[70%] md:w-[27%] md:min-w-0 rounded-xl relative">
+      <div class="flex w-full gap-3 md:gap-8 md:flex-row md:justify-center items-center md:items-end flex-col md:flex-row mt-3 md:pl-0 ">
+        <div class="w-[99%] md:w-[27%] md:min-w-0 rounded-xl relative pl-2 md:pl-0">
           <label class="text-xs text-[#b53d3d] ml-2 font-semibold">{{ t('transmission') }}</label>
           <select v-model="transmissao" class="bg-transparent hover:bg-transparent w-full px-3 py-2 bg-gray-800 text-white rounded-2xl border appearance-none focus:outline-none border-[#b53d3d]">
             <option class="bg-[#121212]" value="">{{ t('select') }}</option>
@@ -574,22 +574,22 @@ const resetFilters = () => {
           <svg class="absolute top-[50%] right-2 pointer-events-none" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 12 12"><path fill="white" d="M3.076 4.617A1 1 0 0 1 4 4h4a1 1 0 0 1 .707 1.707l-2 2a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1-.217-1.09"/></svg>
         </div>
 
-        <div class="stock-km-slider stock-slider-col relative w-full md:w-[42%] flex flex-col gap-3 px-4 md:px-3 pb-0 translate-y-3">
-          <label class="text-xs text-[#b53d3d] font-semibold absolute top-[-30px] ml-1 md:ml-0 mr-6">{{ t('kilometers') }}</label>
+        <div class="stock-km-slider stock-slider-col relative w-[98%] md:w-[42%] flex flex-col gap-3 px-4 md:px-3 pb-0 translate-y-3 mt-5 md:mt-0">
+          <label class="text-xs text-[#b53d3d] font-semibold absolute top-[-30px]">{{ t('kilometers') }}</label>
           <div class="slider-with-labels w-full">
             <div id="kilometer-slider" class="slider relative"></div>
             <div class="slider-value-row stock-km-value-row relative min-h-[1.375rem] pointer-events-none">
               <span
                 v-for="(pct, i) in kmHandlePct"
                 :key="'km-val-' + i"
-                class="slider-value-chip slider-value-chip--km"
-                :style="{ left: pct + '%' }"
+                class="slider-value-chip"
+                :style="{ left: pct + '%', transform: `translateX(-${pct * 0.85}%)` }"
               >{{ Math.round(selectedRange2[i]) }}km</span>
             </div>
           </div>
         </div>
 
-        <div class="w-[90%] md:w-[27%] md:min-w-0 relative">
+        <div class="w-[99%] md:w-[27%] md:min-w-0 relative pl-2 md:pl-0">
           <label class="text-xs text-[#b53d3d] ml-2 font-semibold">{{ t('capacity') }}</label>
           <select v-model="lugares" class="bg-transparent w-full px-3 py-2 bg-gray-800 text-white rounded-2xl border appearance-none focus:outline-none border-[#b53d3d]">
             <option class="bg-[#121212]" value="">{{ t('select') }}</option>
@@ -804,19 +804,6 @@ const resetFilters = () => {
   color: rgba(255, 255, 255, 0.9);
   white-space: nowrap;
   line-height: 1.25;
-  margin-left: 4px;
-}
-
-.slider-value-chip--year {
-  transform: translateX(-50%);
-}
-
-.slider-value-chip--price {
-  transform: translateX(-50%);
-}
-
-.slider-value-chip--km {
-  transform: translateX(-55%);
 }
 
 .stock-slider-col {
