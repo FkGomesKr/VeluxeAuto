@@ -334,8 +334,8 @@ function toggleOpenFilters() {
                     <span
                       v-for="(pct, i) in yearHandlePct"
                       :key="'hero-year-' + i"
-                      class="slider-value-chip slider-value-chip--year"
-                      :style="{ left: pct + '%' }"
+                      class="slider-value-chip"
+                      :style="{ left: pct + '%', transform: `translateX(-${pct * 0.70}%)` }"
                     >{{ Math.round(selectedRange[i]) }}</span>
                   </div>
                 </div>
@@ -389,8 +389,8 @@ function toggleOpenFilters() {
                     <span
                       v-for="(pct, i) in priceHandlePct"
                       :key="'hero-price-' + i"
-                      class="slider-value-chip slider-value-chip--price"
-                      :style="{ left: pct + '%' }"
+                      class="slider-value-chip"
+                      :style="{ left: pct + '%', transform: `translateX(-${pct * 0.80}%)` }"
                     >{{ Math.round(selectedRange3[i]) }}€</span>
                   </div>
                 </div>
@@ -428,8 +428,8 @@ function toggleOpenFilters() {
                     <span
                       v-for="(pct, i) in kmHandlePct"
                       :key="'hero-km-' + i"
-                      class="slider-value-chip slider-value-chip--km"
-                      :style="{ left: pct + '%' }"
+                      class="slider-value-chip"
+                      :style="{ left: pct + '%', transform: `translateX(-${pct * 0.85}%)` }"
                     >{{ Math.round(selectedRange2[i]) }}km</span>
                   </div>
                 </div>
@@ -508,19 +508,6 @@ function toggleOpenFilters() {
   color: rgba(255, 255, 255, 0.9);
   white-space: nowrap;
   line-height: 1.25;
-  margin-left: 4px;
-}
-
-.slider-value-chip--year { 
-  transform: translateX(-50%);
-}
-
-.slider-value-chip--price { 
-  transform: translateX(-50%);
-}
-
-.slider-value-chip--km { 
-  transform: translateX(-55%);
 }
 
 .hero-slider-col {

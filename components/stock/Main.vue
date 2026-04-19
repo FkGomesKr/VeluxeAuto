@@ -512,7 +512,7 @@ const resetFilters = () => {
                 v-for="(pct, i) in yearHandlePct"
                 :key="'year-val-' + i"
                 class="slider-value-chip"
-                :style="{ left: pct + '%', transform: `translateX(-${pct * 0.85}%)` }"
+                :style="{ left: pct + '%', transform: `translateX(-${pct * 0.70}%)` }"
               >{{ Math.round(selectedRange[i]) }}</span>
             </div>
           </div>
@@ -549,7 +549,7 @@ const resetFilters = () => {
                 v-for="(pct, i) in priceHandlePct"
                 :key="'price-val-' + i"
                 class="slider-value-chip"
-                :style="{ left: pct + '%', transform: `translateX(-${pct * 0.85}%)` }"
+                :style="{ left: pct + '%', transform: `translateX(-${pct * 0.80}%)` }"
               >{{ Math.round(selectedRange3[i]) }}€</span>
             </div>
           </div>
