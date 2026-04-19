@@ -106,10 +106,10 @@ const bars = computed(() => [
   <section id="contactos" class="w-full bg-[#121212] py-12 px-8 md:px-4 sm:px-8 lg:px-16 mb-0 sm:mb-8">
     <div class="max-w-7xl mx-auto flex flex-col items-center">
       <div class="flex flex-col items-center mb-14">
-        <h1 class="text-[42px] text-center text-white font-extrabold w-fit leading-[55px]">
+        <h1 class="text-[35px] lg:text-[42px] text-center text-white font-extrabold w-fit leading-[40px] lg:leading-[55px]">
           {{ t('contactSectionTitle') }}
         </h1>
-        <h1 class="text-[42px] text-center text-[#D32F2F] font-extrabold w-fit leading-[55px]">
+        <h1 class="text-[35px] lg:text-[42px] text-center text-[#D32F2F] font-extrabold w-fit leading-[40px] lg:leading-[55px]">
           {{ t('contacts') }}
         </h1>
       </div>

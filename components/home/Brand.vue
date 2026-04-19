@@ -8,10 +8,10 @@ const { t, locale } = useI18n();
     <hr class="bar2">
     <div class="w-full flex flex-col items-center justify-start gap-24 max-[480px]:gap-16 h-[840px] max-[480px]:h-[600px] bg-[#121212] overflow-hidden xl:overflow-visible">
         <div class="mt-8 flex flex-col justify-center items-center py-4">
-            <h1 class="text-[42px] text-center text-white font-extrabold w-fit leading-[55px]">
+            <h1 class="text-[35px] lg:text-[42px] text-center text-white font-extrabold w-fit leading-[40px] lg:leading-[55px]">
                 {{ t('whatyoulookingfor')}}
             </h1>
-            <h1 class="text-[42px] text-center text-[#D32F2F] font-extrabold w-fit leading-[55px]">
+            <h1 class="text-[35px] lg:text-[42px] text-center text-[#D32F2F] font-extrabold w-fit  leading-[40px] lg:leading-[55px]">
                 {{ t('brands') }}
             </h1>
         </div>
