@@ -33,8 +33,7 @@ const error = ref<string | null>(null)
 // Function to load car data
 const loadCar = async (carId: number | undefined) => {
   if (!carId) {
-    error.value = 'Car ID is required'
-    isLoading.value = false
+    showError({ statusCode: 404, statusMessage: 'Page Not Found' })
     return
   }
 
@@ -42,11 +41,13 @@ const loadCar = async (carId: number | undefined) => {
     isLoading.value = true
     error.value = null
     const car = await getCarById(carId)
+    if (!car) {
+      showError({ statusCode: 404, statusMessage: 'Page Not Found' })
+      return
+    }
     carro.value = car
-  } catch (err: any) {
-    error.value = err.message || 'Failed to load car'
-    console.error('Error loading car:', err)
-    carro.value = null
+  } catch {
+    showError({ statusCode: 404, statusMessage: 'Page Not Found' })
   } finally {
     isLoading.value = false
   }
@@ -54,12 +55,7 @@ const loadCar = async (carId: number | undefined) => {
 
 // Load car on component mount
 onMounted(() => {
-  if (props.id) {
-    loadCar(props.id)
-  } else {
-    error.value = 'Car ID is missing'
-    isLoading.value = false
-  }
+  loadCar(props.id)
 })
 
 // Watch for prop changes (in case id changes)
@@ -147,8 +143,7 @@ onUnmounted(() => {
     <div class="loading-spinner"></div>
   </div>
   <!-- Error State -->
-  <div v-else-if="error || !carro" class="bg-[#121212] flex justify-center items-center h-screen text-5xl font-black text-white">
-    {{ error || 'No car was found.' }}
+  <div v-else-if="error || !carro" class="bg-[#121212] flex justify-center items-center h-screen">
   </div>
   <!-- Car Details -->
   <div v-else class="bg-[#121212] p-4 sm:p-10">

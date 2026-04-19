@@ -95,5 +95,9 @@ export default {
   notFoundTitle: "Page introuvable",
   notFoundText: "La page que vous recherchez n'existe pas ou a été déplacée. Vérifiez l'adresse ou retournez à la page d'accueil.",
   notFoundHome: "Retour à l'accueil",
-  notFoundStock: "Voir le stock"
+  notFoundStock: "Voir le stock",
+  noCarsFound: "Aucune voiture ne correspond aux préférences.",
+  maintenanceTitle: "Service temporairement indisponible",
+  maintenanceText: "Nous travaillons à résoudre le problème. Veuillez réessayer dans quelques instants.",
+  maintenanceRetry: "Réessayer"
 };

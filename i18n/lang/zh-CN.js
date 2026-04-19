@@ -95,5 +95,9 @@ export default {
     notFoundTitle: "页面未找到",
     notFoundText: "您要查找的页面不存在或已被移动。请检查地址或返回首页。",
     notFoundHome: "返回首页",
-    notFoundStock: "查看库存"
+    notFoundStock: "查看库存",
+    noCarsFound: "没有符合条件的汽车。",
+    maintenanceTitle: "服务暂时不可用",
+    maintenanceText: "我们正在努力解决问题，请稍后重试。",
+    maintenanceRetry: "重试"
   }

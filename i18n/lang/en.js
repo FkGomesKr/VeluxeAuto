@@ -95,6 +95,10 @@ export default {
     notFoundTitle: "Page not found",
     notFoundText: "The page you're looking for doesn't exist or has been moved. Check the address or go back to the homepage.",
     notFoundHome: "Back to home",
-    notFoundStock: "View stock"
+    notFoundStock: "View stock",
+    noCarsFound: "No cars match your preferences.",
+    maintenanceTitle: "Service temporarily unavailable",
+    maintenanceText: "We're working to fix the issue. Please try again in a few moments.",
+    maintenanceRetry: "Try again"
   }
   

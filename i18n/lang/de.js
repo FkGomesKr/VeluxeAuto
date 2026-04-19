@@ -95,5 +95,9 @@ export default {
     notFoundTitle: "Seite nicht gefunden",
     notFoundText: "Die gesuchte Seite existiert nicht oder wurde verschoben. Überprüfen Sie die Adresse oder kehren Sie zur Startseite zurück.",
     notFoundHome: "Zurück zur Startseite",
-    notFoundStock: "Bestand ansehen"
+    notFoundStock: "Bestand ansehen",
+    noCarsFound: "Kein Auto entspricht den Präferenzen.",
+    maintenanceTitle: "Dienst vorübergehend nicht verfügbar",
+    maintenanceText: "Wir arbeiten daran, das Problem zu beheben. Bitte versuchen Sie es in wenigen Augenblicken erneut.",
+    maintenanceRetry: "Erneut versuchen"
   }

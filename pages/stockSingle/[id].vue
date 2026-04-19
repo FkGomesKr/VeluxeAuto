@@ -6,10 +6,13 @@ useHead({
 const route = useRoute();
 
 const routeId = route.params.id as string
-const id = computed(() => {
-  const parsedId = parseInt(routeId)
-  return isNaN(parsedId) ? undefined : parsedId
-})
+const parsedId = parseInt(routeId)
+
+if (isNaN(parsedId)) {
+  throw createError({ statusCode: 404, statusMessage: 'Page Not Found' })
+}
+
+const id = parsedId
 </script>
 
 <template>

@@ -95,5 +95,9 @@ export default {
     notFoundTitle: "Página no encontrada",
     notFoundText: "La página que buscas no existe o ha sido movida. Verifica la dirección o vuelve a la página principal.",
     notFoundHome: "Volver al inicio",
-    notFoundStock: "Ver inventario"
+    notFoundStock: "Ver inventario",
+    noCarsFound: "Ningún coche corresponde a las preferencias.",
+    maintenanceTitle: "Servicio temporalmente no disponible",
+    maintenanceText: "Estamos trabajando para solucionar el problema. Por favor, inténtelo de nuevo en unos momentos.",
+    maintenanceRetry: "Intentar de nuevo"
   }

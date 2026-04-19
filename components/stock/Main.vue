@@ -60,8 +60,7 @@ const carros = ref<any[]>([])
 const isLoading = ref(true)
 const error = ref<string | null>(null)
 
-// Load cars on component mount
-onMounted(async () => {
+async function loadCars() {
   try {
     isLoading.value = true
     error.value = null
@@ -73,6 +72,14 @@ onMounted(async () => {
   } finally {
     isLoading.value = false
   }
+}
+
+function retryLoad() {
+  loadCars()
+}
+
+onMounted(() => {
+  loadCars()
 })
 
 
@@ -602,12 +609,20 @@ const resetFilters = () => {
     <div class="loading-spinner"></div>
   </div>
   <!-- Error State -->
-  <div v-else-if="error" class="bg-[#121212] text-center w-full pb-20 flex justify-center items-center text-3xl lg:text-5xl font-black text-red-500" :style="{ height: 'calc(100vh - 198px)' }">
-    {{ error }}
+  <div v-else-if="error" class="bg-[#121212] text-center w-full flex flex-col justify-center items-center gap-4 px-6" :style="{ height: 'calc(100vh - 198px)' }">
+    <i class="fa-solid fa-screwdriver-wrench text-5xl sm:text-6xl text-[#b53d3d]"></i>
+    <p class="text-white text-xl sm:text-2xl font-semibold">{{ t('maintenanceTitle') }}</p>
+    <p class="text-[#a0a0a0] text-sm sm:text-base max-w-md">{{ t('maintenanceText') }}</p>
+    <button
+      @click="retryLoad()"
+      class="mt-4 px-8 py-3.5 rounded-xl bg-[#b53d3d] hover:bg-[#c94a4a] text-white font-semibold text-sm transition-all duration-300 hover:-translate-y-0.5 shadow-[0_4px_20px_rgba(181,61,61,0.3)] hover:shadow-[0_6px_30px_rgba(181,61,61,0.5)] cursor-pointer"
+    >
+      {{ t('maintenanceRetry') }}
+    </button>
   </div>
   <!-- No Results -->
   <div v-else-if="filteredCarros.length==0" class="bg-[#121212] text-center w-full pb-20 flex justify-center items-center text-3xl lg:text-5xl font-black text-white" :style="{ height: 'calc(100vh - 198px)' }">
-    No cars correspond the preferences.
+    {{ t('noCarsFound') }}
   </div>
   <!-- Cars Grid -->
   <div v-else class="bg-[#121212] w-full pb-20 px-5 xs:px-10 lg:px-20 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-10" :class="{'pt-6': openFilters}" :style="{ minHeight: 'calc(100vh - 198px)' }">
