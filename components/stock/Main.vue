@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, watch } from 'vue';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Navigation } from 'swiper/modules';
 import noUiSlider from 'nouislider';
@@ -110,26 +110,18 @@ const orderByOptions = [
   },
 ]
 
-const marcas = [
-  {
-    title: "Audi"
-  },
-  {
-    title: "BMW"
-  },
-  {
-    title: "Mercedes"
-  },
-  {
-    title: "Fiat"
-  },
-  {
-    title: "Toyota"
-  },
-  {
-    title: "Peugeot"
-  }
-]
+const marcas = computed(() =>
+  [...new Set(carros.value.map(c => c.marca))].sort().map(m => ({ title: m }))
+)
+
+const modelos = computed(() => {
+  const pool = marca.value
+    ? carros.value.filter(c => c.marca.toLowerCase() === marca.value.toLowerCase())
+    : carros.value
+  return [...new Set(pool.map(c => c.modelo))].sort().map(m => ({ title: m }))
+})
+
+watch(marca, () => { modelo.value = '' })
 
 const combustiveis = [
   {
@@ -230,6 +222,7 @@ const kmHandlePct = computed(() => [
 const filteredCarros = computed(() => {
   let filtered = carros.value.filter(carro => {
     const isMarcaValid = marca.value ? carro.marca.toLowerCase().includes(marca.value.toLowerCase()) : true;
+    const isModeloValid = modelo.value ? carro.modelo.toLowerCase() === modelo.value.toLowerCase() : true;
     const isCombustivelValid = combustivel.value ? t(carro.combustivel).toLowerCase().includes(combustivel.value.toLowerCase()) : true;
     const isTransmissionValid = transmissao.value ? t(carro.transmissao).toLowerCase().includes(transmissao.value.toLowerCase()) : true;
     const isTipologiaValid = tipologia.value ? t(carro.tipologia).toLowerCase().includes(tipologia.value.toLowerCase()) : true;
@@ -241,7 +234,7 @@ const filteredCarros = computed(() => {
     const isKMValid = (selectedRange2.value[0]!== undefined ? carro.kms >= selectedRange2.value[0] : true) &&
                        (selectedRange2.value[1] !== undefined ? carro.kms <= selectedRange2.value[1] : true);
 
-    return isMarcaValid && isCombustivelValid && isAnoValid && isTransmissionValid && isTipologiaValid && isPrecoValid && isKMValid && isLugaresValid;
+    return isMarcaValid && isModeloValid && isCombustivelValid && isAnoValid && isTransmissionValid && isTipologiaValid && isPrecoValid && isKMValid && isLugaresValid;
   });
 
   return filtered.sort((a, b) => {
@@ -535,7 +528,7 @@ const resetFilters = () => {
           <label class="text-xs text-[#b53d3d] ml-2 font-semibold">{{ t('model') }}</label>
           <select v-model="modelo" class="bg-transparent hover:bg-transparent w-full px-3 py-2 bg-gray-800 text-white rounded-2xl border appearance-none focus:outline-none border-[#b53d3d]">
             <option class="bg-[#121212]" value="">{{ t('select') }}</option>
-            <option class="bg-[#121212]" v-for="marca in marcas" :key="marca.title" :value="marca.title">{{ marca.title }}</option>
+            <option class="bg-[#121212]" v-for="opt in modelos" :key="opt.title" :value="opt.title">{{ opt.title }}</option>
           </select>
           <svg class="absolute top-[50%] right-2 pointer-events-none" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 12 12"><path fill="white" d="M3.076 4.617A1 1 0 0 1 4 4h4a1 1 0 0 1 .707 1.707l-2 2a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1-.217-1.09"/></svg>
         </div>
