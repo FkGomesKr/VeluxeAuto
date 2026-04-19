@@ -578,7 +578,7 @@ onUnmounted(() => {
           @swiper="onFullscreenSwiperInit"
           @slideChange="onFullscreenSlideChange"
         >
-          <SwiperSlide v-for="carIMG in carro.imagens" class="w-full relative overflow-hidden">
+          <SwiperSlide v-for="(carIMG, index) in carro.imagens" :key="index" class="w-full relative overflow-hidden">
             <div class="fullscreen-slide-inner">
               <img 
                 v-if="!failedImages.has(carIMG)"
@@ -587,7 +587,7 @@ onUnmounted(() => {
                 :style="{ transformOrigin: zoomOrigin }"
                 :src="carIMG" 
                 alt="Car Image"
-                loading="eager"
+                :loading="Math.abs(Number(index) - activeSlideIndex) <= 1 ? 'eager' : 'lazy'"
                 decoding="async"
                 @error="onImageError(carIMG)"
                 @load="onImageLoad(carIMG)"

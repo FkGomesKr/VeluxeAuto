@@ -10,7 +10,7 @@ useHead({
 <template>
   <div class="bg-[#121212]">
     <HomeHeroSection />
-    <HomeBrand />
-    <HomeContact />
+    <LazyHomeBrand />
+    <LazyHomeContact />
   </div>
 </template>

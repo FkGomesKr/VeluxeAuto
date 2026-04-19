@@ -26,6 +26,7 @@ export default defineNuxtConfig({
     vueI18n: './i18n.config.ts',
   },
   css: [
+    '@fontsource-variable/nunito-sans',
     '@/assets/css/tailwind.css',
     '@fortawesome/fontawesome-free/css/all.css'
   ],

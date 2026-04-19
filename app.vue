@@ -5,10 +5,6 @@ useHead({
       rel: "icon",
       type: "image/x-icon",
       href: "/favicon.ico"
-    },
-    {
-      rel: "stylesheet",
-      href: "https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;700&display=swap"
     }
   ]
 });
@@ -26,7 +22,7 @@ useHead({
 
 html, body {
   background-color: #121212;
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Nunito Sans Variable', 'Nunito Sans', sans-serif;
   color: #121212;
 }
 </style>
