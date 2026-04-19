@@ -92,55 +92,67 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 400, statusMessage: 'Invalid phone format' })
   }
 
-  try {
-    const supabase = createServerSupabaseClient()
+  const supabase = createServerSupabaseClient()
+  const config = useRuntimeConfig()
+  const resendKey = config.RESEND_API_KEY as string | undefined
 
-    const { error } = await (supabase
-      .from('contact_messages') as any)
-      .insert({ name, email, phone, message })
+  const dbTask = (supabase
+    .from('contact_messages') as any)
+    .insert({ name, email, phone, message })
+    .then(({ error: dbError }: { error: any }) => {
+      if (dbError) throw dbError
+    })
 
-    if (error) throw error
-
-    const config = useRuntimeConfig()
-    const resendKey = config.RESEND_API_KEY as string | undefined
-
+  const emailTask = (async () => {
     if (!resendKey) {
       console.error('Missing RESEND_API_KEY — email notifications skipped!')
-    } else {
-      const notificationBody = [
-        `Nome: ${name}`,
-        `Email: ${email || '—'}`,
-        `Telemóvel: ${phone || '—'}`,
-        `\nMensagem:\n${message}`,
-      ].join('\n')
+      return
+    }
+
+    const notificationBody = [
+      `Nome: ${name}`,
+      `Email: ${email || '—'}`,
+      `Telemóvel: ${phone || '—'}`,
+      `\nMensagem:\n${message}`,
+    ].join('\n')
+
+    await sendEmail(
+      resendKey,
+      'veluxeauto@gmail.com',
+      'Novo contacto inserido no sistema! Siga contactar!',
+      notificationBody,
+      'VeluxeContacts <veluxecontacts@notification.veluxeauto.com>',
+    )
+
+    if (email) {
+      const t = translations[locale] ?? translations.pt!
+      const confirmationBody = t.body.replace('{name}', name)
 
       await sendEmail(
         resendKey,
-        'veluxeauto@gmail.com',
-        'Novo contacto inserido no sistema! Siga contactar!',
-        notificationBody,
-        'VeluxeContacts <veluxecontacts@notification.veluxeauto.com>',
+        email,
+        t.subject,
+        confirmationBody,
+        'VeluxeAuto <veluxecontacts@notification.veluxeauto.com>',
       )
-
-      if (email) {
-        const t = translations[locale] ?? translations.pt!
-        const confirmationBody = t.body.replace('{name}', name)
-
-        await sendEmail(
-          resendKey,
-          email,
-          t.subject,
-          confirmationBody,
-          'VeluxeAuto <veluxecontacts@notification.veluxeauto.com>',
-        )
-      }
     }
+  })()
 
-    return { success: true }
-  } catch (error: any) {
+  const [dbResult, emailResult] = await Promise.allSettled([dbTask, emailTask])
+
+  if (dbResult.status === 'rejected') {
+    console.error('Database insert failed:', dbResult.reason)
+  }
+  if (emailResult.status === 'rejected') {
+    console.error('Email send failed:', emailResult.reason)
+  }
+
+  if (dbResult.status === 'rejected' && emailResult.status === 'rejected') {
     throw createError({
       statusCode: 500,
-      statusMessage: error.message || 'Failed to send message',
+      statusMessage: 'Failed to save message and send emails',
     })
   }
+
+  return { success: true }
 })
